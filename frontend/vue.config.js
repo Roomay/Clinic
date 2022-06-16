@@ -10,7 +10,7 @@ module.exports = {
         // 配置webpack-dev-serve的行为 （webpack启动的本地服务器的行为）
         // 所有devserve的选项都支持
         host: "0.0.0.0",
-        port: "8080",
+        port: "8081",
         disableHostCheck: true,
         //关闭 HOST 检查
         hotOnly: false,

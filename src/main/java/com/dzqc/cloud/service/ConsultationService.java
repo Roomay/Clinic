@@ -5,7 +5,7 @@ import com.github.pagehelper.PageInfo;
 
 /**
  * @author Bob
- * @version 1.0 2020/5/9
+ * @version 1.0 2022/6/9
  */
 public interface ConsultationService {
     /**

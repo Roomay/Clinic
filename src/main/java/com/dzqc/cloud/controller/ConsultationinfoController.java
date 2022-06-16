@@ -76,7 +76,7 @@ public class ConsultationinfoController {
     public ResultObject deletePatients(Integer[] consultationIds){
         int result = consultationService.deletePatients(consultationIds);
         if (result != consultationIds.length){
-            throw new RuntimeException("批量删除失败！！！");
+            throw new RuntimeException("Batch deletion fails!!!");
         }
         return ResultObject.success();
     }
