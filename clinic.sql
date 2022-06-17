@@ -55,10 +55,10 @@ CREATE TABLE `consultation` (
   `doctor_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '医生姓名',
   `day_slot` int(11) NULL DEFAULT NULL COMMENT '星期几',
   `time_slot` int(11) NULL DEFAULT NULL COMMENT '时间段',
-  `avail_status` int(11) NULL DEFAULT NULL COMMENT '可用状态',
+  `avail_status` int(11) NULL DEFAULT NULL COMMENT '可用状态 0.可预约 1.等待确认 2.不可用',
   `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `charge` decimal(11,1) NOT NULL DEFAULT 0.0 COMMENT '收费',
-  PRIMARY KEY (`consultation`) USING BTREE
+  PRIMARY KEY (`consultation_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '坐诊表' ROW_FORMAT = DYNAMIC;
 
 
@@ -67,7 +67,7 @@ CREATE TABLE `consultation` (
 -- ----------------------------
 DROP TABLE IF EXISTS `medicalrecord`;
 CREATE TABLE `medicalrecord`  (
-  `consultation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '就诊记录ID',
+  `record_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '病历ID',
   `patient_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '病人ID',
   `patient_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '患者姓名',
   `gender` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '患者性别',
@@ -76,12 +76,16 @@ CREATE TABLE `medicalrecord`  (
   `doctor_id` int(11) NULL AUTO_INCREMENT COMMENT '医生ID',
   `doctor_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '医生姓名',
   `preconsultation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '预问诊',
-  `diagnosis` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '反馈建议',
+  `report_id` int(11) NULL DEFAULT NULL COMMENT '检查报告id',
+  `diagnosis` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '诊断',
+  `prescription` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '处方',
   `department_id` int(11) NULL DEFAULT NULL COMMENT '科室ID',
   `create_time` timestamp(0) NULL DEFAULT NULL,
   `update_time` timestamp(0) NULL DEFAULT NULL,
   `status` int(11) NULL DEFAULT NULL COMMENT '病历状态 0自行预约 1智能导诊 2已诊断 3删除',
-  PRIMARY KEY (`consultation_id`) USING BTREE
+  PRIMARY KEY (`record_id`) USING BTREE
+  UNIQUE INDEX `patient_id`(`patient_id`) USING BTREE,
+  UNIQUE INDEX `doctor_id`(`doctor_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '病历表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -106,12 +110,12 @@ CREATE TABLE `departmentinfo`  (
 -- ----------------------------
 -- Records of departmentinfo
 -- ----------------------------
-INSERT INTO `department_info` VALUES (33, 'orthopedic', NULL);  --骨科
-INSERT INTO `department_info` VALUES (34, 'ophtalmology', NULL);  --眼科
-INSERT INTO `department_info` VALUES (35, 'Endocrinology', NULL); --内分泌科
-INSERT INTO `department_info` VALUES (36, 'obstetrics_and_gynecology', NULL); --妇科
-INSERT INTO `department_info` VALUES (37, 'neurology', NULL); --神经科
-INSERT INTO `department_info` VALUES (38, 'psychiatry', NULL);  --精神科
+-- INSERT INTO `department_info` VALUES (33, 'orthopedic', NULL);  --骨科
+-- INSERT INTO `department_info` VALUES (34, 'ophtalmology', NULL);  --眼科
+-- INSERT INTO `department_info` VALUES (35, 'Endocrinology', NULL); --内分泌科
+-- INSERT INTO `department_info` VALUES (36, 'obstetrics_and_gynecology', NULL); --妇科
+-- INSERT INTO `department_info` VALUES (37, 'neurology', NULL); --神经科
+-- INSERT INTO `department_info` VALUES (38, 'psychiatry', NULL);  --精神科
 
 
 
@@ -123,7 +127,9 @@ CREATE TABLE `doctor_info`  (
   `doctor_id` int(11) NOT NULL AUTO_INCREMENT,
   `doctor_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '医生姓名',
   `password` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '密码',
+  `cid` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证号码',
   `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '联系电话',
+  `validatecode` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '验证码',
   -- `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '住址',
   `department_id` int(11) NULL DEFAULT NULL COMMENT '科室ID',
   `title_id` int(11) NULL DEFAULT NULL COMMENT '职称ID',
@@ -132,8 +138,10 @@ CREATE TABLE `doctor_info`  (
   `avail_state` int(11) NOT NULL COMMENT '启用状态 0.禁用 1.启用',
   `create_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
+  PRIMARY KEY (`doctor_id`) USING BTREE,
   UNIQUE INDEX `doctor_name`(`doctor_name`) USING BTREE,
+  UNIQUE INDEX `cid`(`cid`) USING BTREE,
+  UNIQUE INDEX `department_id`(`department_id`) USING BTREE,
   UNIQUE INDEX `phone`(`phone`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '医生信息表' ROW_FORMAT = DYNAMIC;
 
@@ -152,13 +160,18 @@ CREATE TABLE `patient_info`  (
   `patient_id` int(11) NOT NULL AUTO_INCREMENT,
   `patient_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '病人姓名',
   `password` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '密码',
+  `cid` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证号码',
   `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '联系电话',
+  `validatecode` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '验证码',
+  `birthday` datetime(0) NOT NULL COMMENT '出生日期',
+  `gender` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '性别 0.女 1.男',
   -- `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '住址',
   `create_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `patient_name`(`patient_name`) USING BTREE,
   UNIQUE INDEX `phone`(`phone`) USING BTREE
+  UNIQUE INDEX `cid`(`cid`) USING BTREE,
 ) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '病人信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -168,6 +181,8 @@ DROP TABLE IF EXISTS `admin_info`;
 CREATE TABLE `admin_info` (
   `admin_id` int(11) NOT NULL AUTO_INCREMENT,
   `password` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '密码',
+  `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '联系电话',
+  `validatecode` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '验证码',
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '管理员表' ROW_FORMAT = DYNAMIC;
 
 
@@ -348,41 +363,40 @@ CREATE TABLE `admin_info` (
 -- ----------------------------
 -- Table structure for userinfo
 -- ----------------------------
-DROP TABLE IF EXISTS `userinfo`;
-CREATE TABLE `userinfo`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户姓名',
-  `password` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '密码',
-  `roleid` int(11) NOT NULL COMMENT '角色ID 1.超级管理员 2.普通用户 3.医生 4.护士',
-  `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '手机号码',
-  `validatecode` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '验证码',
-  `cid` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证号码',
-  `birthday` datetime(0) NOT NULL COMMENT '出生日期',
-  `gender` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '性别 0.女 1.男',
-  `di_type` int(11) NULL DEFAULT NULL COMMENT '1.检查/诊断 2. 治疗/手术 3.复诊',
-  `frontimg` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证正面照',
-  `backimg` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证反面照',
-  `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '住址',
-  `bedno` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '病床号',
-  `departmentid` int(11) NULL DEFAULT NULL COMMENT '科室id',
-  `doctorid` int(11) NULL DEFAULT NULL COMMENT '主治医生id',
-  `nurseid` int(11) NULL DEFAULT NULL COMMENT '责任护士id',
-  `instatus` int(11) NULL DEFAULT NULL COMMENT '住院状态 1.未住院 2.预住院 3.住院中 4.已出院',
-  `state` int(11) NOT NULL COMMENT '启用状态 0.禁用 1.启用',
-  PRIMARY KEY (`id`) USING BTREE,
-  UNIQUE INDEX `username`(`username`) USING BTREE,
-  UNIQUE INDEX `phone`(`phone`) USING BTREE,
-  UNIQUE INDEX `cid`(`cid`) USING BTREE,
-  UNIQUE INDEX `bedno`(`bedno`) USING BTREE,
-  UNIQUE INDEX `departmentid`(`departmentid`) USING BTREE,
-  UNIQUE INDEX `doctorid`(`doctorid`) USING BTREE,
-  UNIQUE INDEX `nurseid`(`nurseid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
+-- DROP TABLE IF EXISTS `userinfo`;
+-- CREATE TABLE `userinfo`  (
+--   `id` int(11) NOT NULL AUTO_INCREMENT,
+--   `username` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户姓名',
+--   `password` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '密码',
+--   `roleid` int(11) NOT NULL COMMENT '角色ID 1.超级管理员 2.普通用户 3.医生 4.护士',
+--   `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '手机号码',
+--   `cid` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证号码',
+--   `birthday` datetime(0) NOT NULL COMMENT '出生日期',
+--   `gender` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '性别 0.女 1.男',
+--   `di_type` int(11) NULL DEFAULT NULL COMMENT '1.检查/诊断 2. 治疗/手术 3.复诊',
+--   `frontimg` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证正面照',
+--   `backimg` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '身份证反面照',
+--   `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '住址',
+--   `bedno` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '病床号',
+--   `departmentid` int(11) NULL DEFAULT NULL COMMENT '科室id',
+--   `doctorid` int(11) NULL DEFAULT NULL COMMENT '主治医生id',
+--   `nurseid` int(11) NULL DEFAULT NULL COMMENT '责任护士id',
+--   `instatus` int(11) NULL DEFAULT NULL COMMENT '住院状态 1.未住院 2.预住院 3.住院中 4.已出院',
+--   `state` int(11) NOT NULL COMMENT '启用状态 0.禁用 1.启用',
+--   PRIMARY KEY (`id`) USING BTREE,
+--   UNIQUE INDEX `username`(`username`) USING BTREE,
+--   UNIQUE INDEX `phone`(`phone`) USING BTREE,
+--   UNIQUE INDEX `cid`(`cid`) USING BTREE,
+--   UNIQUE INDEX `bedno`(`bedno`) USING BTREE,
+--   UNIQUE INDEX `departmentid`(`departmentid`) USING BTREE,
+--   UNIQUE INDEX `doctorid`(`doctorid`) USING BTREE,
+--   UNIQUE INDEX `nurseid`(`nurseid`) USING BTREE
+-- ) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of userinfo
 -- ----------------------------
-INSERT INTO `userinfo` VALUES (33, 'ykq632', '123456', 1, '1500000003', NULL, '2147483647', '2020-04-01 10:04:08', '1', NULL, 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3497380956,3644779616&fm=26&gp=0.jpg', 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3387134982,2837425777&fm=26&gp=0.jpg', '河南省-商丘市', '', NULL, 33, NULL, NULL, 1);
-INSERT INTO `userinfo` VALUES (34, 'lisa1', '123456', 1, '13734741054', NULL, '15262919956789003', '2020-04-01 15:33:30', '1', NULL, 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3497380956,3644779616&fm=26&gp=0.jpg', 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3387134982,2837425777&fm=26&gp=0.jpg', '河南省-郑州市', NULL, NULL, 34, NULL, NULL, 1);
+-- INSERT INTO `userinfo` VALUES (33, 'ykq632', '123456', 1, '1500000003', NULL, '2147483647', '2020-04-01 10:04:08', '1', NULL, 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3497380956,3644779616&fm=26&gp=0.jpg', 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3387134982,2837425777&fm=26&gp=0.jpg', '河南省-商丘市', '', NULL, 33, NULL, NULL, 1);
+-- INSERT INTO `userinfo` VALUES (34, 'lisa1', '123456', 1, '13734741054', NULL, '15262919956789003', '2020-04-01 15:33:30', '1', NULL, 'https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3497380956,3644779616&fm=26&gp=0.jpg', 'https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=3387134982,2837425777&fm=26&gp=0.jpg', '河南省-郑州市', NULL, NULL, 34, NULL, NULL, 1);
 
 SET FOREIGN_KEY_CHECKS = 1;
