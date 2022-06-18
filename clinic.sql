@@ -3,16 +3,18 @@
 
  Source Server         : localhost_3306
  Source Server Type    : MySQL
- Source Server Version : 50730
+ Source Server Version : 80029
  Source Host           : localhost:3306
  Source Schema         : cloud_hospital
 
  Target Server Type    : MySQL
- Target Server Version : 50730
+ Target Server Version : 80029
  File Encoding         : 65001
 
  Date: 6/15/2022 21:08:30
 */
+
+USE clinic_management;
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -68,12 +70,12 @@ CREATE TABLE `consultation` (
 DROP TABLE IF EXISTS `medicalrecord`;
 CREATE TABLE `medicalrecord`  (
   `record_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '病历ID',
-  `patient_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '病人ID',
+  `patient_id` int(11) NOT NULL COMMENT '病人ID',
   `patient_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '患者姓名',
   `gender` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '患者性别',
   `symptom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '主要症状',
   `drugsused` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '所用药物',
-  `doctor_id` int(11) NULL AUTO_INCREMENT COMMENT '医生ID',
+  `doctor_id` int(11) NULL COMMENT '医生ID',
   `doctor_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '医生姓名',
   `preconsultation` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '预问诊',
   `report_id` int(11) NULL DEFAULT NULL COMMENT '检查报告id',
@@ -83,7 +85,7 @@ CREATE TABLE `medicalrecord`  (
   `create_time` timestamp(0) NULL DEFAULT NULL,
   `update_time` timestamp(0) NULL DEFAULT NULL,
   `status` int(11) NULL DEFAULT NULL COMMENT '病历状态 0自行预约 1智能导诊 2已诊断 3删除',
-  PRIMARY KEY (`record_id`) USING BTREE
+  PRIMARY KEY (`record_id`) USING BTREE,
   UNIQUE INDEX `patient_id`(`patient_id`) USING BTREE,
   UNIQUE INDEX `doctor_id`(`doctor_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '病历表' ROW_FORMAT = DYNAMIC;
@@ -169,10 +171,10 @@ CREATE TABLE `patient_info`  (
   -- `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '住址',
   `create_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
+  PRIMARY KEY (`patient_id`) USING BTREE,
   UNIQUE INDEX `patient_name`(`patient_name`) USING BTREE,
-  UNIQUE INDEX `phone`(`phone`) USING BTREE
-  UNIQUE INDEX `cid`(`cid`) USING BTREE,
+  UNIQUE INDEX `phone`(`phone`) USING BTREE,
+  UNIQUE INDEX `cid`(`cid`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '病人信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -184,6 +186,7 @@ CREATE TABLE `admin_info` (
   `password` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '密码',
   `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '联系电话',
   `validatecode` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '验证码',
+  PRIMARY KEY (`admin_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '管理员表' ROW_FORMAT = DYNAMIC;
 
 
