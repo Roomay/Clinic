@@ -1,45 +1,45 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dzqc.cloud.dao.MedicalRecordMapper" >
-  <resultMap id="BaseResultMap" type="com.dzqc.cloud.entity.MedicalRecord" >
-    <constructor >
-      <idArg column="record_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="patient_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="patient_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="gender" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="symptom" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="drugsused" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="doctor_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="doctor_name" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="preconsultation" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="report_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="diagnosis" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="prescription" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="department_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dzqc.cloud.dao.MedicalRecordMapper">
+  <resultMap id="BaseResultMap" type="com.dzqc.cloud.entity.MedicalRecord">
+    <constructor>
+      <idArg column="record_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="patient_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="patient_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="symptom" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="drugsused" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="doctor_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="preconsultation" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="report_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="diagnosis" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="prescription" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -50,25 +50,25 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
                   and ${criterion.condition}
                 </when>
-                <when test="criterion.singleValue" >
+                <when test="criterion.singleValue">
                   and ${criterion.condition} #{criterion.value}
                 </when>
-                <when test="criterion.betweenValue" >
+                <when test="criterion.betweenValue">
                   and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
                 </when>
-                <when test="criterion.listValue" >
+                <when test="criterion.listValue">
                   and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
                     #{listItem}
                   </foreach>
                 </when>
@@ -79,42 +79,42 @@
       </foreach>
     </where>
   </sql>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     record_id, patient_id, patient_name, gender, symptom, drugsused, doctor_id, doctor_name, 
     preconsultation, report_id, diagnosis, prescription, department_id, create_time, 
     update_time, status
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dzqc.cloud.entity.MedicalRecordExample" >
+  <select id="selectByExample" parameterType="com.dzqc.cloud.entity.MedicalRecordExample" resultMap="BaseResultMap">
     select
-    <if test="distinct" >
+    <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
     from medicalrecord
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    <if test="orderByClause != null" >
+    <if test="orderByClause != null">
       order by ${orderByClause}
     </if>
   </select>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from medicalrecord
     where record_id = #{recordId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from medicalrecord
     where record_id = #{recordId,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.dzqc.cloud.entity.MedicalRecordExample" >
+  <delete id="deleteByExample" parameterType="com.dzqc.cloud.entity.MedicalRecordExample">
     delete from medicalrecord
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.dzqc.cloud.entity.MedicalRecord" >
+  <insert id="insert" parameterType="com.dzqc.cloud.entity.MedicalRecord">
     insert into medicalrecord (record_id, patient_id, patient_name, 
       gender, symptom, drugsused, 
       doctor_id, doctor_name, preconsultation, 
@@ -128,172 +128,172 @@
       #{departmentId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{status,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.dzqc.cloud.entity.MedicalRecord" >
+  <insert id="insertSelective" parameterType="com.dzqc.cloud.entity.MedicalRecord">
     insert into medicalrecord
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="recordId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="recordId != null">
         record_id,
       </if>
-      <if test="patientId != null" >
+      <if test="patientId != null">
         patient_id,
       </if>
-      <if test="patientName != null" >
+      <if test="patientName != null">
         patient_name,
       </if>
-      <if test="gender != null" >
+      <if test="gender != null">
         gender,
       </if>
-      <if test="symptom != null" >
+      <if test="symptom != null">
         symptom,
       </if>
-      <if test="drugsused != null" >
+      <if test="drugsused != null">
         drugsused,
       </if>
-      <if test="doctorId != null" >
+      <if test="doctorId != null">
         doctor_id,
       </if>
-      <if test="doctorName != null" >
+      <if test="doctorName != null">
         doctor_name,
       </if>
-      <if test="preconsultation != null" >
+      <if test="preconsultation != null">
         preconsultation,
       </if>
-      <if test="reportId != null" >
+      <if test="reportId != null">
         report_id,
       </if>
-      <if test="diagnosis != null" >
+      <if test="diagnosis != null">
         diagnosis,
       </if>
-      <if test="prescription != null" >
+      <if test="prescription != null">
         prescription,
       </if>
-      <if test="departmentId != null" >
+      <if test="departmentId != null">
         department_id,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time,
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="recordId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="recordId != null">
         #{recordId,jdbcType=INTEGER},
       </if>
-      <if test="patientId != null" >
+      <if test="patientId != null">
         #{patientId,jdbcType=INTEGER},
       </if>
-      <if test="patientName != null" >
+      <if test="patientName != null">
         #{patientName,jdbcType=VARCHAR},
       </if>
-      <if test="gender != null" >
+      <if test="gender != null">
         #{gender,jdbcType=VARCHAR},
       </if>
-      <if test="symptom != null" >
+      <if test="symptom != null">
         #{symptom,jdbcType=VARCHAR},
       </if>
-      <if test="drugsused != null" >
+      <if test="drugsused != null">
         #{drugsused,jdbcType=VARCHAR},
       </if>
-      <if test="doctorId != null" >
+      <if test="doctorId != null">
         #{doctorId,jdbcType=INTEGER},
       </if>
-      <if test="doctorName != null" >
+      <if test="doctorName != null">
         #{doctorName,jdbcType=VARCHAR},
       </if>
-      <if test="preconsultation != null" >
+      <if test="preconsultation != null">
         #{preconsultation,jdbcType=VARCHAR},
       </if>
-      <if test="reportId != null" >
+      <if test="reportId != null">
         #{reportId,jdbcType=INTEGER},
       </if>
-      <if test="diagnosis != null" >
+      <if test="diagnosis != null">
         #{diagnosis,jdbcType=VARCHAR},
       </if>
-      <if test="prescription != null" >
+      <if test="prescription != null">
         #{prescription,jdbcType=VARCHAR},
       </if>
-      <if test="departmentId != null" >
+      <if test="departmentId != null">
         #{departmentId,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         #{status,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.dzqc.cloud.entity.MedicalRecordExample" resultType="java.lang.Integer" >
+  <select id="countByExample" parameterType="com.dzqc.cloud.entity.MedicalRecordExample" resultType="java.lang.Integer">
     select count(*) from medicalrecord
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+  <update id="updateByExampleSelective" parameterType="map">
     update medicalrecord
-    <set >
-      <if test="record.recordId != null" >
+    <set>
+      <if test="record.recordId != null">
         record_id = #{record.recordId,jdbcType=INTEGER},
       </if>
-      <if test="record.patientId != null" >
+      <if test="record.patientId != null">
         patient_id = #{record.patientId,jdbcType=INTEGER},
       </if>
-      <if test="record.patientName != null" >
+      <if test="record.patientName != null">
         patient_name = #{record.patientName,jdbcType=VARCHAR},
       </if>
-      <if test="record.gender != null" >
+      <if test="record.gender != null">
         gender = #{record.gender,jdbcType=VARCHAR},
       </if>
-      <if test="record.symptom != null" >
+      <if test="record.symptom != null">
         symptom = #{record.symptom,jdbcType=VARCHAR},
       </if>
-      <if test="record.drugsused != null" >
+      <if test="record.drugsused != null">
         drugsused = #{record.drugsused,jdbcType=VARCHAR},
       </if>
-      <if test="record.doctorId != null" >
+      <if test="record.doctorId != null">
         doctor_id = #{record.doctorId,jdbcType=INTEGER},
       </if>
-      <if test="record.doctorName != null" >
+      <if test="record.doctorName != null">
         doctor_name = #{record.doctorName,jdbcType=VARCHAR},
       </if>
-      <if test="record.preconsultation != null" >
+      <if test="record.preconsultation != null">
         preconsultation = #{record.preconsultation,jdbcType=VARCHAR},
       </if>
-      <if test="record.reportId != null" >
+      <if test="record.reportId != null">
         report_id = #{record.reportId,jdbcType=INTEGER},
       </if>
-      <if test="record.diagnosis != null" >
+      <if test="record.diagnosis != null">
         diagnosis = #{record.diagnosis,jdbcType=VARCHAR},
       </if>
-      <if test="record.prescription != null" >
+      <if test="record.prescription != null">
         prescription = #{record.prescription,jdbcType=VARCHAR},
       </if>
-      <if test="record.departmentId != null" >
+      <if test="record.departmentId != null">
         department_id = #{record.departmentId,jdbcType=INTEGER},
       </if>
-      <if test="record.createTime != null" >
+      <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.updateTime != null" >
+      <if test="record.updateTime != null">
         update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="record.status != null" >
+      <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
       </if>
     </set>
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByExample" parameterType="map" >
+  <update id="updateByExample" parameterType="map">
     update medicalrecord
     set record_id = #{record.recordId,jdbcType=INTEGER},
       patient_id = #{record.patientId,jdbcType=INTEGER},
@@ -311,62 +311,446 @@
       create_time = #{record.createTime,jdbcType=TIMESTAMP},
       update_time = #{record.updateTime,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=INTEGER}
-    <if test="_parameter != null" >
+    <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dzqc.cloud.entity.MedicalRecord" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.dzqc.cloud.entity.MedicalRecord">
     update medicalrecord
-    <set >
-      <if test="patientId != null" >
+    <set>
+      <if test="patientId != null">
         patient_id = #{patientId,jdbcType=INTEGER},
       </if>
-      <if test="patientName != null" >
+      <if test="patientName != null">
         patient_name = #{patientName,jdbcType=VARCHAR},
       </if>
-      <if test="gender != null" >
+      <if test="gender != null">
         gender = #{gender,jdbcType=VARCHAR},
       </if>
-      <if test="symptom != null" >
+      <if test="symptom != null">
         symptom = #{symptom,jdbcType=VARCHAR},
       </if>
-      <if test="drugsused != null" >
+      <if test="drugsused != null">
         drugsused = #{drugsused,jdbcType=VARCHAR},
       </if>
-      <if test="doctorId != null" >
+      <if test="doctorId != null">
         doctor_id = #{doctorId,jdbcType=INTEGER},
       </if>
-      <if test="doctorName != null" >
+      <if test="doctorName != null">
         doctor_name = #{doctorName,jdbcType=VARCHAR},
       </if>
-      <if test="preconsultation != null" >
+      <if test="preconsultation != null">
         preconsultation = #{preconsultation,jdbcType=VARCHAR},
       </if>
-      <if test="reportId != null" >
+      <if test="reportId != null">
         report_id = #{reportId,jdbcType=INTEGER},
       </if>
-      <if test="diagnosis != null" >
+      <if test="diagnosis != null">
         diagnosis = #{diagnosis,jdbcType=VARCHAR},
       </if>
-      <if test="prescription != null" >
+      <if test="prescription != null">
         prescription = #{prescription,jdbcType=VARCHAR},
       </if>
-      <if test="departmentId != null" >
+      <if test="departmentId != null">
         department_id = #{departmentId,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="status != null" >
+      <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
     </set>
     where record_id = #{recordId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dzqc.cloud.entity.MedicalRecord" >
+  <update id="updateByPrimaryKey" parameterType="com.dzqc.cloud.entity.MedicalRecord">
+    update medicalrecord
+    set patient_id = #{patientId,jdbcType=INTEGER},
+      patient_name = #{patientName,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=VARCHAR},
+      symptom = #{symptom,jdbcType=VARCHAR},
+      drugsused = #{drugsused,jdbcType=VARCHAR},
+      doctor_id = #{doctorId,jdbcType=INTEGER},
+      doctor_name = #{doctorName,jdbcType=VARCHAR},
+      preconsultation = #{preconsultation,jdbcType=VARCHAR},
+      report_id = #{reportId,jdbcType=INTEGER},
+      diagnosis = #{diagnosis,jdbcType=VARCHAR},
+      prescription = #{prescription,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER}
+    where record_id = #{recordId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.dzqc.cloud.entity.MedicalRecord">
+    <constructor>
+      <idArg column="record_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="patient_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="patient_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="gender" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="symptom" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="drugsused" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="doctor_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="preconsultation" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="report_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="diagnosis" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="prescription" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
+    </constructor>
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    record_id, patient_id, patient_name, gender, symptom, drugsused, doctor_id, doctor_name, 
+    preconsultation, report_id, diagnosis, prescription, department_id, create_time, 
+    update_time, status
+  </sql>
+  <select id="selectByExample" parameterType="com.dzqc.cloud.entity.MedicalRecordExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from medicalrecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from medicalrecord
+    where record_id = #{recordId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from medicalrecord
+    where record_id = #{recordId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.dzqc.cloud.entity.MedicalRecordExample">
+    delete from medicalrecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.dzqc.cloud.entity.MedicalRecord">
+    insert into medicalrecord (record_id, patient_id, patient_name, 
+      gender, symptom, drugsused, 
+      doctor_id, doctor_name, preconsultation, 
+      report_id, diagnosis, prescription, 
+      department_id, create_time, update_time, 
+      status)
+    values (#{recordId,jdbcType=INTEGER}, #{patientId,jdbcType=INTEGER}, #{patientName,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=VARCHAR}, #{symptom,jdbcType=VARCHAR}, #{drugsused,jdbcType=VARCHAR}, 
+      #{doctorId,jdbcType=INTEGER}, #{doctorName,jdbcType=VARCHAR}, #{preconsultation,jdbcType=VARCHAR}, 
+      #{reportId,jdbcType=INTEGER}, #{diagnosis,jdbcType=VARCHAR}, #{prescription,jdbcType=VARCHAR}, 
+      #{departmentId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dzqc.cloud.entity.MedicalRecord">
+    insert into medicalrecord
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="recordId != null">
+        record_id,
+      </if>
+      <if test="patientId != null">
+        patient_id,
+      </if>
+      <if test="patientName != null">
+        patient_name,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="symptom != null">
+        symptom,
+      </if>
+      <if test="drugsused != null">
+        drugsused,
+      </if>
+      <if test="doctorId != null">
+        doctor_id,
+      </if>
+      <if test="doctorName != null">
+        doctor_name,
+      </if>
+      <if test="preconsultation != null">
+        preconsultation,
+      </if>
+      <if test="reportId != null">
+        report_id,
+      </if>
+      <if test="diagnosis != null">
+        diagnosis,
+      </if>
+      <if test="prescription != null">
+        prescription,
+      </if>
+      <if test="departmentId != null">
+        department_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="recordId != null">
+        #{recordId,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null">
+        #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="patientName != null">
+        #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="symptom != null">
+        #{symptom,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsused != null">
+        #{drugsused,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorId != null">
+        #{doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="doctorName != null">
+        #{doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="preconsultation != null">
+        #{preconsultation,jdbcType=VARCHAR},
+      </if>
+      <if test="reportId != null">
+        #{reportId,jdbcType=INTEGER},
+      </if>
+      <if test="diagnosis != null">
+        #{diagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="prescription != null">
+        #{prescription,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.dzqc.cloud.entity.MedicalRecordExample" resultType="java.lang.Integer">
+    select count(*) from medicalrecord
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update medicalrecord
+    <set>
+      <if test="record.recordId != null">
+        record_id = #{record.recordId,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientId != null">
+        patient_id = #{record.patientId,jdbcType=INTEGER},
+      </if>
+      <if test="record.patientName != null">
+        patient_name = #{record.patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null">
+        gender = #{record.gender,jdbcType=VARCHAR},
+      </if>
+      <if test="record.symptom != null">
+        symptom = #{record.symptom,jdbcType=VARCHAR},
+      </if>
+      <if test="record.drugsused != null">
+        drugsused = #{record.drugsused,jdbcType=VARCHAR},
+      </if>
+      <if test="record.doctorId != null">
+        doctor_id = #{record.doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="record.doctorName != null">
+        doctor_name = #{record.doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.preconsultation != null">
+        preconsultation = #{record.preconsultation,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportId != null">
+        report_id = #{record.reportId,jdbcType=INTEGER},
+      </if>
+      <if test="record.diagnosis != null">
+        diagnosis = #{record.diagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="record.prescription != null">
+        prescription = #{record.prescription,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentId != null">
+        department_id = #{record.departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null">
+        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update medicalrecord
+    set record_id = #{record.recordId,jdbcType=INTEGER},
+      patient_id = #{record.patientId,jdbcType=INTEGER},
+      patient_name = #{record.patientName,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=VARCHAR},
+      symptom = #{record.symptom,jdbcType=VARCHAR},
+      drugsused = #{record.drugsused,jdbcType=VARCHAR},
+      doctor_id = #{record.doctorId,jdbcType=INTEGER},
+      doctor_name = #{record.doctorName,jdbcType=VARCHAR},
+      preconsultation = #{record.preconsultation,jdbcType=VARCHAR},
+      report_id = #{record.reportId,jdbcType=INTEGER},
+      diagnosis = #{record.diagnosis,jdbcType=VARCHAR},
+      prescription = #{record.prescription,jdbcType=VARCHAR},
+      department_id = #{record.departmentId,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dzqc.cloud.entity.MedicalRecord">
+    update medicalrecord
+    <set>
+      <if test="patientId != null">
+        patient_id = #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="patientName != null">
+        patient_name = #{patientName,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=VARCHAR},
+      </if>
+      <if test="symptom != null">
+        symptom = #{symptom,jdbcType=VARCHAR},
+      </if>
+      <if test="drugsused != null">
+        drugsused = #{drugsused,jdbcType=VARCHAR},
+      </if>
+      <if test="doctorId != null">
+        doctor_id = #{doctorId,jdbcType=INTEGER},
+      </if>
+      <if test="doctorName != null">
+        doctor_name = #{doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="preconsultation != null">
+        preconsultation = #{preconsultation,jdbcType=VARCHAR},
+      </if>
+      <if test="reportId != null">
+        report_id = #{reportId,jdbcType=INTEGER},
+      </if>
+      <if test="diagnosis != null">
+        diagnosis = #{diagnosis,jdbcType=VARCHAR},
+      </if>
+      <if test="prescription != null">
+        prescription = #{prescription,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+    </set>
+    where record_id = #{recordId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dzqc.cloud.entity.MedicalRecord">
     update medicalrecord
     set patient_id = #{patientId,jdbcType=INTEGER},
       patient_name = #{patientName,jdbcType=VARCHAR},

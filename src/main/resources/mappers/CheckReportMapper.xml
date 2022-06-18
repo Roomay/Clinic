@@ -1,40 +1,40 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.dzqc.cloud.dao.CheckReportMapper" >
-  <resultMap id="BaseResultMap" type="com.dzqc.cloud.entity.CheckReport" >
-    <constructor >
-      <idArg column="report_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="patient_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="consultation_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="inspectionItem" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="attachment" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="comment" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="check_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="department_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="description" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="conclusion" jdbcType="VARCHAR" javaType="java.lang.String" />
-      <arg column="issue_doctor_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="conduct_doctor_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
-      <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dzqc.cloud.dao.CheckReportMapper">
+  <resultMap id="BaseResultMap" type="com.dzqc.cloud.entity.CheckReport">
+    <constructor>
+      <idArg column="report_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="patient_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="consultation_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="inspectionItem" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="attachment" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="check_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="conclusion" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="issue_doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="conduct_doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
     </constructor>
   </resultMap>
-  <sql id="Base_Column_List" >
+  <sql id="Base_Column_List">
     report_id, patient_id, consultation_id, inspectionItem, attachment, comment, check_time, 
     department_id, description, conclusion, issue_doctor_id, conduct_doctor_id, create_time, 
     update_time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from checkReport
     where report_id = #{reportId,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from checkReport
     where report_id = #{reportId,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.dzqc.cloud.entity.CheckReport" >
+  <insert id="insert" parameterType="com.dzqc.cloud.entity.CheckReport">
     insert into checkReport (report_id, patient_id, consultation_id, 
       inspectionItem, attachment, comment, 
       check_time, department_id, description, 
@@ -46,143 +46,341 @@
       #{conclusion,jdbcType=VARCHAR}, #{issueDoctorId,jdbcType=INTEGER}, #{conductDoctorId,jdbcType=INTEGER}, 
       #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="com.dzqc.cloud.entity.CheckReport" >
+  <insert id="insertSelective" parameterType="com.dzqc.cloud.entity.CheckReport">
     insert into checkReport
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="reportId != null" >
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
         report_id,
       </if>
-      <if test="patientId != null" >
+      <if test="patientId != null">
         patient_id,
       </if>
-      <if test="consultationId != null" >
+      <if test="consultationId != null">
         consultation_id,
       </if>
-      <if test="inspectionitem != null" >
+      <if test="inspectionitem != null">
         inspectionItem,
       </if>
-      <if test="attachment != null" >
+      <if test="attachment != null">
         attachment,
       </if>
-      <if test="comment != null" >
+      <if test="comment != null">
         comment,
       </if>
-      <if test="checkTime != null" >
+      <if test="checkTime != null">
         check_time,
       </if>
-      <if test="departmentId != null" >
+      <if test="departmentId != null">
         department_id,
       </if>
-      <if test="description != null" >
+      <if test="description != null">
         description,
       </if>
-      <if test="conclusion != null" >
+      <if test="conclusion != null">
         conclusion,
       </if>
-      <if test="issueDoctorId != null" >
+      <if test="issueDoctorId != null">
         issue_doctor_id,
       </if>
-      <if test="conductDoctorId != null" >
+      <if test="conductDoctorId != null">
         conduct_doctor_id,
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time,
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time,
       </if>
     </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="reportId != null" >
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
         #{reportId,jdbcType=INTEGER},
       </if>
-      <if test="patientId != null" >
+      <if test="patientId != null">
         #{patientId,jdbcType=INTEGER},
       </if>
-      <if test="consultationId != null" >
+      <if test="consultationId != null">
         #{consultationId,jdbcType=INTEGER},
       </if>
-      <if test="inspectionitem != null" >
+      <if test="inspectionitem != null">
         #{inspectionitem,jdbcType=VARCHAR},
       </if>
-      <if test="attachment != null" >
+      <if test="attachment != null">
         #{attachment,jdbcType=VARCHAR},
       </if>
-      <if test="comment != null" >
+      <if test="comment != null">
         #{comment,jdbcType=VARCHAR},
       </if>
-      <if test="checkTime != null" >
+      <if test="checkTime != null">
         #{checkTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="departmentId != null" >
+      <if test="departmentId != null">
         #{departmentId,jdbcType=INTEGER},
       </if>
-      <if test="description != null" >
+      <if test="description != null">
         #{description,jdbcType=VARCHAR},
       </if>
-      <if test="conclusion != null" >
+      <if test="conclusion != null">
         #{conclusion,jdbcType=VARCHAR},
       </if>
-      <if test="issueDoctorId != null" >
+      <if test="issueDoctorId != null">
         #{issueDoctorId,jdbcType=INTEGER},
       </if>
-      <if test="conductDoctorId != null" >
+      <if test="conductDoctorId != null">
         #{conductDoctorId,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dzqc.cloud.entity.CheckReport" >
+  <update id="updateByPrimaryKeySelective" parameterType="com.dzqc.cloud.entity.CheckReport">
     update checkReport
-    <set >
-      <if test="patientId != null" >
+    <set>
+      <if test="patientId != null">
         patient_id = #{patientId,jdbcType=INTEGER},
       </if>
-      <if test="consultationId != null" >
+      <if test="consultationId != null">
         consultation_id = #{consultationId,jdbcType=INTEGER},
       </if>
-      <if test="inspectionitem != null" >
+      <if test="inspectionitem != null">
         inspectionItem = #{inspectionitem,jdbcType=VARCHAR},
       </if>
-      <if test="attachment != null" >
+      <if test="attachment != null">
         attachment = #{attachment,jdbcType=VARCHAR},
       </if>
-      <if test="comment != null" >
+      <if test="comment != null">
         comment = #{comment,jdbcType=VARCHAR},
       </if>
-      <if test="checkTime != null" >
+      <if test="checkTime != null">
         check_time = #{checkTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="departmentId != null" >
+      <if test="departmentId != null">
         department_id = #{departmentId,jdbcType=INTEGER},
       </if>
-      <if test="description != null" >
+      <if test="description != null">
         description = #{description,jdbcType=VARCHAR},
       </if>
-      <if test="conclusion != null" >
+      <if test="conclusion != null">
         conclusion = #{conclusion,jdbcType=VARCHAR},
       </if>
-      <if test="issueDoctorId != null" >
+      <if test="issueDoctorId != null">
         issue_doctor_id = #{issueDoctorId,jdbcType=INTEGER},
       </if>
-      <if test="conductDoctorId != null" >
+      <if test="conductDoctorId != null">
         conduct_doctor_id = #{conductDoctorId,jdbcType=INTEGER},
       </if>
-      <if test="createTime != null" >
+      <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updateTime != null" >
+      <if test="updateTime != null">
         update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
     </set>
     where report_id = #{reportId,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.dzqc.cloud.entity.CheckReport" >
+  <update id="updateByPrimaryKey" parameterType="com.dzqc.cloud.entity.CheckReport">
+    update checkReport
+    set patient_id = #{patientId,jdbcType=INTEGER},
+      consultation_id = #{consultationId,jdbcType=INTEGER},
+      inspectionItem = #{inspectionitem,jdbcType=VARCHAR},
+      attachment = #{attachment,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=VARCHAR},
+      check_time = #{checkTime,jdbcType=TIMESTAMP},
+      department_id = #{departmentId,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      conclusion = #{conclusion,jdbcType=VARCHAR},
+      issue_doctor_id = #{issueDoctorId,jdbcType=INTEGER},
+      conduct_doctor_id = #{conductDoctorId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </update>
+  <resultMap id="BaseResultMap" type="com.dzqc.cloud.entity.CheckReport">
+    <constructor>
+      <idArg column="report_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="patient_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="consultation_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="inspectionItem" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="attachment" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="comment" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="check_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="department_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="description" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="conclusion" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="issue_doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="conduct_doctor_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="create_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="update_time" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    report_id, patient_id, consultation_id, inspectionItem, attachment, comment, check_time, 
+    department_id, description, conclusion, issue_doctor_id, conduct_doctor_id, create_time, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from checkReport
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from checkReport
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dzqc.cloud.entity.CheckReport">
+    insert into checkReport (report_id, patient_id, consultation_id, 
+      inspectionItem, attachment, comment, 
+      check_time, department_id, description, 
+      conclusion, issue_doctor_id, conduct_doctor_id, 
+      create_time, update_time)
+    values (#{reportId,jdbcType=INTEGER}, #{patientId,jdbcType=INTEGER}, #{consultationId,jdbcType=INTEGER}, 
+      #{inspectionitem,jdbcType=VARCHAR}, #{attachment,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, 
+      #{checkTime,jdbcType=TIMESTAMP}, #{departmentId,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, 
+      #{conclusion,jdbcType=VARCHAR}, #{issueDoctorId,jdbcType=INTEGER}, #{conductDoctorId,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.dzqc.cloud.entity.CheckReport">
+    insert into checkReport
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        report_id,
+      </if>
+      <if test="patientId != null">
+        patient_id,
+      </if>
+      <if test="consultationId != null">
+        consultation_id,
+      </if>
+      <if test="inspectionitem != null">
+        inspectionItem,
+      </if>
+      <if test="attachment != null">
+        attachment,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="checkTime != null">
+        check_time,
+      </if>
+      <if test="departmentId != null">
+        department_id,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="conclusion != null">
+        conclusion,
+      </if>
+      <if test="issueDoctorId != null">
+        issue_doctor_id,
+      </if>
+      <if test="conductDoctorId != null">
+        conduct_doctor_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="reportId != null">
+        #{reportId,jdbcType=INTEGER},
+      </if>
+      <if test="patientId != null">
+        #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="consultationId != null">
+        #{consultationId,jdbcType=INTEGER},
+      </if>
+      <if test="inspectionitem != null">
+        #{inspectionitem,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null">
+        #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="departmentId != null">
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="conclusion != null">
+        #{conclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="issueDoctorId != null">
+        #{issueDoctorId,jdbcType=INTEGER},
+      </if>
+      <if test="conductDoctorId != null">
+        #{conductDoctorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dzqc.cloud.entity.CheckReport">
+    update checkReport
+    <set>
+      <if test="patientId != null">
+        patient_id = #{patientId,jdbcType=INTEGER},
+      </if>
+      <if test="consultationId != null">
+        consultation_id = #{consultationId,jdbcType=INTEGER},
+      </if>
+      <if test="inspectionitem != null">
+        inspectionItem = #{inspectionitem,jdbcType=VARCHAR},
+      </if>
+      <if test="attachment != null">
+        attachment = #{attachment,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="checkTime != null">
+        check_time = #{checkTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="departmentId != null">
+        department_id = #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="conclusion != null">
+        conclusion = #{conclusion,jdbcType=VARCHAR},
+      </if>
+      <if test="issueDoctorId != null">
+        issue_doctor_id = #{issueDoctorId,jdbcType=INTEGER},
+      </if>
+      <if test="conductDoctorId != null">
+        conduct_doctor_id = #{conductDoctorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where report_id = #{reportId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dzqc.cloud.entity.CheckReport">
     update checkReport
     set patient_id = #{patientId,jdbcType=INTEGER},
       consultation_id = #{consultationId,jdbcType=INTEGER},
