@@ -98,10 +98,11 @@ CREATE TABLE `medicalrecord`  (
 -- Table structure for departmentinfo
 -- ----------------------------
 DROP TABLE IF EXISTS `department_info`;
-CREATE TABLE `departmentinfo`  (
+CREATE TABLE `department_info`  (
   `department_id` int(11) NOT NULL AUTO_INCREMENT,
   `department_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '科室名称',
   `affliation_id` int(11) NULL DEFAULT NULL COMMENT '隶属id',
+  `introduction` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '科室简介',
 
   PRIMARY KEY (`department_id`) USING BTREE,
   UNIQUE INDEX `department_name`(`department_name`) USING BTREE
