@@ -1,6 +1,5 @@
 package com.dzqc.cloud.service;
 
-import com.dzqc.cloud.entity.Medicalrecord;
 import com.github.pagehelper.PageInfo;
 
 public interface MedicalrecordService {

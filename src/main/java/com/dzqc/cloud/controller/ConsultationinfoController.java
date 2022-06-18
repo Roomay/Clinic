@@ -1,5 +1,4 @@
 package com.dzqc.cloud.controller;
-import com.dzqc.cloud.entity.Consultation;
 import com.dzqc.cloud.service.ConsultationService;
 import com.dzqc.cloud.common.ResultObject;
 import com.github.pagehelper.PageInfo;

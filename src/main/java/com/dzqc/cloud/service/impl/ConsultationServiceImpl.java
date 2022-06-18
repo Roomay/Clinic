@@ -1,7 +1,5 @@
 package com.dzqc.cloud.service.impl;
 
-import com.dzqc.cloud.dao.ConsultationMapper;
-import com.dzqc.cloud.entity.Consultation;
 import com.dzqc.cloud.service.ConsultationService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

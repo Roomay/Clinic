@@ -1,6 +1,5 @@
 package com.dzqc.cloud.service;
 
-import com.dzqc.cloud.entity.Consultation;
 import com.github.pagehelper.PageInfo;
 
 /**

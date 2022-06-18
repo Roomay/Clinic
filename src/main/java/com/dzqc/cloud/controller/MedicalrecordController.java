@@ -3,8 +3,6 @@ package com.dzqc.cloud.controller;
 import com.dzqc.cloud.service.MedicalrecordService;
 import com.dzqc.cloud.common.Message;
 import com.dzqc.cloud.common.ResultObject;
-import com.dzqc.cloud.entity.Medicalrecord;
-import com.dzqc.cloud.entity.Userinfo;
 import com.dzqc.cloud.service.UserService;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.RandomStringUtils;

@@ -3,7 +3,6 @@ package com.dzqc.cloud.controller;
 import com.dzqc.cloud.common.ResultObject;
 import com.dzqc.cloud.service.EmpinfoService;
 import com.dzqc.cloud.common.Message;
-import com.dzqc.cloud.entity.Empinfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;

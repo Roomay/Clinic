@@ -1,7 +1,5 @@
 package com.dzqc.cloud.service.impl;
 
-import com.dzqc.cloud.dao.EmpinfoMapper;
-import com.dzqc.cloud.entity.Empinfo;
 import com.dzqc.cloud.service.EmpinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -27,10 +27,10 @@
 
         <!--jdbc的数据库连接 -->
         <jdbcConnection
-                driverClass="${db.driverClassName}"
-                connectionURL="${db.url}"
-                userId="${db.username}"
-                password="${db.password}">
+                driverClass="com.mysql.jdbc.Driver"
+                connectionURL="jdbc:mysql://localhost:3383/clinic_management?serverTimezone=UTC"
+                userId="root"
+                password="123456">
         </jdbcConnection>
 
 
@@ -81,6 +81,12 @@
         <!-- 要生成哪些表  tableName：填写相应的数据表名  domainObjectName：实体的类名 其它不动-->
         <table tableName="checkReport" domainObjectName="CheckReport" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
+        <table tableName="consultation" domainObjectName="Consultation"></table>
+        <table tableName="medicalrecord" domainObjectName="MedicalRecord"></table>
+        <table tableName="department_info" domainObjectName="DepartmentInfo"></table>
+        <table tableName="doctor_info" domainObjectName="DoctorInfo"></table>
+        <table tableName="patient_info" domainObjectName="PatientInfo"></table>
+        <table tableName="admin_info" domainObjectName="AdminInfo"></table>
 
     </context>
 </generatorConfiguration>

@@ -1,8 +1,5 @@
 package com.dzqc.cloud.service.impl;
 
-import com.dzqc.cloud.dao.MedicalrecordMapper;
-import com.dzqc.cloud.dao.UserinfoMapper;
-import com.dzqc.cloud.entity.Medicalrecord;
 import com.dzqc.cloud.service.MedicalrecordService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;

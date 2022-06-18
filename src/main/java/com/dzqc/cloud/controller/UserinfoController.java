@@ -2,7 +2,6 @@ package com.dzqc.cloud.controller;
 
 import com.dzqc.cloud.common.Message;
 import com.dzqc.cloud.common.ResultObject;
-import com.dzqc.cloud.entity.Userinfo;
 import com.dzqc.cloud.service.UserService;
 import com.dzqc.cloud.util.SendSmsUtil;
 import com.dzqc.cloud.util.VerificationCode;

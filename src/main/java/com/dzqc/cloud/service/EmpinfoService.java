@@ -1,7 +1,5 @@
 package com.dzqc.cloud.service;
 
-import com.dzqc.cloud.entity.Empinfo;
-
 import java.util.List;
 
 public interface EmpinfoService {
