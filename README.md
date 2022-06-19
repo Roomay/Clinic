@@ -7,3 +7,10 @@ docker 指定映射端口为3383(避免3306与其他docker实例混淆)
 ```
 $ docker run --restart=always --name clinic -e MYSQL_ROOT_PASSWORD=123456 -p 3383:3306 -d mysql:8.0 
 ```
+
+### Interfaces to be done
+* 注册登录
+* 所有doc
+* 根据depar选
+* 用户名 appoint （1，2）
+* 显示医生的可预约时间
