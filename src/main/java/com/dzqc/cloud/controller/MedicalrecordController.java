@@ -9,15 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-<<<<<<< HEAD
-@Controller
-public class MedicalRecordController {
-=======
+
 @RestController
 public class MedicalrecordController {
 
->>>>>>> 0c1bd94b53d56df24f6560d2c7ab278040496551
-    @Autowired
+    @Auowired
     private MedicalrecordService medicalrecordService;
 
     @RequestMapping( value="/medicalrecord/insert",method = RequestMethod.POST)
