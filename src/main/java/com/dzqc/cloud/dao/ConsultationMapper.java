@@ -1,6 +1,9 @@
 package com.dzqc.cloud.dao;
 
 import com.dzqc.cloud.entity.Consultation;
+import com.dzqc.cloud.entity.DoctorInfo;
+
+import java.util.List;
 
 public interface ConsultationMapper {
     int deleteByPrimaryKey(Integer consultationId);
@@ -14,4 +17,6 @@ public interface ConsultationMapper {
     int updateByPrimaryKeySelective(Consultation record);
 
     int updateByPrimaryKey(Consultation record);
+
+    List<Consultation> selectByDoctorId(int doctorId);
 }
