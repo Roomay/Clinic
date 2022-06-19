@@ -48,7 +48,16 @@ CREATE TABLE `checkReport`  (
 -- ----------------------------
 -- Table structure for consultation
 -- ----------------------------
-
+DROP TABLE IF EXISTS 'login_ticket';
+CREATE TABLE 'login_ticket' (
+ `id` int NOT NULL,
+ `user_id` int NOT NULL,
+ `ticket` varchar(45) NOt NULL,
+ `type` int NULL COMMENT '0-用户;1-医生;2-管理员',
+ `status` int NULL COMMENT '0-valid; 1-invalid',
+ `expired` timestamp NOT NULL,
+ PRIMARY KEY (`id`)
+);
 
 DROP TABLE IF EXISTS `consultation`;
 CREATE TABLE `consultation` (

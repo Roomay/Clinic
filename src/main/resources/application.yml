@@ -4,7 +4,7 @@ spring:
   datasource:
     druid:
       username: root
-      password: 123456
+      password: mysql
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://localhost:3306/clinic_management?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
 
@@ -12,8 +12,7 @@ spring:
 mybatis:
   type-aliases-package: com.dzqc.cloud.entity
   mapper-locations: classpath:mappers/*Mapper.xml
-server:
-  port: 80
+
 
 ## 现实日志
 logging:
@@ -33,3 +32,12 @@ pagehelper:
   reasonable: true
   support-methods-arguments: true
   params: count=countSql
+
+clinc:
+  path:
+    domain: http://localhost:8080
+
+server:
+  port: 8080
+  servlet:
+    context-path: /clinic

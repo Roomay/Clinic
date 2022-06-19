@@ -1,7 +1,11 @@
 package com.dzqc.cloud.service;
 
 import com.dzqc.cloud.entity.MedicalRecord;
+import org.springframework.stereotype.Service;
 
-public interface MedicalrecordService {
-    public int insertmedical(MedicalRecord medicalRecord);
+@Service
+public class MedicalrecordService {
+    public int insertmedical(MedicalRecord medicalRecord) {
+        return 0;
+    }
 }

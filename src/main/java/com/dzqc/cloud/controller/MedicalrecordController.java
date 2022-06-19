@@ -5,15 +5,14 @@ import com.dzqc.cloud.common.ResultObject;
 import com.dzqc.cloud.entity.MedicalRecord;
 import com.dzqc.cloud.entity.PatientInfo;
 import com.dzqc.cloud.service.MedicalrecordService;
-import com.dzqc.cloud.service.impl.MedicalrecordServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@Controller
 public class MedicalRecordController {
     @Autowired
-    MedicalrecordService medicalrecordService;
-
+    private MedicalrecordService medicalrecordService;
 
     @RequestMapping( value="/medicalrecord/insert",method = RequestMethod.POST)
     public ResultObject insertrecord(@RequestBody MedicalRecord medicalRecord) {
@@ -29,7 +28,4 @@ public class MedicalRecordController {
             return ResultObject.error(Message.SERVER_ERROR);
         }
     }
-
-
-
 }

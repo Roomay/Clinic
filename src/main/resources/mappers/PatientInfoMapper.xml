@@ -25,6 +25,12 @@
     from patient_info
     where patient_id = #{patientId,jdbcType=INTEGER}
   </select>
+  <select id="selectByUsername" resultType="com.dzqc.cloud.entity.PatientInfo">
+    select
+    <include refid="Base_Column_List" />
+    from patient_info
+    where patient_name = #{patientName,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from patient_info
     where patient_id = #{patientId,jdbcType=INTEGER}
