@@ -86,8 +86,8 @@ CREATE TABLE `medicalrecord`  (
   `update_time` timestamp(0) NULL DEFAULT NULL,
   `status` int(11) NULL DEFAULT NULL COMMENT '病历状态 0自行预约 1智能导诊 2已诊断 3删除',
   PRIMARY KEY (`record_id`) USING BTREE,
-  UNIQUE INDEX `patient_id`(`patient_id`) USING BTREE,
-  UNIQUE INDEX `doctor_id`(`doctor_id`) USING BTREE
+  INDEX `patient_id`(`patient_id`) USING BTREE,
+  INDEX `doctor_id`(`doctor_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '病历表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
@@ -142,9 +142,9 @@ CREATE TABLE `doctor_info`  (
   `create_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`doctor_id`) USING BTREE,
-  UNIQUE INDEX `doctor_name`(`doctor_name`) USING BTREE,
+  INDEX `doctor_name`(`doctor_name`) USING BTREE,
   UNIQUE INDEX `cid`(`cid`) USING BTREE,
-  UNIQUE INDEX `department_id`(`department_id`) USING BTREE,
+  INDEX `department_id`(`department_id`) USING BTREE,
   UNIQUE INDEX `phone`(`phone`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '医生信息表' ROW_FORMAT = DYNAMIC;
 
@@ -172,7 +172,7 @@ CREATE TABLE `patient_info`  (
   `create_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`patient_id`) USING BTREE,
-  UNIQUE INDEX `patient_name`(`patient_name`) USING BTREE,
+  INDEX `patient_name`(`patient_name`) USING BTREE,
   UNIQUE INDEX `phone`(`phone`) USING BTREE,
   UNIQUE INDEX `cid`(`cid`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '病人信息表' ROW_FORMAT = DYNAMIC;
