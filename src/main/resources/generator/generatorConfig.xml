@@ -81,12 +81,18 @@
         <!-- 要生成哪些表  tableName：填写相应的数据表名  domainObjectName：实体的类名 其它不动-->
         <table tableName="checkReport" domainObjectName="CheckReport" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"/>
-        <table tableName="consultation" domainObjectName="Consultation"></table>
-        <table tableName="medicalrecord" domainObjectName="MedicalRecord"></table>
-        <table tableName="department_info" domainObjectName="DepartmentInfo"></table>
-        <table tableName="doctor_info" domainObjectName="DoctorInfo"></table>
-        <table tableName="patient_info" domainObjectName="PatientInfo"></table>
-        <table tableName="admin_info" domainObjectName="AdminInfo"></table>
+        <table tableName="consultation" domainObjectName="Consultation" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="medicalrecord" domainObjectName="MedicalRecord" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="department_info" domainObjectName="DepartmentInfo" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="doctor_info" domainObjectName="DoctorInfo" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="patient_info" domainObjectName="PatientInfo" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
+        <table tableName="admin_info" domainObjectName="AdminInfo" enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false"></table>
 
     </context>
 </generatorConfiguration>

@@ -21,83 +21,11 @@
       <arg column="status" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
   <sql id="Base_Column_List" >
     record_id, patient_id, patient_name, gender, symptom, drugsused, doctor_id, doctor_name, 
     preconsultation, report_id, diagnosis, prescription, department_id, create_time, 
     update_time, status
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dzqc.cloud.entity.MedicalRecordExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from medicalrecord
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -107,12 +35,6 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from medicalrecord
     where record_id = #{recordId,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.dzqc.cloud.entity.MedicalRecordExample" >
-    delete from medicalrecord
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
   </delete>
   <insert id="insert" parameterType="com.dzqc.cloud.entity.MedicalRecord" >
     insert into medicalrecord (record_id, patient_id, patient_name, 
@@ -231,90 +153,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.dzqc.cloud.entity.MedicalRecordExample" resultType="java.lang.Integer" >
-    select count(*) from medicalrecord
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update medicalrecord
-    <set >
-      <if test="record.recordId != null" >
-        record_id = #{record.recordId,jdbcType=INTEGER},
-      </if>
-      <if test="record.patientId != null" >
-        patient_id = #{record.patientId,jdbcType=INTEGER},
-      </if>
-      <if test="record.patientName != null" >
-        patient_name = #{record.patientName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.gender != null" >
-        gender = #{record.gender,jdbcType=VARCHAR},
-      </if>
-      <if test="record.symptom != null" >
-        symptom = #{record.symptom,jdbcType=VARCHAR},
-      </if>
-      <if test="record.drugsused != null" >
-        drugsused = #{record.drugsused,jdbcType=VARCHAR},
-      </if>
-      <if test="record.doctorId != null" >
-        doctor_id = #{record.doctorId,jdbcType=INTEGER},
-      </if>
-      <if test="record.doctorName != null" >
-        doctor_name = #{record.doctorName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.preconsultation != null" >
-        preconsultation = #{record.preconsultation,jdbcType=VARCHAR},
-      </if>
-      <if test="record.reportId != null" >
-        report_id = #{record.reportId,jdbcType=INTEGER},
-      </if>
-      <if test="record.diagnosis != null" >
-        diagnosis = #{record.diagnosis,jdbcType=VARCHAR},
-      </if>
-      <if test="record.prescription != null" >
-        prescription = #{record.prescription,jdbcType=VARCHAR},
-      </if>
-      <if test="record.departmentId != null" >
-        department_id = #{record.departmentId,jdbcType=INTEGER},
-      </if>
-      <if test="record.createTime != null" >
-        create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.updateTime != null" >
-        update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="record.status != null" >
-        status = #{record.status,jdbcType=INTEGER},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update medicalrecord
-    set record_id = #{record.recordId,jdbcType=INTEGER},
-      patient_id = #{record.patientId,jdbcType=INTEGER},
-      patient_name = #{record.patientName,jdbcType=VARCHAR},
-      gender = #{record.gender,jdbcType=VARCHAR},
-      symptom = #{record.symptom,jdbcType=VARCHAR},
-      drugsused = #{record.drugsused,jdbcType=VARCHAR},
-      doctor_id = #{record.doctorId,jdbcType=INTEGER},
-      doctor_name = #{record.doctorName,jdbcType=VARCHAR},
-      preconsultation = #{record.preconsultation,jdbcType=VARCHAR},
-      report_id = #{record.reportId,jdbcType=INTEGER},
-      diagnosis = #{record.diagnosis,jdbcType=VARCHAR},
-      prescription = #{record.prescription,jdbcType=VARCHAR},
-      department_id = #{record.departmentId,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP},
-      update_time = #{record.updateTime,jdbcType=TIMESTAMP},
-      status = #{record.status,jdbcType=INTEGER}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.dzqc.cloud.entity.MedicalRecord" >
     update medicalrecord
     <set >

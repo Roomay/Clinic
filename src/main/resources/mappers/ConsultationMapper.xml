@@ -13,82 +13,10 @@
       <arg column="charge" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
     </constructor>
   </resultMap>
-  <sql id="Example_Where_Clause" >
-    <where >
-      <foreach collection="oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause" >
-    <where >
-      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
-        <if test="criteria.valid" >
-          <trim prefix="(" suffix=")" prefixOverrides="and" >
-            <foreach collection="criteria.criteria" item="criterion" >
-              <choose >
-                <when test="criterion.noValue" >
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue" >
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue" >
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue" >
-                  and ${criterion.condition}
-                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
   <sql id="Base_Column_List" >
     consultation_id, doctor_id, doctor_name, day_slot, time_slot, avail_status, comment, 
     charge
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.dzqc.cloud.entity.ConsultationExample" >
-    select
-    <if test="distinct" >
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from consultation
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null" >
-      order by ${orderByClause}
-    </if>
-  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
@@ -98,12 +26,6 @@
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from consultation
     where consultation_id = #{consultationId,jdbcType=INTEGER}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.dzqc.cloud.entity.ConsultationExample" >
-    delete from consultation
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
   </delete>
   <insert id="insert" parameterType="com.dzqc.cloud.entity.Consultation" >
     insert into consultation (consultation_id, doctor_id, doctor_name, 
@@ -168,58 +90,6 @@
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.dzqc.cloud.entity.ConsultationExample" resultType="java.lang.Integer" >
-    select count(*) from consultation
-    <if test="_parameter != null" >
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map" >
-    update consultation
-    <set >
-      <if test="record.consultationId != null" >
-        consultation_id = #{record.consultationId,jdbcType=INTEGER},
-      </if>
-      <if test="record.doctorId != null" >
-        doctor_id = #{record.doctorId,jdbcType=INTEGER},
-      </if>
-      <if test="record.doctorName != null" >
-        doctor_name = #{record.doctorName,jdbcType=VARCHAR},
-      </if>
-      <if test="record.daySlot != null" >
-        day_slot = #{record.daySlot,jdbcType=INTEGER},
-      </if>
-      <if test="record.timeSlot != null" >
-        time_slot = #{record.timeSlot,jdbcType=INTEGER},
-      </if>
-      <if test="record.availStatus != null" >
-        avail_status = #{record.availStatus,jdbcType=INTEGER},
-      </if>
-      <if test="record.comment != null" >
-        comment = #{record.comment,jdbcType=VARCHAR},
-      </if>
-      <if test="record.charge != null" >
-        charge = #{record.charge,jdbcType=DECIMAL},
-      </if>
-    </set>
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map" >
-    update consultation
-    set consultation_id = #{record.consultationId,jdbcType=INTEGER},
-      doctor_id = #{record.doctorId,jdbcType=INTEGER},
-      doctor_name = #{record.doctorName,jdbcType=VARCHAR},
-      day_slot = #{record.daySlot,jdbcType=INTEGER},
-      time_slot = #{record.timeSlot,jdbcType=INTEGER},
-      avail_status = #{record.availStatus,jdbcType=INTEGER},
-      comment = #{record.comment,jdbcType=VARCHAR},
-      charge = #{record.charge,jdbcType=DECIMAL}
-    <if test="_parameter != null" >
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
   <update id="updateByPrimaryKeySelective" parameterType="com.dzqc.cloud.entity.Consultation" >
     update consultation
     <set >
