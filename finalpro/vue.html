@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--view层-->
+<div id="app">
+    <button v-on:click="vm.sayHi()">anniu</button>
+</div>
+<!--第一步：导入vue.js-->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+    var vm = new Vue({
+        el:"#app",
+        //MODEL:数据
+
+        data:{
+            message: "java"
+        },
+        methods:{ //方法必须定义在Vue的Methon对象中,v-on:事件
+            sayHi: function (){
+                window.location.href ="http://localhost:8080/";
+            }
+        }
+    });
+</script>
+</body>
+</html>
