@@ -55,15 +55,13 @@ CREATE TABLE `consultation` (
   `consultation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '就诊记录ID',
   `doctor_id` int(11) NOT NULL ,
   `doctor_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '医生姓名',
-  `day_slot` int(11) NULL DEFAULT NULL COMMENT '0~6 表示星期日到星期六',
-  `time_slot` int(11) NULL DEFAULT NULL COMMENT '0~19表示从8:00-18:00,当中20个时间段(每30分钟一个)',
+  `day_slot` int(11) NULL DEFAULT NULL COMMENT '星期几',
+  `time_slot` int(11) NULL DEFAULT NULL COMMENT '时间段',
   `avail_status` int(11) NULL DEFAULT NULL COMMENT '可用状态 0.可预约 1.等待确认 2.不可用',
   `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `charge` decimal(11,1) NOT NULL DEFAULT 0.0 COMMENT '收费',
   PRIMARY KEY (`consultation_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '坐诊表' ROW_FORMAT = DYNAMIC;
-
-INSERT INTO `consultation` VALUES (1, '1', 'Zhang', 1, 0, 0, 'Experimented medicines offered', 200.0);
 
 
 -- ----------------------------
@@ -74,7 +72,7 @@ CREATE TABLE `medicalrecord`  (
   `record_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '病历ID',
   `patient_id` int(11) NOT NULL COMMENT '病人ID',
   `patient_name` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '患者姓名',
-  `gender` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '患者性别 0男 1女',
+  `gender` varchar(2) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '患者性别',
   `symptom` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '主要症状',
   `drugsused` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '所用药物',
   `doctor_id` int(11) NULL COMMENT '医生ID',
@@ -95,7 +93,7 @@ CREATE TABLE `medicalrecord`  (
 -- ----------------------------
 -- Records of medicalrecord
 -- ----------------------------
-INSERT INTO `medicalrecord` VALUES (0, 0, 'Bob', '0', 'Vomitting', 'Zofen', 1,'Zhang', NULL, NULL, NULL, NULL, NULL, '2020-05-20 17:05:18', '2020-05-20 17:05:21', 0);
+-- INSERT INTO `consultation` VALUES (1, 'bob', '1', '呕吐', '止咳糖浆', 'qq', '22', 33, '2020-05-20 17:05:18', '2020-05-20 17:05:21', 0);
 -- INSERT INTO `consultation` VALUES (2, 'sundy', '1', '头疼', '康比得', '11', '22', 34, '2020-05-20 17:06:13', '2020-05-20 17:06:15', 0);
 
 -- ----------------------------
@@ -115,14 +113,12 @@ CREATE TABLE `department_info`  (
 -- ----------------------------
 -- Records of departmentinfo
 -- ----------------------------
-INSERT INTO `department_info` VALUES (33, 'orthopedic', NULL, 'Bone to be loved');
--- 骨科
-INSERT INTO `department_info` VALUES (34, 'ophtalmology', NULL, 'Bright eyes');
--- 眼科
--- INSERT INTO `department_info` VALUES (35, 'Endocrinology', NULL);  -- 内分泌科
--- INSERT INTO `department_info` VALUES (36, 'obstetrics_and_gynecology', NULL);  -- 妇科
--- INSERT INTO `department_info` VALUES (37, 'neurology', NULL);  -- 神经科
--- INSERT INTO `department_info` VALUES (38, 'psychiatry', NULL); -- 精神科
+-- INSERT INTO `department_info` VALUES (33, 'orthopedic', NULL);  --骨科
+-- INSERT INTO `department_info` VALUES (34, 'ophtalmology', NULL);  --眼科
+-- INSERT INTO `department_info` VALUES (35, 'Endocrinology', NULL); --内分泌科
+-- INSERT INTO `department_info` VALUES (36, 'obstetrics_and_gynecology', NULL); --妇科
+-- INSERT INTO `department_info` VALUES (37, 'neurology', NULL); --神经科
+-- INSERT INTO `department_info` VALUES (38, 'psychiatry', NULL);  --精神科
 
 
 
@@ -155,8 +151,8 @@ CREATE TABLE `doctor_info`  (
 -- ----------------------------
 -- Records of doctor_info
 -- ----------------------------
-INSERT INTO `doctor_info` VALUES (1, 'Zhang', '123456', 'F3433','15700085557', NULL, 33, 1, 'An outstanding doctor with gorgeous achievement against COVID-19', NULL, 1, '2020-04-01 15:35:20', '2020-04-01 15:35:20');
-INSERT INTO `doctor_info` VALUES (2, 'Wang', '123456', 'G0698', '13734741053', NULL, 34, 0, 'Another oustanding doctor with exciting records against COVID-19', NULL, 1, '2022-04-01 15:35:20', '2022-04-02 15:35:20');
+-- INSERT INTO `doctor_info` VALUES (33, '张医生', '111111', '2020-04-16 14:40:02', '15700085557', '河南-商丘-夏邑', 1, 33, 33, '医生界的一枝花，抗击新冠肺炎卓有成效', NULL, '5', 1, NULL, NULL);
+-- INSERT INTO `doctor_info` VALUES (34, '王医生', '111111', '2020-04-01 15:35:20', '13734741053', '河南-郑州-金水', 1, 34, 33, '医生界的扛把子，抗击新冠肺炎一马当先', NULL, '10', 1, NULL, NULL);
 
 
 -- ----------------------------
@@ -180,7 +176,6 @@ CREATE TABLE `patient_info`  (
   UNIQUE INDEX `phone`(`phone`) USING BTREE,
   UNIQUE INDEX `cid`(`cid`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '病人信息表' ROW_FORMAT = DYNAMIC;
-INSERT INTO `patient_info` VALUES (0, 'Bob', '123456', 'V9527', '52252315', NULL,'1989-05-20 17:05:18', '0', '2020-05-20 17:05:18', '2020-05-20 17:05:21');
 
 -- ----------------------------
 -- Table structure for administrator
@@ -193,7 +188,7 @@ CREATE TABLE `admin_info` (
   `validatecode` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '验证码',
   PRIMARY KEY (`admin_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '管理员表' ROW_FORMAT = DYNAMIC;
-INSERT INTO `admin_info` VALUES (0, '123456', '13500000000', NULL);
+
 
 -- ----------------------------
 -- Table structure for institutioninfo

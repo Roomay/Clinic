@@ -1,7 +1,6 @@
 package com.dzqc.cloud.entity;
 
 import java.io.Serializable;
-
 public class AdminInfo implements Serializable {
     private Integer adminId;
 

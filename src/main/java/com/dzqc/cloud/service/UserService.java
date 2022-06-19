@@ -1,5 +1,7 @@
 package com.dzqc.cloud.service;
 
+import com.dzqc.cloud.entity.User;
+
 public interface UserService {
-    public Userinfo selectByPhone(String phone);
+    public int insertUser(User user);
 }

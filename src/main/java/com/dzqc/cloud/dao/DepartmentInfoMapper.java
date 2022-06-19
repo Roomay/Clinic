@@ -4,7 +4,9 @@ import com.dzqc.cloud.entity.DepartmentInfo;
 import com.dzqc.cloud.entity.DepartmentInfoExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface DepartmentInfoMapper {
     int countByExample(DepartmentInfoExample example);
 
@@ -27,4 +29,6 @@ public interface DepartmentInfoMapper {
     int updateByPrimaryKeySelective(DepartmentInfo record);
 
     int updateByPrimaryKey(DepartmentInfo record);
+
+    List<DepartmentInfo> selectAll();
 }
