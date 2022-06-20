@@ -2,12 +2,15 @@ package com.dzqc.cloud.controller;
 
 import com.dzqc.cloud.common.Message;
 import com.dzqc.cloud.common.ResultObject;
+import com.dzqc.cloud.entity.Consultation;
 import com.dzqc.cloud.entity.DoctorInfo;
 import com.dzqc.cloud.service.ConsultationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class ConsultationController {
@@ -23,8 +26,15 @@ public class ConsultationController {
     @CrossOrigin
     @GetMapping("/consultation/selectByDoctor")
     public ResultObject selectByDoctorId(int doctorId) {
-        return ResultObject.success(
-                consultationService.selectByDoctorId(doctorId)
-        );
+        try {
+            List<Consultation> consultationsFound = consultationService.selectByDoctorId(doctorId);
+            if (consultationsFound.isEmpty()) {
+                return ResultObject.error("没有坐诊记录");
+            } else {
+                return ResultObject.success(consultationsFound);
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
     }
 }

@@ -128,4 +128,10 @@
       charge = #{charge,jdbcType=DECIMAL}
     where consultation_id = #{consultationId,jdbcType=INTEGER}
   </update>
+  <select id="selectByDoctorId" parameterType="int">
+    select
+    <include refid="Base_Column_List"></include>
+    from consultation
+    where doctor_id = #{doctorId,jdbcType=INTEGER}
+  </select>
 </mapper>
