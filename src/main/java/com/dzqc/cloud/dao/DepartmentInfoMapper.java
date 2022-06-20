@@ -1,7 +1,11 @@
 package com.dzqc.cloud.dao;
 
 import com.dzqc.cloud.entity.DepartmentInfo;
+import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+@Mapper
 public interface DepartmentInfoMapper {
     int deleteByPrimaryKey(Integer departmentId);
 
@@ -14,4 +18,6 @@ public interface DepartmentInfoMapper {
     int updateByPrimaryKeySelective(DepartmentInfo record);
 
     int updateByPrimaryKey(DepartmentInfo record);
+
+    List<DepartmentInfo> selectAll();
 }
