@@ -1,5 +1,6 @@
 package com.dzqc.cloud.controller;
 
+import com.dzqc.cloud.common.Message;
 import com.dzqc.cloud.common.ResultObject;
 import com.dzqc.cloud.entity.DoctorInfo;
 import com.dzqc.cloud.service.ConsultationService;
@@ -14,6 +15,7 @@ public class ConsultationController {
     @Autowired
     private ConsultationService consultationService;
 
+
     /**
      * 获取医生名下的所有就诊预约
      * @return 该医生名下的所有就诊预约
@@ -21,8 +23,8 @@ public class ConsultationController {
     @CrossOrigin
     @GetMapping("/consultation/selectByDoctor")
     public ResultObject selectByDoctorId(int doctorId) {
-        try {
-
-        }
+        return ResultObject.success(
+                consultationService.selectByDoctorId(doctorId)
+        );
     }
 }

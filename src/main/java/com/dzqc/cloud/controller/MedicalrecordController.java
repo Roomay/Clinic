@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class MedicalrecordController {
 
-    @Auowired
+    @Autowired
     private MedicalrecordService medicalrecordService;
 
     @RequestMapping( value="/medicalrecord/insert",method = RequestMethod.POST)
