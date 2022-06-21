@@ -38,6 +38,7 @@ CREATE TABLE `checkReport`  (
   `conduct_doctor_id` int(11) NULL DEFAULT NULL COMMENT '检查医生',
   `create_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
+  `is_deleted` int(11) NOT NULL DEFAULT 0 COMMENT '删除标记 0.正常 1.删除',
   PRIMARY KEY (`report_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '检查报告表' ROW_FORMAT = DYNAMIC;
 
@@ -69,6 +70,7 @@ CREATE TABLE `consultation` (
   `avail_status` int(11) NULL DEFAULT NULL COMMENT '可用状态 0.可预约 1.等待确认 2.不可用',
   `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `charge` decimal(11,1) NOT NULL DEFAULT 0.0 COMMENT '收费',
+  `is_deleted` int(11) NOT NULL DEFAULT 0 COMMENT '删除标记 0.正常 1.删除',
   PRIMARY KEY (`consultation_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '坐诊表' ROW_FORMAT = DYNAMIC;
 
@@ -93,7 +95,8 @@ CREATE TABLE `medicalrecord`  (
   `department_id` int(11) NULL DEFAULT NULL COMMENT '科室ID',
   `create_time` timestamp(0) NULL DEFAULT NULL,
   `update_time` timestamp(0) NULL DEFAULT NULL,
-  `status` int(11) NULL DEFAULT NULL COMMENT '病历状态 0自行预约 1智能导诊 2已诊断 3删除',
+  `status` int(11) NULL DEFAULT NULL COMMENT '病历状态 0自行预约 1智能导诊 2已诊断',
+  `is_deleted` int(11) NOT NULL DEFAULT 0 COMMENT '删除标记 0.正常 1.删除',
   PRIMARY KEY (`record_id`) USING BTREE,
   INDEX `patient_id`(`patient_id`) USING BTREE,
   INDEX `doctor_id`(`doctor_id`) USING BTREE
@@ -114,7 +117,7 @@ CREATE TABLE `department_info`  (
   `department_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '科室名称',
   `affliation_id` int(11) NULL DEFAULT NULL COMMENT '隶属id',
   `introduction` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '科室简介',
-
+  `is_deleted` int(11) NOT NULL DEFAULT 0 COMMENT '删除标记 0.正常 1.删除',
   PRIMARY KEY (`department_id`) USING BTREE,
   UNIQUE INDEX `department_name`(`department_name`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '科室信息表' ROW_FORMAT = DYNAMIC;
@@ -150,6 +153,7 @@ CREATE TABLE `doctor_info`  (
   `avail_state` int(11) NOT NULL COMMENT '启用状态 0.禁用 1.启用',
   `create_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
+  `is_deleted` int(11) NOT NULL DEFAULT 0 COMMENT '删除标记 0.正常 1.删除',
   PRIMARY KEY (`doctor_id`) USING BTREE,
   INDEX `doctor_name`(`doctor_name`) USING BTREE,
   UNIQUE INDEX `cid`(`cid`) USING BTREE,
@@ -180,6 +184,7 @@ CREATE TABLE `patient_info`  (
   -- `address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '住址',
   `create_time` datetime(0) NULL DEFAULT NULL,
   `update_time` datetime(0) NULL DEFAULT NULL,
+  `is_deleted` int(11) NOT NULL DEFAULT 0 COMMENT '删除标记 0.正常 1.删除',
   PRIMARY KEY (`patient_id`) USING BTREE,
   INDEX `patient_name`(`patient_name`) USING BTREE,
   UNIQUE INDEX `phone`(`phone`) USING BTREE,
@@ -195,6 +200,7 @@ CREATE TABLE `admin_info` (
   `password` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '密码',
   `phone` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '联系电话',
   `validatecode` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '验证码',
+  `is_deleted` int(11) NOT NULL DEFAULT 0 COMMENT '删除标记 0.正常 1.删除',
   PRIMARY KEY (`admin_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '管理员表' ROW_FORMAT = DYNAMIC;
 
