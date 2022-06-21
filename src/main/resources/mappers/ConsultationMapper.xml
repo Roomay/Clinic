@@ -8,6 +8,8 @@
       <arg column="doctor_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="day_slot" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="time_slot" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="patient_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="patient_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="avail_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="comment" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="charge" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
@@ -15,7 +17,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    consultation_id, doctor_id, doctor_name, day_slot, time_slot, avail_status, comment, 
+    consultation_id, doctor_id, doctor_name, day_slot, time_slot, patient_id, patient_name, avail_status, comment,
     charge, is_deleted
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -134,5 +136,11 @@
     <include refid="Base_Column_List"></include>
     from consultation
     where doctor_id = #{doctorId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByPatientId" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"></include>
+    from consultation
+    where patient_id = #{patientId,jdbcType=INTEGER}
   </select>
 </mapper>

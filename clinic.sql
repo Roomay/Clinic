@@ -67,6 +67,8 @@ CREATE TABLE `consultation` (
   `doctor_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '医生姓名',
   `day_slot` int(11) NULL DEFAULT NULL COMMENT '星期几',
   `time_slot` int(11) NULL DEFAULT NULL COMMENT '时间段',
+  `patient_id` int(11) NULL DEFAULT NULL COMMENT '病人ID',
+  `patient_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '病人姓名',
   `avail_status` int(11) NULL DEFAULT NULL COMMENT '可用状态 0.可预约 1.等待确认 2.不可用',
   `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `charge` decimal(11,1) NOT NULL DEFAULT 0.0 COMMENT '收费',
