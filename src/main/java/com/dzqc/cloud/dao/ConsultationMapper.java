@@ -20,5 +20,7 @@ public interface ConsultationMapper {
 
     int updateByPrimaryKey(Consultation record);
 
-    List<Consultation> selectByDoctorId(int doctorId);
+    List<Consultation> selectByDoctorId(Integer doctorId);
+
+    List<Consultation> selectByPatientId(Integer patientId);
 }

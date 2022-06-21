@@ -7,10 +7,11 @@
       <arg column="department_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="affliation_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="introduction" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="is_deleted" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    department_id, department_name, affliation_id, introduction
+    department_id, department_name, affliation_id, introduction, is_deleted
   </sql>
   <select id="selectAll" resultMap="BaseResultMap">
     select <include refid="Base_Column_List"/> from department_info

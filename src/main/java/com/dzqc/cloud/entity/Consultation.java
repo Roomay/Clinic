@@ -20,9 +20,11 @@ public class Consultation implements Serializable {
 
     private BigDecimal charge;
 
+    private Integer isDeleted;
+
     private static final long serialVersionUID = 1L;
 
-    public Consultation(Integer consultationId, Integer doctorId, String doctorName, Integer daySlot, Integer timeSlot, Integer availStatus, String comment, BigDecimal charge) {
+    public Consultation(Integer consultationId, Integer doctorId, String doctorName, Integer daySlot, Integer timeSlot, Integer availStatus, String comment, BigDecimal charge, Integer isDeleted) {
         this.consultationId = consultationId;
         this.doctorId = doctorId;
         this.doctorName = doctorName;
@@ -31,6 +33,7 @@ public class Consultation implements Serializable {
         this.availStatus = availStatus;
         this.comment = comment;
         this.charge = charge;
+        this.isDeleted = isDeleted;
     }
 
     public Consultation() {
@@ -99,5 +102,13 @@ public class Consultation implements Serializable {
 
     public void setCharge(BigDecimal charge) {
         this.charge = charge;
+    }
+
+    public Integer getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }

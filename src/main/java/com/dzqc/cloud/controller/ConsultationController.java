@@ -23,7 +23,6 @@ public class ConsultationController {
      * 获取医生名下的所有就诊预约
      * @return 该医生名下的所有就诊预约
      */
-    @CrossOrigin
     @GetMapping("/consultation/selectByDoctor")
     public ResultObject selectByDoctorId(int doctorId) {
         try {
@@ -37,4 +36,15 @@ public class ConsultationController {
             return ResultObject.error(Message.SERVER_ERROR);
         }
     }
+
+    /**
+     * 预约该条坐诊
+     * @return 预约是否成功
+     */
+//    @GetMapping("/consultation/selectByPatientId")
+//    public ResultObject selectByPatientId(int patientId) {
+//        try {
+//            List<>
+//        }
+//    }
 }

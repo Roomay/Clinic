@@ -11,11 +11,12 @@
       <arg column="avail_status" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="comment" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="charge" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="is_deleted" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     consultation_id, doctor_id, doctor_name, day_slot, time_slot, avail_status, comment, 
-    charge
+    charge, is_deleted
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -128,7 +129,7 @@
       charge = #{charge,jdbcType=DECIMAL}
     where consultation_id = #{consultationId,jdbcType=INTEGER}
   </update>
-  <select id="selectByDoctorId" parameterType="int">
+  <select id="selectByDoctorId" parameterType="java.lang.Integer">
     select
     <include refid="Base_Column_List"></include>
     from consultation

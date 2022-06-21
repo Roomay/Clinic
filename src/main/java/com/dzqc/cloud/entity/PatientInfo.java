@@ -24,9 +24,11 @@ public class PatientInfo implements Serializable {
 
     private Date updateTime;
 
+    private Integer isDeleted;
+
     private static final long serialVersionUID = 1L;
 
-    public PatientInfo(Integer patientId, String patientName, String password, String cid, String phone, String validatecode, Date birthday, String gender, Date createTime, Date updateTime) {
+    public PatientInfo(Integer patientId, String patientName, String password, String cid, String phone, String validatecode, Date birthday, String gender, Date createTime, Date updateTime, Integer isDeleted) {
         this.patientId = patientId;
         this.patientName = patientName;
         this.password = password;
@@ -37,6 +39,7 @@ public class PatientInfo implements Serializable {
         this.gender = gender;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.isDeleted = isDeleted;
     }
 
     public PatientInfo() {
@@ -121,5 +124,13 @@ public class PatientInfo implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }

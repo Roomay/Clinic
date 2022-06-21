@@ -11,13 +11,16 @@ public class DepartmentInfo implements Serializable {
 
     private String introduction;
 
+    private Integer isDeleted;
+
     private static final long serialVersionUID = 1L;
 
-    public DepartmentInfo(Integer departmentId, String departmentName, Integer affliationId, String introduction) {
+    public DepartmentInfo(Integer departmentId, String departmentName, Integer affliationId, String introduction, Integer isDeleted) {
         this.departmentId = departmentId;
         this.departmentName = departmentName;
         this.affliationId = affliationId;
         this.introduction = introduction;
+        this.isDeleted = isDeleted;
     }
 
     public DepartmentInfo() {
@@ -55,4 +58,13 @@ public class DepartmentInfo implements Serializable {
     public void setIntroduction(String introduction) {
         this.introduction = introduction == null ? null : introduction.trim();
     }
+
+    public Integer getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
 }

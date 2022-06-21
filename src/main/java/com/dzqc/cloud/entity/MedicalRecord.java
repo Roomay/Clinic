@@ -36,9 +36,11 @@ public class MedicalRecord implements Serializable {
 
     private Integer status;
 
+    private Integer isDeleted;
+
     private static final long serialVersionUID = 1L;
 
-    public MedicalRecord(Integer recordId, Integer patientId, String patientName, String gender, String symptom, String drugsused, Integer doctorId, String doctorName, String preconsultation, Integer reportId, String diagnosis, String prescription, Integer departmentId, Date createTime, Date updateTime, Integer status) {
+    public MedicalRecord(Integer recordId, Integer patientId, String patientName, String gender, String symptom, String drugsused, Integer doctorId, String doctorName, String preconsultation, Integer reportId, String diagnosis, String prescription, Integer departmentId, Date createTime, Date updateTime, Integer status, Integer isDeleted) {
         this.recordId = recordId;
         this.patientId = patientId;
         this.patientName = patientName;
@@ -55,6 +57,7 @@ public class MedicalRecord implements Serializable {
         this.createTime = createTime;
         this.updateTime = updateTime;
         this.status = status;
+        this.isDeleted = isDeleted;
     }
 
     public MedicalRecord() {
@@ -187,5 +190,13 @@ public class MedicalRecord implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }

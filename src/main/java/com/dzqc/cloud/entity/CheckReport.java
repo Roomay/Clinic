@@ -32,9 +32,11 @@ public class CheckReport implements Serializable {
 
     private Date updateTime;
 
+    private Integer isDeleted;
+
     private static final long serialVersionUID = 1L;
 
-    public CheckReport(Integer reportId, Integer patientId, Integer consultationId, String inspectionitem, String attachment, String comment, Date checkTime, Integer departmentId, String description, String conclusion, Integer issueDoctorId, Integer conductDoctorId, Date createTime, Date updateTime) {
+    public CheckReport(Integer reportId, Integer patientId, Integer consultationId, String inspectionitem, String attachment, String comment, Date checkTime, Integer departmentId, String description, String conclusion, Integer issueDoctorId, Integer conductDoctorId, Date createTime, Date updateTime, Integer isDeleted) {
         this.reportId = reportId;
         this.patientId = patientId;
         this.consultationId = consultationId;
@@ -49,6 +51,7 @@ public class CheckReport implements Serializable {
         this.conductDoctorId = conductDoctorId;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.isDeleted = isDeleted;
     }
 
     public CheckReport() {
@@ -165,5 +168,13 @@ public class CheckReport implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }

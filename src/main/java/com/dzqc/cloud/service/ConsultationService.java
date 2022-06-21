@@ -18,7 +18,11 @@ public class ConsultationService {
         return consultationMapper.selectByPrimaryKey(consultationId);
     }
 
-    public List<Consultation> selectByDoctorId(int doctorId) {
+    public List<Consultation> selectByDoctorId(Integer doctorId) {
         return consultationMapper.selectByDoctorId(doctorId);
+    }
+
+    public List<Consultation> selectByPatientId(Integer patientId) {
+        return consultationMapper.selectByPatientId(patientId);
     }
 }

@@ -11,13 +11,16 @@ public class AdminInfo implements Serializable {
 
     private String validatecode;
 
+    private Integer isDeleted;
+
     private static final long serialVersionUID = 1L;
 
-    public AdminInfo(Integer adminId, String password, String phone, String validatecode) {
+    public AdminInfo(Integer adminId, String password, String phone, String validatecode, Integer isDeleted) {
         this.adminId = adminId;
         this.password = password;
         this.phone = phone;
         this.validatecode = validatecode;
+        this.isDeleted = isDeleted;
     }
 
     public AdminInfo() {
@@ -54,5 +57,13 @@ public class AdminInfo implements Serializable {
 
     public void setValidatecode(String validatecode) {
         this.validatecode = validatecode == null ? null : validatecode.trim();
+    }
+
+    public Integer getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }

@@ -17,12 +17,13 @@
       <arg column="conduct_doctor_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="create_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
       <arg column="update_time" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="is_deleted" jdbcType="INTEGER" javaType="java.lang.Integer" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
     report_id, patient_id, consultation_id, inspectionItem, attachment, comment, check_time, 
     department_id, description, conclusion, issue_doctor_id, conduct_doctor_id, create_time, 
-    update_time
+    update_time, is_deleted
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 

@@ -30,9 +30,11 @@ public class DoctorInfo implements Serializable {
 
     private Date updateTime;
 
+    private Integer isDeleted;
+
     private static final long serialVersionUID = 1L;
 
-    public DoctorInfo(Integer doctorId, String doctorName, String password, String cid, String phone, String validatecode, Integer departmentId, Integer titleId, String comment, String headimg, Integer availState, Date createTime, Date updateTime) {
+    public DoctorInfo(Integer doctorId, String doctorName, String password, String cid, String phone, String validatecode, Integer departmentId, Integer titleId, String comment, String headimg, Integer availState, Date createTime, Date updateTime, Integer isDeleted) {
         this.doctorId = doctorId;
         this.doctorName = doctorName;
         this.password = password;
@@ -46,6 +48,7 @@ public class DoctorInfo implements Serializable {
         this.availState = availState;
         this.createTime = createTime;
         this.updateTime = updateTime;
+        this.isDeleted = isDeleted;
     }
 
     public DoctorInfo() {
@@ -154,5 +157,13 @@ public class DoctorInfo implements Serializable {
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public Integer getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(Integer isDeleted) {
+        this.isDeleted = isDeleted;
     }
 }
