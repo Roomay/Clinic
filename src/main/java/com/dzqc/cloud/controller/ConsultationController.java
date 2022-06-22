@@ -74,9 +74,12 @@ public class ConsultationController {
      */
 
     @PostMapping("/consulation/appointment")
-    public ResultObject appointment(@RequestBody Consultation consultation, Integer patientId, String patientName) {
+    public ResultObject appointment(Integer consultationId, Integer patientId, String patientName) {
+        Consultation consultation = consultationService.selectByConsultationId(consultationId);
         try {
-            if (consultation.getAvailStatus()==UNAVAILABLE) {
+            if (consultation == null) {
+                return ResultObject.error("不存在该记录");
+            } else if (consultation.getAvailStatus()==UNAVAILABLE) {
                 return ResultObject.error("该时间段已被预约");
             } else if (consultation.getIsDeleted()==DELETED) {
                 return ResultObject.error("不存在该记录");

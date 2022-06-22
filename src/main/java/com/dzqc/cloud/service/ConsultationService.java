@@ -14,7 +14,7 @@ public class ConsultationService {
     @Autowired
     private ConsultationMapper consultationMapper;
 
-    public Consultation selectByPrimaryKey(Integer consultationId) {
+    public Consultation selectByConsultationId(Integer consultationId) {
         return consultationMapper.selectByPrimaryKey(consultationId);
     }
 
