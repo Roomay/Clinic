@@ -3,6 +3,7 @@ package com.dzqc.cloud.dao;
 import com.dzqc.cloud.entity.Consultation;
 import com.dzqc.cloud.entity.DoctorInfo;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface ConsultationMapper {
 
     int insert(Consultation record);
 
-    int insertSelective(Consultation record);
+    int insertSelective(@RequestBody Consultation record);
 
     Consultation selectByPrimaryKey(Integer consultationId);
 

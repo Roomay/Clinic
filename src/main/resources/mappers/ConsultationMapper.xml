@@ -31,6 +31,10 @@
     where consultation_id = #{consultationId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.dzqc.cloud.entity.Consultation" >
+
+<!--    <selectKey keyProperty="consultation_id" order="AFTER" resultType="int">-->
+<!--      SELECT LAST_INSERT_ID()-->
+<!--    </selectKey>-->
     insert into consultation (consultation_id, doctor_id, doctor_name, 
       day_slot, time_slot, avail_status, 
       comment, charge)

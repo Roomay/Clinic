@@ -1,6 +1,8 @@
 package com.dzqc.cloud.common;
 
+import com.dzqc.cloud.entity.Consultation;
 import com.dzqc.cloud.entity.MedicalRecord;
+import com.dzqc.cloud.service.ConsultationService;
 import com.dzqc.cloud.service.MedicalrecordService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,19 +11,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.math.BigDecimal;
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @MapperScan("com.dzqc.cloud.dao")
 public class test  {
 
     @Autowired
-    private MedicalrecordService medicalrecordService;
+    private ConsultationService consultationService;
 
     @Test
     public void test(){
-        MedicalRecord medicalRecord=new MedicalRecord();
-        medicalRecord.setPatientId(223110);
-        int s=medicalrecordService.insertmedical(medicalRecord);
+        Consultation consultation=new Consultation();
+        consultation.setDoctorId(1);
+        consultation.setDoctorName("1");
+        consultation.setPatientName("1");
+        consultation.setCharge(BigDecimal.valueOf(1.0));
+//        System.out.println(consultation);
+        int s=consultationService.insertConsultation(consultation);
         System.out.println(s);
 
     }

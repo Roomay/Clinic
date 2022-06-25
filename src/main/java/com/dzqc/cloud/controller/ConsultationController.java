@@ -93,4 +93,26 @@ public class ConsultationController {
             return ResultObject.error(Message.SERVER_ERROR);
         }
     }
+
+
+
+    /**
+     * 预约一条坐诊
+     * @return 预约成功的该条记录
+     */
+    @CrossOrigin
+    @PostMapping("/consulation/insertappointment")
+    public ResultObject insertappointment(@RequestBody Consultation consultation) {
+        int c = consultationService.insertConsultation(consultation);
+        try {
+            if (c == 0) {
+                return ResultObject.error("插入失败");
+            }
+            else {
+                return ResultObject.success("插入成功");
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
 }
