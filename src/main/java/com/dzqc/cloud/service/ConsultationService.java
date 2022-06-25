@@ -25,4 +25,9 @@ public class ConsultationService {
     public List<Consultation> selectByPatientId(Integer patientId) {
         return consultationMapper.selectByPatientId(patientId);
     }
+
+    public int insertConsultation(Consultation consultation) {
+        return consultationMapper.insert(consultation);
+    }
+
 }

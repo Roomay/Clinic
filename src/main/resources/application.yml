@@ -33,11 +33,7 @@ pagehelper:
   support-methods-arguments: true
   params: count=countSql
 
-clinc:
-  path:
-    domain: http://localhost:8080
-
 server:
   port: 8080
-  servlet:
-    context-path: /clinic
+#  servlet:
+#    context-path: /clinic

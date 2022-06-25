@@ -31,6 +31,10 @@
     where consultation_id = #{consultationId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.dzqc.cloud.entity.Consultation" >
+
+<!--    <selectKey keyProperty="consultation_id" order="AFTER" resultType="int">-->
+<!--      SELECT LAST_INSERT_ID()-->
+<!--    </selectKey>-->
     insert into consultation (consultation_id, doctor_id, doctor_name, 
       day_slot, time_slot, avail_status, 
       comment, charge)
@@ -131,13 +135,13 @@
       charge = #{charge,jdbcType=DECIMAL}
     where consultation_id = #{consultationId,jdbcType=INTEGER}
   </update>
-  <select id="selectByDoctorId" parameterType="java.lang.Integer">
+  <select id="selectByDoctorId" parameterType="java.lang.Integer" resultType="java.util.Map">
     select
     <include refid="Base_Column_List"></include>
     from consultation
     where doctor_id = #{doctorId,jdbcType=INTEGER}
   </select>
-  <select id="selectByPatientId" parameterType="java.lang.Integer">
+  <select id="selectByPatientId" parameterType="java.lang.Integer" resultType="java.util.Map">
     select
     <include refid="Base_Column_List"></include>
     from consultation

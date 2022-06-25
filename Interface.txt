@@ -1,4 +1,1 @@
-注册登录
-所有doc
-根据depar选
-用户名 appoint （1，2）
+根据Consultation表的date选取Count（）一天四个坐诊 为四返回空 小于4返回time_slot字段的list （比如1，2，3 分别代表一个时间段）

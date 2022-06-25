@@ -36,8 +36,8 @@ public class ConsultationController {
      * 获取医生名下的所有就诊预约
      * @return 该医生名下的所有就诊预约
      */
-    @GetMapping("/consultation/selectByDoctor")
-    public ResultObject selectByDoctorId(int doctorId) {
+    @PostMapping("/consultation/selectByDoctor")
+    public ResultObject selectByDoctorId(Integer doctorId) {
         try {
             List<Consultation> consultationsFound = consultationService.selectByDoctorId(doctorId);
             if (consultationsFound.isEmpty()) {
@@ -54,8 +54,8 @@ public class ConsultationController {
      * 获取病人名下的所有就诊预约
      * @return 该病人名下的所有就诊预约
      */
-    @GetMapping("/consultation/selectByPatientId")
-    public ResultObject selectByPatientId(int patientId) {
+    @PostMapping("/consultation/selectByPatientId")
+    public ResultObject selectByPatientId(Integer patientId) {
         try {
             List<Consultation> consultationsFound = consultationService.selectByPatientId(patientId);
             if (consultationsFound.isEmpty()) {
@@ -88,6 +88,28 @@ public class ConsultationController {
                 consultation.setPatientId(patientId);
                 consultation.setPatientName(patientName);
                 return ResultObject.success(consultation);
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
+
+
+    /**
+     * 预约一条坐诊
+     * @return 预约成功的该条记录
+     */
+    @CrossOrigin
+    @PostMapping("/consulation/insertappointment")
+    public ResultObject insertappointment(@RequestBody Consultation consultation) {
+        int c = consultationService.insertConsultation(consultation);
+        try {
+            if (c == 0) {
+                return ResultObject.error("插入失败");
+            }
+            else {
+                return ResultObject.success("插入成功");
             }
         } catch (Exception e) {
             return ResultObject.error(Message.SERVER_ERROR);
