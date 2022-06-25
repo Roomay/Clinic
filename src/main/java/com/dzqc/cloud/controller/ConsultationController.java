@@ -29,16 +29,17 @@ public class ConsultationController {
     private static final int FRIDAY = 5;
     private static final int SATURDAY = 6;
 
-    private static final int TIME_BEGIN = 0;
+    private static final int TIMESLOT_BEGIN = 0;
     private static final int TIMESLOT_END = 20;
 
     @Autowired
     private ConsultationService consultationService;
 
     /**
-     * 增加一条坐诊信息
+     * 增加一条坐诊信息 Junru
      * @return 成功增加的坐诊信息
      */
+    @CrossOrigin
     @PostMapping("/consultation/insertAConsultation")
     public ResultObject insertAConsultation(Consultation record) {
         if (record.getDoctorId() == null || record.getDoctorName() == null) {
@@ -47,7 +48,7 @@ public class ConsultationController {
         if (record.getDaySlot() < SUNDAY || record.getDaySlot() > SATURDAY) {
             return ResultObject.error("添加坐诊信息失败，日期信息越界");
         }
-        if (record.getTimeSlot() < TIME_BEGIN || record.getTimeSlot() > TIMESLOT_END) {
+        if (record.getTimeSlot() < TIMESLOT_BEGIN || record.getTimeSlot() > TIMESLOT_END) {
             return ResultObject.error("添加坐诊信息失败，时间信息越界");
         }
         try {
@@ -55,7 +56,7 @@ public class ConsultationController {
             record.setIsDeleted(NOT_DELETED);
             int inserted = consultationService.insertConsultation(record);
             if (inserted == 1) {
-                return ResultObject.success();
+                return ResultObject.success("添加坐诊信息成功");
             } else {
                 return ResultObject.error("添加坐诊信息失败");
             }
@@ -102,7 +103,7 @@ public class ConsultationController {
     }
 
     /**
-     * 预约一条坐诊 Junru
+     * 预约一条坐诊
      * @return 预约成功的该条记录
      */
 
@@ -129,7 +130,7 @@ public class ConsultationController {
 
 
     /**
-     * 插入一条坐诊 Chongyue
+     * 增加一条坐诊信息 Chongyue
      * @return 反馈信息
      */
     @CrossOrigin
@@ -145,6 +146,22 @@ public class ConsultationController {
             }
         } catch (Exception e) {
             return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
+    /**
+     * 批量删除电子病历
+     * @param ids
+     * @return
+     */
+    @RequestMapping("/consultation/batchDelete")
+    public ResultObject batchDelete(Integer [] ids){
+        try {
+            this.consultationService.batchDelete(ids);
+            return ResultObject.success("删除电子病历成功");
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultObject.error("删除电子病历失败");
         }
     }
 }

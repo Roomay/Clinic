@@ -28,9 +28,9 @@
   </delete>
   <insert id="insert" parameterType="com.dzqc.cloud.entity.DepartmentInfo" >
     insert into department_info (department_id, department_name, affliation_id, 
-      introduction)
+      introduction, is_deleted)
     values (#{departmentId,jdbcType=INTEGER}, #{departmentName,jdbcType=VARCHAR}, #{affliationId,jdbcType=INTEGER}, 
-      #{introduction,jdbcType=VARCHAR})
+      #{introduction,jdbcType=VARCHAR}, #{isDeleted,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.dzqc.cloud.entity.DepartmentInfo" >
     insert into department_info
@@ -47,6 +47,9 @@
       <if test="introduction != null" >
         introduction,
       </if>
+      <if test="isDeleted != null" >
+        is_deleted,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="departmentId != null" >
@@ -60,6 +63,9 @@
       </if>
       <if test="introduction != null" >
         #{introduction,jdbcType=VARCHAR},
+      </if>
+      <if test="isDeleted != null" >
+        #{isDeleted,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -75,6 +81,9 @@
       <if test="introduction != null" >
         introduction = #{introduction,jdbcType=VARCHAR},
       </if>
+      <if test="isDeleted != null" >
+        is_deleted = #{isDeleted,jdbcType=INTEGER},
+      </if>
     </set>
     where department_id = #{departmentId,jdbcType=INTEGER}
   </update>
@@ -82,7 +91,8 @@
     update department_info
     set department_name = #{departmentName,jdbcType=VARCHAR},
       affliation_id = #{affliationId,jdbcType=INTEGER},
-      introduction = #{introduction,jdbcType=VARCHAR}
+      introduction = #{introduction,jdbcType=VARCHAR},
+      is_deleted = #{isDeleted,jdbcType=INTEGER},
     where department_id = #{departmentId,jdbcType=INTEGER}
   </update>
 </mapper>
