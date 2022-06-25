@@ -70,6 +70,7 @@ public class ConsultationController {
      * 获取医生名下的所有就诊预约
      * @return 该医生名下的所有就诊预约
      */
+    @CrossOrigin
     @PostMapping("/consultation/selectByDoctor")
     public ResultObject selectByDoctorId(Integer doctorId) {
         try {
@@ -86,8 +87,31 @@ public class ConsultationController {
 
     /**
      * 获取病人名下的所有就诊预约
+     * @return 该病人名下的所有就诊预约 根据session
+     */
+    @CrossOrigin
+    @PostMapping("/consultation/selectByPatientName")
+    public ResultObject selectByPatientName(String PatientName) {
+        try {
+            List<Consultation> consultationsFound = consultationService.selectByPatientName(PatientName);
+            if (consultationsFound.isEmpty()) {
+                return ResultObject.error("没有坐诊记录");
+            } else {
+                return ResultObject.success(consultationsFound);
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
+
+
+
+    /**
+     * 获取病人名下的所有就诊预约
      * @return 该病人名下的所有就诊预约
      */
+    @CrossOrigin
     @PostMapping("/consultation/selectByPatientId")
     public ResultObject selectByPatientId(Integer patientId) {
         try {
@@ -106,7 +130,7 @@ public class ConsultationController {
      * 预约一条坐诊
      * @return 预约成功的该条记录
      */
-
+    @CrossOrigin
     @PostMapping("/consulation/appointment")
     public ResultObject appointment(Consultation consultation, PatientInfo patientInfo) {
         try {
@@ -154,6 +178,7 @@ public class ConsultationController {
      * @param ids
      * @return
      */
+    @CrossOrigin
     @RequestMapping("/consultation/batchDelete")
     public ResultObject batchDelete(Integer [] ids){
         try {

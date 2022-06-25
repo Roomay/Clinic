@@ -27,6 +27,12 @@ public class ConsultationService {
         return consultationMapper.selectByPatientId(patientId);
     }
 
+
+
+    public List<Consultation> selectByPatientName(String patientName) {
+        return consultationMapper.selectByPatientName(patientName);
+    }
+
     public int insertConsultation(Consultation consultation) {
         return consultationMapper.insert(consultation);
     }

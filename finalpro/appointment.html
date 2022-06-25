@@ -225,7 +225,7 @@
 									</div>
 									<div class="col-lg-6 col-md-6 col-12">
 										<div class="form-group">
-											<input type="text" placeholder="Date" id="datepicker">
+											<input type="text" placeholder="Date" min="2022-06-25" id="datepicker">
 										</div>
 									</div>
 									<div class="col-lg-12 col-md-12 col-12">
@@ -338,6 +338,15 @@
 					</div>
 				</div>
 			</div>
+
+
+
+
+
+
+
+
+
 			<!--/ End Footer Top -->
 			<!-- Copyright -->
 			<div class="copyright">
@@ -351,10 +360,36 @@
 					</div>
 				</div>
 			</div>
+
+
+
+
 			<!--/ End Copyright -->
 		</footer>
 		<!--/ End Footer Area -->
-		
+		<script>
+			$('[data-plugin="datepicker"]').datepicker({
+				startDate : new Date()
+			});
+			var app=new Vue({
+				el:"#datepicker",
+				data:{
+					tOption1: {
+
+						disabledDate (date) {
+
+							return date && date.valueOf() > Date.now() - 86400000
+
+						}
+
+					},
+				}
+
+
+			})
+
+
+		</script>
 		<!-- jquery Min JS -->
         <script src="js/jquery.min.js"></script>
 		<!-- jquery Migrate JS -->

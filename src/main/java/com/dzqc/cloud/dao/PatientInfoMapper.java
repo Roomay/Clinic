@@ -18,4 +18,5 @@ public interface PatientInfoMapper {
     int updateByPrimaryKey(PatientInfo record);
 
     PatientInfo selectByUsername(String patientName);
+
 }

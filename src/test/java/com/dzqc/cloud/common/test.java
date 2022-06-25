@@ -29,14 +29,14 @@ public class test  {
         consultation.setDoctorName("1");
         consultation.setPatientName("1");
         consultation.setCharge(BigDecimal.valueOf(1.0));
-        Integer s = new Integer(1);
+        String s = "fred";
 //        System.out.println(consultation);
-        List<Consultation> ss=consultationService.selectByPatientId(s);
+        List<Consultation> ss=consultationService.selectByPatientName(s);
         System.out.println(ss);
 
 //        System.out.println(consultation);
-        s =consultationService.insertConsultation(consultation);
-        System.out.println(s);
+//        s =consultationService.insertConsultation(consultation);
+//        System.out.println(s);
 
     }
 

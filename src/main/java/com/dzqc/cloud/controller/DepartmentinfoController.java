@@ -19,7 +19,6 @@ public class DepartmentinfoController {
        * 获取所有的科室
        * @return 所有的科室信息
        */
-      @CrossOrigin
       @GetMapping("/departmentinfo/list")
       public ResultObject list(){
     	  return ResultObject.success(

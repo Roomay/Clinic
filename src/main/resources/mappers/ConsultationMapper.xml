@@ -151,6 +151,14 @@
     from consultation
     where doctor_id = #{doctorId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByPatientName" resultType="java.util.Map">
+    select
+    <include refid="Base_Column_List"></include>
+    from consultation
+    where patient_name = #{patientName,jdbcType=VARCHAR}
+  </select>
+
   <select id="selectByPatientId" parameterType="java.lang.Integer" resultType="java.util.Map">
     select
     <include refid="Base_Column_List"></include>

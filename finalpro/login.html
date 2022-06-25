@@ -335,7 +335,7 @@
 
 					type: "POST",
 
-					url: "http://localhost:8085/user/selectByusername",
+					url: "http://localhost:8080/patient/selectByusername",
 
 					data: "username=" + login_username +"&password=" + login_password,
 
@@ -346,13 +346,14 @@
 							});
 							console.log(msg['userId']);
 							setTimeout(function(){
-								var url = "index.html";
-								// window.sessionStorage.setItem("username",login_username);
+								var url = "case_list.html";
+								window.sessionStorage.setItem("username",login_username);
+								console.log(window.sessionStorage.getItem("username"));
 								Toast.fire({
 									icon: 'success',
 									title: 'Sign in successfully'
 								})
-								window.location.href=url;},1000);
+								window.location.href=url+"?username="+login_username;},1000);
 						}
 						else{
 							Toast.fire({

@@ -25,5 +25,7 @@ public interface ConsultationMapper {
 
     List<Consultation> selectByPatientId(Integer patientId);
 
+    List<Consultation> selectByPatientName(String patientName);
+
     void softDeleteByPrimaryKey(Integer consultationId);
 }

@@ -134,4 +134,8 @@ public class PatientService  {
         loginTicketMapper.updateStatus(ticket, 1);
         return;
     }
+
+    public PatientInfo selectByusername(String username) {
+        return patientInfoMapper.selectByUsername(username);
+    }
 }

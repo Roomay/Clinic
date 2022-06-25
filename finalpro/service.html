@@ -448,11 +448,9 @@
 		methods:{
 			getdepartment: function (){
 				var that=this;
-				axios.get("http://localhost:80/departmentinfo/list").then(
+				axios.get("http://localhost:8080/departmentinfo/list").then(
 						function (response) {
 							that.arr=response.data.result
-							var a =[{name:"ss"},{name:"dsa"}];
-							console.log(that.arr);
 						},function (error) {
 							console.log(error)
 						}

@@ -8,7 +8,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
-
+import com.dzqc.cloud.common.Message;
 import javax.imageio.ImageIO;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
@@ -20,7 +20,7 @@ import java.util.Map;
 
 
 @RestController
-public class PatientController implements Message{
+public class PatientController{
 
     @Autowired
     private PatientService patientService;
@@ -28,9 +28,33 @@ public class PatientController implements Message{
     @Autowired
     private Producer kaptchaProducer;
 
-    @Value("${server.servlet.context-path}")
-    private String contextPath;
-
+    /**
+     * login
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping( "/patient/selectByusername")
+    public ResultObject selectByusername(String username,String password) {
+        try {
+            PatientInfo patientInfo = this.patientService.selectByusername(username);
+            //
+            if (patientInfo==null) {
+                return ResultObject.error("未注册");
+            }
+            else if (patientInfo.getPassword().equals(password)) {
+                return ResultObject.success(patientInfo);
+            }
+            else if (!patientInfo.getPassword().equals(password)){
+                return ResultObject.error("密码错"+patientInfo.getPassword());
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+        return null;
+    }
+//    @Value("${server.servlet.context-path}")
+//    private String contextPath;
+//
 
 //    @RequestMapping(path = "/register", method = RequestMethod.GET)
 //    public String getRegisterPage() {
@@ -65,7 +89,7 @@ public class PatientController implements Message{
                 }
             }
         } catch (Exception e) {
-            return ResultObject.error(SERVER_ERROR);
+            return ResultObject.error(Message.SERVER_ERROR);
         }
 
     }
@@ -128,7 +152,7 @@ public class PatientController implements Message{
             }
 
             //检查账号，密码
-            int expiredSeconds = rememberMe ? REMEMBER_EXPIRED_SECONDS : DEFAULT_EXPIRED_SECONDS;
+            int expiredSeconds = rememberMe ? Message.REMEMBER_EXPIRED_SECONDS : Message.DEFAULT_EXPIRED_SECONDS;
             Map<String, Object> map = patientService.login(username, password, expiredSeconds);
             if(map.containsKey("ticket")) {
                 Cookie cookie = new Cookie("ticket", map.get("ticket").toString());
@@ -144,7 +168,7 @@ public class PatientController implements Message{
                 }
             }
         } catch (Exception e){
-            return ResultObject.error(SERVER_ERROR);
+            return ResultObject.error(Message.SERVER_ERROR);
         }
     }
 
@@ -166,7 +190,7 @@ public class PatientController implements Message{
             patientService.logout(ticket);
             return ResultObject.success("成功退出登录");
         } catch (Exception e) {
-            return ResultObject.success(SERVER_ERROR);
+            return ResultObject.success(Message.SERVER_ERROR);
         }
     }
 

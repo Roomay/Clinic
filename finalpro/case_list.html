@@ -157,8 +157,8 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 col-12">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6 col-12">
+                <div class="row" id="appointment_id">
+                    <div class="col-lg-4 col-md-6 col-12" v-for="item in arr">
                         <!-- Single Blog -->
                         <div class="single-news">
                             <div class="news-head">
@@ -167,7 +167,7 @@
                             <div class="news-body">
                                 <div class="news-content">
                                     <div class="date">22 Aug, 2020</div>
-                                    <h2><a href="blog-single-sidebar.html">We have annnocuced our new product.</a></h2>
+                                    <h2><a href="blog-single-sidebar.html" v-text="item.departmentName">We have annnocuced our new product.</a></h2>
                                     <p class="text">Lorem ipsum dolor a sit ameti, consectetur adipisicing elit, sed do eiusmod tempor incididunt sed do incididunt sed.</p>
                                 </div>
                             </div>
@@ -176,103 +176,6 @@
                     </div>
 
 
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <!-- Single Blog -->
-                        <div class="single-news">
-                            <div class="news-head">
-                                <img src="img/blog1.jpg" alt="#">
-                            </div>
-                            <div class="news-body">
-                                <div class="news-content">
-                                    <div class="date">22 Aug, 2020</div>
-                                    <h2><a href="blog-single-sidebar.html">We have annnocuced our new product.</a></h2>
-                                    <p class="text">Lorem ipsum dolor a sit ameti, consectetur adipisicing elit, sed do eiusmod tempor incididunt sed do incididunt sed.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Blog -->
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <!-- Single Blog -->
-                        <div class="single-news">
-                            <div class="news-head">
-                                <img src="img/blog2.jpg" alt="#">
-                            </div>
-                            <div class="news-body">
-                                <div class="news-content">
-                                    <div class="date">15 Jul, 2020</div>
-                                    <h2><a href="blog-single-sidebar.html">Top five way for solving teeth problems.</a></h2>
-                                    <p class="text">Lorem ipsum dolor a sit ameti, consectetur adipisicing elit, sed do eiusmod tempor incididunt sed do incididunt sed.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Blog -->
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <!-- Single Blog -->
-                        <div class="single-news">
-                            <div class="news-head">
-                                <img src="img/blog3.jpg" alt="#">
-                            </div>
-                            <div class="news-body">
-                                <div class="news-content">
-                                    <div class="date">05 Jan, 2020</div>
-                                    <h2><a href="blog-single-sidebar.html">We provide highly business soliutions.</a></h2>
-                                    <p class="text">Lorem ipsum dolor a sit ameti, consectetur adipisicing elit, sed do eiusmod tempor incididunt sed do incididunt sed.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Blog -->
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <!-- Single Blog -->
-                        <div class="single-news">
-                            <div class="news-head">
-                                <img src="img/blog3.jpg" alt="#">
-                            </div>
-                            <div class="news-body">
-                                <div class="news-content">
-                                    <div class="date">05 Jan, 2020</div>
-                                    <h2><a href="blog-single-sidebar.html">We provide highly business soliutions.</a></h2>
-                                    <p class="text">Lorem ipsum dolor a sit ameti, consectetur adipisicing elit, sed do eiusmod tempor incididunt sed do incididunt sed.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Blog -->
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <!-- Single Blog -->
-                        <div class="single-news">
-                            <div class="news-head">
-                                <img src="img/blog1.jpg" alt="#">
-                            </div>
-                            <div class="news-body">
-                                <div class="news-content">
-                                    <div class="date">22 Aug, 2020</div>
-                                    <h2><a href="blog-single-sidebar.html">We have annnocuced our new product.</a></h2>
-                                    <p class="text">Lorem ipsum dolor a sit ameti, consectetur adipisicing elit, sed do eiusmod tempor incididunt sed do incididunt sed.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Blog -->
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <!-- Single Blog -->
-                        <div class="single-news">
-                            <div class="news-head">
-                                <img src="img/blog2.jpg" alt="#">
-                            </div>
-                            <div class="news-body">
-                                <div class="news-content">
-                                    <div class="date">15 Jul, 2020</div>
-                                    <h2><a href="blog-single-sidebar.html">Top five way for solving teeth problems.</a></h2>
-                                    <p class="text">Lorem ipsum dolor a sit ameti, consectetur adipisicing elit, sed do eiusmod tempor incididunt sed do incididunt sed.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Single Blog -->
-                    </div>
                     <div class="col-12">
                         <!-- Pagination -->
                         <div class="pagination">
@@ -465,6 +368,37 @@
     <!--/ End Copyright -->
 </footer>
 <!--/ End Footer Area -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    var app=new Vue({
+        el:"#appointment_id",
+        data:{
+            arr:[]
+        },
+
+        mounted :function(){this.getappointment();},
+        methods:{
+            getappointment: function (){
+                var that=this;
+                var username=window.sessionStorage.getItem("username")
+                console.log(window.sessionStorage.getItem("username"));
+                axios.post("http://localhost:8080/consultation/selectByPatientId?patientId="+username).then(
+                    function (response) {
+                        that.arr=response.data.result
+                        console.log(response.data.result)
+                    },function (error) {
+                        console.log(error)
+                    }
+                )
+            }
+        }
+
+    })
+</script>
+
 
 <!-- jquery Min JS -->
 <script src="js/jquery.min.js"></script>
