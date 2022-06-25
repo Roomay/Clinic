@@ -147,4 +147,9 @@
     from consultation
     where patient_id = #{patientId,jdbcType=INTEGER}
   </select>
+  <update id="softDeleteByPrimaryKey" parameterType="java.lang.Integer" >
+    update consultation
+    set is_deleted=1
+    where consultation_id = #{consultationId,jdbcType=INTEGER}
+  </update>
 </mapper>

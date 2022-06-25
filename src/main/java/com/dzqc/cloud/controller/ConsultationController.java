@@ -4,11 +4,13 @@ import com.dzqc.cloud.common.Message;
 import com.dzqc.cloud.common.ResultObject;
 import com.dzqc.cloud.entity.Consultation;
 import com.dzqc.cloud.entity.DoctorInfo;
+import com.dzqc.cloud.entity.PatientInfo;
 import com.dzqc.cloud.service.ConsultationService;
 import com.dzqc.cloud.service.MedicalrecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -27,9 +29,40 @@ public class ConsultationController {
     private static final int FRIDAY = 5;
     private static final int SATURDAY = 6;
 
+    private static final int TIME_BEGIN = 0;
+    private static final int TIMESLOT_END = 20;
 
     @Autowired
     private ConsultationService consultationService;
+
+    /**
+     * 增加一条坐诊信息
+     * @return 成功增加的坐诊信息
+     */
+    @PostMapping("/consultation/insertAConsultation")
+    public ResultObject insertAConsultation(Consultation record) {
+        if (record.getDoctorId() == null || record.getDoctorName() == null) {
+            return ResultObject.error("添加坐诊信息失败，医生信息不能为空");
+        }
+        if (record.getDaySlot() < SUNDAY || record.getDaySlot() > SATURDAY) {
+            return ResultObject.error("添加坐诊信息失败，日期信息越界");
+        }
+        if (record.getTimeSlot() < TIME_BEGIN || record.getTimeSlot() > TIMESLOT_END) {
+            return ResultObject.error("添加坐诊信息失败，时间信息越界");
+        }
+        try {
+            record.setConsultationId(null);
+            record.setIsDeleted(NOT_DELETED);
+            int inserted = consultationService.insertConsultation(record);
+            if (inserted == 1) {
+                return ResultObject.success();
+            } else {
+                return ResultObject.error("添加坐诊信息失败");
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
 
 
     /**
@@ -69,13 +102,12 @@ public class ConsultationController {
     }
 
     /**
-     * 预约一条坐诊
+     * 预约一条坐诊 Junru
      * @return 预约成功的该条记录
      */
 
     @PostMapping("/consulation/appointment")
-    public ResultObject appointment(Integer consultationId, Integer patientId, String patientName) {
-        Consultation consultation = consultationService.selectByConsultationId(consultationId);
+    public ResultObject appointment(Consultation consultation, PatientInfo patientInfo) {
         try {
             if (consultation == null) {
                 return ResultObject.error("不存在该记录");
@@ -85,8 +117,8 @@ public class ConsultationController {
                 return ResultObject.error("不存在该记录");
             } else {
                 consultation.setAvailStatus(UNAVAILABLE);
-                consultation.setPatientId(patientId);
-                consultation.setPatientName(patientName);
+                consultation.setPatientId(patientInfo.getPatientId());
+                consultation.setPatientName(patientInfo.getPatientName());
                 return ResultObject.success(consultation);
             }
         } catch (Exception e) {
@@ -97,14 +129,14 @@ public class ConsultationController {
 
 
     /**
-     * 预约一条坐诊
-     * @return 预约成功的该条记录
+     * 插入一条坐诊 Chongyue
+     * @return 反馈信息
      */
     @CrossOrigin
     @PostMapping("/consulation/insertappointment")
     public ResultObject insertappointment(@RequestBody Consultation consultation) {
-        int c = consultationService.insertConsultation(consultation);
         try {
+            int c = consultationService.insertConsultation(consultation);
             if (c == 0) {
                 return ResultObject.error("插入失败");
             }
