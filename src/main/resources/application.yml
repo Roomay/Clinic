@@ -35,5 +35,5 @@ pagehelper:
 
 server:
   port: 8080
-#  servlet:
-#    context-path: /clinic
+  servlet:
+    context-path: /clinic

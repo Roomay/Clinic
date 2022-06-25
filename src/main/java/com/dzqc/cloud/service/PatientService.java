@@ -129,6 +129,7 @@ public class PatientService  {
         return map;
     }
 
+
     public void logout(String ticket) {
         loginTicketMapper.updateStatus(ticket, 1);
         return;

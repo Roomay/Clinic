@@ -12,13 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
-<<<<<<< HEAD
-<<<<<<< HEAD
 import java.util.List;
-=======
->>>>>>> 4e27e0477f91582a391d47aedeeea7bbdebd9e1b
-=======
->>>>>>> 4e27e0477f91582a391d47aedeeea7bbdebd9e1b
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -35,19 +29,14 @@ public class test  {
         consultation.setDoctorName("1");
         consultation.setPatientName("1");
         consultation.setCharge(BigDecimal.valueOf(1.0));
-<<<<<<< HEAD
-<<<<<<< HEAD
         Integer s = new Integer(1);
 //        System.out.println(consultation);
         List<Consultation> ss=consultationService.selectByPatientId(s);
         System.out.println(ss);
-=======
-=======
->>>>>>> 4e27e0477f91582a391d47aedeeea7bbdebd9e1b
+
 //        System.out.println(consultation);
-        int s=consultationService.insertConsultation(consultation);
+        s =consultationService.insertConsultation(consultation);
         System.out.println(s);
->>>>>>> 4e27e0477f91582a391d47aedeeea7bbdebd9e1b
 
     }
 
