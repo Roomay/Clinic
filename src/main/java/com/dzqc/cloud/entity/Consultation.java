@@ -10,6 +10,8 @@ public class Consultation implements Serializable {
 
     private String doctorName;
 
+    private Integer departmentId;
+
     private Integer daySlot;
 
     private Integer timeSlot;
@@ -28,10 +30,11 @@ public class Consultation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Consultation(Integer consultationId, Integer doctorId, String doctorName, Integer daySlot, Integer timeSlot, Integer patientId, String patientName, Integer availStatus, String comment, BigDecimal charge, Integer isDeleted) {
+    public Consultation(Integer consultationId, Integer doctorId, String doctorName, Integer departmentId, Integer daySlot, Integer timeSlot, Integer patientId, String patientName, Integer availStatus, String comment, BigDecimal charge, Integer isDeleted) {
         this.consultationId = consultationId;
         this.doctorId = doctorId;
         this.doctorName = doctorName;
+        this.departmentId = departmentId;
         this.daySlot = daySlot;
         this.timeSlot = timeSlot;
         this.patientId = patientId;
@@ -68,6 +71,14 @@ public class Consultation implements Serializable {
 
     public void setDoctorName(String doctorName) {
         this.doctorName = doctorName == null ? null : doctorName.trim();
+    }
+
+    public Integer getDepartmentId() {
+        return doctorId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
     }
 
     public Integer getDaySlot() {

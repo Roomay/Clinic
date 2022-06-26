@@ -42,4 +42,8 @@ public class ConsultationService {
             consultationMapper.softDeleteByPrimaryKey(id);
         }
     }
+
+    public List<Consultation> selectByTimeDepartment(Integer timeSlot, Integer departmentId) {
+        return consultationMapper.selectByTimeDepartmentId(timeSlot, departmentId);
+    }
 }

@@ -3,6 +3,7 @@ package com.dzqc.cloud.controller;
 import com.dzqc.cloud.common.Message;
 import com.dzqc.cloud.common.ResultObject;
 import com.dzqc.cloud.entity.Consultation;
+import com.dzqc.cloud.entity.DepartmentInfo;
 import com.dzqc.cloud.entity.DoctorInfo;
 import com.dzqc.cloud.entity.PatientInfo;
 import com.dzqc.cloud.service.ConsultationService;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -176,7 +178,7 @@ public class ConsultationController {
     /**
      * 批量删除电子病历
      * @param ids
-     * @return
+     * @return 反馈信息
      */
     @CrossOrigin
     @RequestMapping("/consultation/batchDelete")
@@ -187,6 +189,25 @@ public class ConsultationController {
         }catch (Exception e){
             e.printStackTrace();
             return ResultObject.error("删除电子病历失败");
+        }
+    }
+
+    /**
+     * 根据日期返回当日空余的TimeSlot
+     * @return 根据TimeSlot分类的坐诊信息列表
+     */
+    @CrossOrigin
+    @GetMapping("/consultation/selectByDate")
+    public ResultObject selectByDateDepartment(Integer daySlot, DepartmentInfo departmentInfo) {
+        try {
+            List<List<Consultation>> list = new ArrayList<>();
+            int departmentId = departmentInfo.getDepartmentId();
+            for (int i = TIMESLOT_BEGIN; i <= TIMESLOT_END; i++) {
+                list.add(consultationService.selectByTimeDepartment(i, departmentId));
+            }
+            return ResultObject.success(list);
+        } catch (Exception e) {
+            return ResultObject.error("查询当天坐诊失败");
         }
     }
 }

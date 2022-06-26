@@ -6,6 +6,7 @@
       <idArg column="consultation_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="doctor_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="doctor_name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="department_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="day_slot" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="time_slot" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="patient_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
@@ -17,7 +18,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    consultation_id, doctor_id, doctor_name, day_slot, time_slot, patient_id, patient_name, avail_status, comment,
+    consultation_id, doctor_id, doctor_name, department_id, day_slot, time_slot, patient_id, patient_name, avail_status, comment,
     charge, is_deleted
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -35,10 +36,10 @@
 <!--    <selectKey keyProperty="consultation_id" order="AFTER" resultType="int">-->
 <!--      SELECT LAST_INSERT_ID()-->
 <!--    </selectKey>-->
-    insert into consultation (consultation_id, doctor_id, doctor_name, 
+    insert into consultation (consultation_id, doctor_id, doctor_name, department_id,
       day_slot, time_slot, avail_status, 
       comment, charge, is_deleted)
-    values (#{consultationId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, #{doctorName,jdbcType=VARCHAR}, 
+    values (#{consultationId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, #{doctorName,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER},
       #{daySlot,jdbcType=INTEGER}, #{timeSlot,jdbcType=INTEGER}, #{availStatus,jdbcType=INTEGER}, 
       #{comment,jdbcType=VARCHAR}, #{charge,jdbcType=DECIMAL}, #{isDeleted,jdbcType=INTEGER})
   </insert>
@@ -53,6 +54,9 @@
       </if>
       <if test="doctorName != null" >
         doctor_name,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
       </if>
       <if test="daySlot != null" >
         day_slot,
@@ -82,6 +86,9 @@
       </if>
       <if test="doctorName != null" >
         #{doctorName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=INTEGER},
       </if>
       <if test="daySlot != null" >
         #{daySlot,jdbcType=INTEGER},
@@ -115,6 +122,9 @@
       <if test="daySlot != null" >
         day_slot = #{daySlot,jdbcType=INTEGER},
       </if>
+      <if test="departmentId != null" >
+        doctor_id = #{departmentId,jdbcType=INTEGER},
+      </if>
       <if test="timeSlot != null" >
         time_slot = #{timeSlot,jdbcType=INTEGER},
       </if>
@@ -137,6 +147,7 @@
     update consultation
     set doctor_id = #{doctorId,jdbcType=INTEGER},
       doctor_name = #{doctorName,jdbcType=VARCHAR},
+      department_id = #{departmentId,jdbcType=INTEGER},
       day_slot = #{daySlot,jdbcType=INTEGER},
       time_slot = #{timeSlot,jdbcType=INTEGER},
       avail_status = #{availStatus,jdbcType=INTEGER},
@@ -145,21 +156,21 @@
       is_deleted = #{isDeleted,jdbcType=INTEGER},
     where consultation_id = #{consultationId,jdbcType=INTEGER}
   </update>
-  <select id="selectByDoctorId" parameterType="java.lang.Integer" resultType="java.util.Map">
+  <select id="selectByDoctorId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"></include>
     from consultation
     where doctor_id = #{doctorId,jdbcType=INTEGER}
   </select>
 
-  <select id="selectByPatientName" resultType="java.util.Map">
+  <select id="selectByPatientName" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"></include>
     from consultation
     where patient_name = #{patientName,jdbcType=VARCHAR}
   </select>
 
-  <select id="selectByPatientId" parameterType="java.lang.Integer" resultType="java.util.Map">
+  <select id="selectByPatientId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"></include>
     from consultation

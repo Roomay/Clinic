@@ -28,4 +28,6 @@ public interface ConsultationMapper {
     List<Consultation> selectByPatientName(String patientName);
 
     void softDeleteByPrimaryKey(Integer consultationId);
+
+    List<Consultation> selectByTimeDepartmentId(Integer timeSlot, Integer departmentId);
 }

@@ -62,9 +62,10 @@ CREATE TABLE 'login_ticket' (
 
 DROP TABLE IF EXISTS `consultation`;
 CREATE TABLE `consultation` (
-  `consultation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '就诊记录ID',
-  `doctor_id` int(11) NOT NULL ,
+  `consultation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '坐诊记录ID',
+  `doctor_id` int(11) NOT NULL COMMENT '医生ID',
   `doctor_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '医生姓名',
+  `department_id` int(11) NOT NULL '科室ID',
   `day_slot` int(11) NULL DEFAULT NULL COMMENT '星期几',
   `time_slot` int(11) NULL DEFAULT NULL COMMENT '时间段',
   `patient_id` int(11) NULL DEFAULT NULL COMMENT '病人ID',
@@ -73,7 +74,9 @@ CREATE TABLE `consultation` (
   `comment` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `charge` decimal(11,1) NOT NULL DEFAULT 0.0 COMMENT '收费',
   `is_deleted` int(11) NOT NULL DEFAULT 0 COMMENT '删除标记 0.正常 1.删除',
-  PRIMARY KEY (`consultation_id`) USING BTREE
+  PRIMARY KEY (`consultation_id`) USING BTREE,
+  INDEX `department_id`(`department_id`) USING BTREE,
+  INDEX `day_slot`(`day_slot`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '坐诊表' ROW_FORMAT = DYNAMIC;
 
 
@@ -107,8 +110,8 @@ CREATE TABLE `medicalrecord`  (
 -- ----------------------------
 -- Records of medicalrecord
 -- ----------------------------
--- INSERT INTO `consultation` VALUES (1, 'bob', '1', '呕吐', '止咳糖浆', 'qq', '22', 33, '2020-05-20 17:05:18', '2020-05-20 17:05:21', 0);
--- INSERT INTO `consultation` VALUES (2, 'sundy', '1', '头疼', '康比得', '11', '22', 34, '2020-05-20 17:06:13', '2020-05-20 17:06:15', 0);
+-- INSERT INTO `medicalrecord` VALUES (1, 'bob', '1', '呕吐', '止咳糖浆', 'qq', '22', 33, '2020-05-20 17:05:18', '2020-05-20 17:05:21', 0);
+-- INSERT INTO `medicalrecord` VALUES (2, 'sundy', '1', '头疼', '康比得', '11', '22', 34, '2020-05-20 17:06:13', '2020-05-20 17:06:15', 0);
 
 -- ----------------------------
 -- Table structure for departmentinfo
