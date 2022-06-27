@@ -20,4 +20,6 @@ public interface DepartmentInfoMapper {
     int updateByPrimaryKey(DepartmentInfo record);
 
     List<DepartmentInfo> selectAll();
+
+    DepartmentInfo selectByDepartmentName(String departmentName);
 }

@@ -45,7 +45,7 @@ public class ConsultationController {
     @CrossOrigin
     @PostMapping("/consultation/insertAConsultation")
     public ResultObject insertAConsultation(Consultation record) {
-        if (record.getDoctorId() == null || record.getDoctorName() == null) {
+        if (record == null || record.getDoctorId() == null || record.getDoctorName() == null) {
             return ResultObject.error("添加坐诊信息失败，医生信息不能为空");
         }
         if (record.getDaySlot() < SUNDAY || record.getDaySlot() > SATURDAY) {

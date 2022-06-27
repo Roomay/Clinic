@@ -95,4 +95,10 @@
       is_deleted = #{isDeleted,jdbcType=INTEGER},
     where department_id = #{departmentId,jdbcType=INTEGER}
   </update>
+  <select id="selectByDepartmentName" parameterType="java.lang.String">
+    select
+    <include refid="Base_Column_List"></include>
+    from department_info
+    where department_name = #{departmentName,jdbcType=VARCHAR}
+  </select>
 </mapper>
