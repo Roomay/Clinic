@@ -181,4 +181,10 @@
     set is_deleted=1
     where consultation_id = #{consultationId,jdbcType=INTEGER}
   </update>
+  <select id="selectByTimeDepartmentId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from consultation
+    where department_id = #{departmentId,jdbcType=INTEGER} and day_slot = #{daySlot,jdbcType=INTEGER} and time_slot = #{timeSlot,jdbcType=INTEGER}
+  </select>
 </mapper>

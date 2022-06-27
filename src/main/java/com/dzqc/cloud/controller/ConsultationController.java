@@ -8,6 +8,7 @@ import com.dzqc.cloud.entity.DoctorInfo;
 import com.dzqc.cloud.entity.PatientInfo;
 import com.dzqc.cloud.service.ConsultationService;
 import com.dzqc.cloud.service.MedicalrecordService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -203,11 +204,51 @@ public class ConsultationController {
             List<List<Consultation>> list = new ArrayList<>();
             int departmentId = departmentInfo.getDepartmentId();
             for (int i = TIMESLOT_BEGIN; i <= TIMESLOT_END; i++) {
-                list.add(consultationService.selectByTimeDepartment(i, departmentId));
+                list.add(consultationService.selectByTimeDepartment(daySlot, i, departmentId));
             }
             return ResultObject.success(list);
         } catch (Exception e) {
             return ResultObject.error("查询当天坐诊失败");
         }
     }
+
+    /**
+     * 部分修改一条坐诊信息(根据consultationId定位)
+     * @return 反馈信息
+     */
+    @CrossOrigin
+    @PostMapping("/consultation/updateByPrimaryKeySelective")
+    public ResultObject updateByPrimaryKeySelective(Consultation consultation) {
+        try {
+            int u = consultationService.updateByPrimaryKeySelective(consultation);
+            if (u == 0) {
+                return ResultObject.error("部分更新失败");
+            } else {
+                return ResultObject.success("部分更新成功");
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
+    /**
+     * 完全替换一条坐诊信息(根据consultationId定位)
+     * @return 反馈信息
+     */
+    @CrossOrigin
+    @PostMapping("/consultation/updateByPrimaryKey")
+    public ResultObject updateByPrimaryKey(Consultation consultation) {
+        try {
+            int u = consultationService.updateByPrimaryKey(consultation);
+            if (u == 0) {
+                return ResultObject.error("部分更新失败");
+            } else {
+                return ResultObject.success("部分更新成功");
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
+
 }

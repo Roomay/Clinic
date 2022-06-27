@@ -43,7 +43,15 @@ public class ConsultationService {
         }
     }
 
-    public List<Consultation> selectByTimeDepartment(Integer timeSlot, Integer departmentId) {
-        return consultationMapper.selectByTimeDepartmentId(timeSlot, departmentId);
+    public List<Consultation> selectByTimeDepartment(Integer daySlot , Integer timeSlot, Integer departmentId) {
+        return consultationMapper.selectByTimeDepartmentId(daySlot, timeSlot, departmentId);
+    }
+
+    public int updateByPrimaryKeySelective(Consultation record) {
+        return consultationMapper.updateByPrimaryKeySelective(record);
+    }
+
+    public int updateByPrimaryKey(Consultation record) {
+        return consultationMapper.updateByPrimaryKey(record);
     }
 }
