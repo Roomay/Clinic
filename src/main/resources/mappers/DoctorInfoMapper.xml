@@ -198,4 +198,10 @@
       is_deleted = #{isDeleted,jdbcType=INTEGER},
     where doctor_id = #{doctorId,jdbcType=INTEGER}
   </update>
+  <select id="selectByDepartmentId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from doctor_info
+    where department_id = #{departmentId,jdbcType=INTEGER}
+  </select>
 </mapper>

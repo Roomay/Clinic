@@ -139,4 +139,5 @@ public class DepartmentinfoController {
             return ResultObject.error(Message.SERVER_ERROR);
         }
     }
+
 }

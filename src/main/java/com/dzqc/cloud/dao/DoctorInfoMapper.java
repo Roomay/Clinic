@@ -1,7 +1,10 @@
 package com.dzqc.cloud.dao;
 
 import com.dzqc.cloud.entity.DoctorInfo;
+import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+@Mapper
 public interface DoctorInfoMapper {
     int deleteByPrimaryKey(Integer doctorId);
 
@@ -14,4 +17,7 @@ public interface DoctorInfoMapper {
     int updateByPrimaryKeySelective(DoctorInfo record);
 
     int updateByPrimaryKey(DoctorInfo record);
+
+    List<DoctorInfo> selectByDepartmentId(Integer departmentId);
+
 }
