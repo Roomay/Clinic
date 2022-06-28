@@ -79,8 +79,13 @@ public class DepartmentinfoController {
         }
     }
 
+    /**
+     * 批量删除
+     * @param ids
+     * @return 反馈信息
+     */
     @CrossOrigin
-    @RequestMapping("/department/batchDelete")
+    @RequestMapping("/departmentinfo/batchDelete")
     public ResultObject batchDelete(Integer [] ids){
         try {
             int deleted = this.departmentinfoService.batchDelete(ids);
@@ -92,6 +97,46 @@ public class DepartmentinfoController {
         }catch (Exception e){
             e.printStackTrace();
             return ResultObject.error("删除科室失败");
+        }
+    }
+
+    /**
+     * 部分修改一条坐诊信息(根据departmentId定位)
+     * @param departmentInfo
+     * @return
+     */
+    @CrossOrigin
+    @PostMapping("/departmentinfo/updateByPrimaryKeySelective")
+    public ResultObject updateByPrimaryKeySelective(DepartmentInfo departmentInfo) {
+        try {
+            int u = departmentinfoService.updateByPrimaryKeySelective(departmentInfo);
+            if (u == 0) {
+                return ResultObject.error("部分更新失败");
+            } else {
+                return ResultObject.success("部分更新成功");
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
+    /**
+     * 完全替换一条坐诊信息(根据departmentId定位)
+     * @param departmentInfo
+     * @return
+     */
+    @CrossOrigin
+    @PostMapping("/departmentinfo/updateByPrimaryKey")
+    public ResultObject updateByPrimaryKey(DepartmentInfo departmentInfo) {
+        try {
+            int u = departmentinfoService.updateByPrimaryKey(departmentInfo);
+            if (u == 0) {
+                return ResultObject.error("替换失败");
+            } else {
+                return ResultObject.success("替换成功");
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
         }
     }
 }

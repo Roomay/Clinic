@@ -1,6 +1,7 @@
 package com.dzqc.cloud.service;
 
 import com.dzqc.cloud.dao.DepartmentInfoMapper;
+import com.dzqc.cloud.entity.Consultation;
 import com.dzqc.cloud.entity.DepartmentInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,5 +32,13 @@ public class DepartmentinfoService {
             count += departmentinfoMapper.softDeleteByPrimaryKey(id);
         }
         return count;
+    }
+
+    public int updateByPrimaryKeySelective(DepartmentInfo departmentInfo) {
+        return departmentinfoMapper.updateByPrimaryKeySelective(departmentInfo);
+    }
+
+    public int updateByPrimaryKey(DepartmentInfo departmentInfo) {
+        return departmentinfoMapper.updateByPrimaryKey(departmentInfo);
     }
 }

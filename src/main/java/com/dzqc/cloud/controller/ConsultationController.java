@@ -245,14 +245,13 @@ public class ConsultationController {
         try {
             int u = consultationService.updateByPrimaryKey(consultation);
             if (u == 0) {
-                return ResultObject.error("部分更新失败");
+                return ResultObject.error("替换失败");
             } else {
-                return ResultObject.success("部分更新成功");
+                return ResultObject.success("替换成功");
             }
         } catch (Exception e) {
             return ResultObject.error(Message.SERVER_ERROR);
         }
     }
-
 
 }
