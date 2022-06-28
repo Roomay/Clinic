@@ -49,8 +49,8 @@ CREATE TABLE `checkReport`  (
 -- ----------------------------
 -- Table structure for consultation
 -- ----------------------------
-DROP TABLE IF EXISTS 'login_ticket';
-CREATE TABLE 'login_ticket' (
+DROP TABLE IF EXISTS `login_ticket`;
+CREATE TABLE `login_ticket` (
  `id` int NOT NULL,
  `user_id` int NOT NULL,
  `ticket` varchar(45) NOt NULL,
@@ -58,14 +58,14 @@ CREATE TABLE 'login_ticket' (
  `status` int NULL COMMENT '0-valid; 1-invalid',
  `expired` timestamp NOT NULL,
  PRIMARY KEY (`id`)
-);
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '登录令牌' ROW_FORMAT = DYNAMIC;
 
 DROP TABLE IF EXISTS `consultation`;
 CREATE TABLE `consultation` (
   `consultation_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '坐诊记录ID',
   `doctor_id` int(11) NOT NULL COMMENT '医生ID',
   `doctor_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '医生姓名',
-  `department_id` int(11) NOT NULL '科室ID',
+  `department_id` int(11) NOT NULL COMMENT '科室ID',
   `day_slot` int(11) NULL DEFAULT NULL COMMENT '星期几',
   `time_slot` int(11) NULL DEFAULT NULL COMMENT '时间段',
   `patient_id` int(11) NULL DEFAULT NULL COMMENT '病人ID',
