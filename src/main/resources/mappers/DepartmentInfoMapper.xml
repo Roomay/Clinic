@@ -101,4 +101,9 @@
     from department_info
     where department_name = #{departmentName,jdbcType=VARCHAR}
   </select>
+  <update id="softDeleteByPrimaryKey" parameterType="java.lang.Integer" >
+    update department_info
+    set is_deleted=1
+    where department_id = #{departmentId,jdbcType=INTEGER}
+  </update>
 </mapper>

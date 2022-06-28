@@ -22,4 +22,6 @@ public interface DepartmentInfoMapper {
     List<DepartmentInfo> selectAll();
 
     DepartmentInfo selectByDepartmentName(String departmentName);
+
+    int softDeleteByPrimaryKey(Integer departmentId);
 }

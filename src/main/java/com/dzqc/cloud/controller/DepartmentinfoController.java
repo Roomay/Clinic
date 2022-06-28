@@ -6,9 +6,7 @@ import com.dzqc.cloud.entity.Consultation;
 import com.dzqc.cloud.entity.DepartmentInfo;
 import com.dzqc.cloud.service.DepartmentinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -78,6 +76,22 @@ public class DepartmentinfoController {
             }
         } catch (Exception e) {
             return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
+    @CrossOrigin
+    @RequestMapping("/department/batchDelete")
+    public ResultObject batchDelete(Integer [] ids){
+        try {
+            int deleted = this.departmentinfoService.batchDelete(ids);
+            if (deleted > 0) {
+                return ResultObject.success("删除科室成功");
+            } else {
+                return ResultObject.error("提供的id均不存在");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResultObject.error("删除科室失败");
         }
     }
 }

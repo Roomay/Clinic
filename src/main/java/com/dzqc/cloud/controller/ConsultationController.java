@@ -185,8 +185,12 @@ public class ConsultationController {
     @RequestMapping("/consultation/batchDelete")
     public ResultObject batchDelete(Integer [] ids){
         try {
-            this.consultationService.batchDelete(ids);
-            return ResultObject.success("删除电子病历成功");
+            int deleted = this.consultationService.batchDelete(ids);
+            if (deleted > 0) {
+                return ResultObject.success("删除电子病历成功");
+            } else {
+                return ResultObject.error("提供的id均不存在");
+            }
         }catch (Exception e){
             e.printStackTrace();
             return ResultObject.error("删除电子病历失败");

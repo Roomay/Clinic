@@ -37,10 +37,12 @@ public class ConsultationService {
         return consultationMapper.insert(consultation);
     }
 
-    public void batchDelete(Integer[] ids) {
+    public int batchDelete(Integer[] ids) {
+        int count = 0;
         for (Integer id : ids) {
-            consultationMapper.softDeleteByPrimaryKey(id);
+            count += consultationMapper.softDeleteByPrimaryKey(id);
         }
+        return count;
     }
 
     public List<Consultation> selectByTimeDepartment(Integer daySlot , Integer timeSlot, Integer departmentId) {

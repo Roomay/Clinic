@@ -24,4 +24,12 @@ public class DepartmentinfoService {
     public DepartmentInfo selectByDepartmentName(String departmentName) {
         return departmentinfoMapper.selectByDepartmentName(departmentName);
     }
+
+    public int batchDelete(Integer[] ids) {
+        int count = 0;
+        for (Integer id : ids) {
+            count += departmentinfoMapper.softDeleteByPrimaryKey(id);
+        }
+        return count;
+    }
 }
