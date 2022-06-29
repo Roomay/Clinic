@@ -94,9 +94,9 @@ public class ConsultationController {
      */
     @CrossOrigin
     @PostMapping("/consultation/selectByPatientName")
-    public ResultObject selectByPatientName(String PatientName) {
+    public ResultObject selectByPatientName(String patientName) {
         try {
-            List<Consultation> consultationsFound = consultationService.selectByPatientName(PatientName);
+            List<Consultation> consultationsFound = consultationService.selectByPatientName(patientName);
             if (consultationsFound.isEmpty()) {
                 return ResultObject.error("没有坐诊记录");
             } else {
@@ -107,9 +107,6 @@ public class ConsultationController {
         }
     }
 
-
-
-
     /**
      * 获取病人名下的所有就诊预约
      * @return 该病人名下的所有就诊预约
@@ -119,6 +116,25 @@ public class ConsultationController {
     public ResultObject selectByPatientId(Integer patientId) {
         try {
             List<Consultation> consultationsFound = consultationService.selectByPatientId(patientId);
+            if (consultationsFound.isEmpty()) {
+                return ResultObject.error("没有就诊记录");
+            } else {
+                return ResultObject.success(consultationsFound);
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
+    /**
+     *
+     * @return 根据ID返回 用于跳转details页面
+     */
+    @CrossOrigin
+    @PostMapping("/consultation/selectByConsultationId")
+    public ResultObject selectByConsultationId(Integer consultationId) {
+        try {
+            List<Consultation> consultationsFound = consultationService.selectByConsultationId(consultationId);
             if (consultationsFound.isEmpty()) {
                 return ResultObject.error("没有就诊记录");
             } else {

@@ -14,7 +14,7 @@ public class ConsultationService {
     @Autowired
     private ConsultationMapper consultationMapper;
 
-    public Consultation selectByConsultationId(Integer consultationId) {
+    public  List<Consultation>  selectByConsultationId(Integer consultationId) {
         return consultationMapper.selectByPrimaryKey(consultationId);
     }
 
@@ -25,8 +25,6 @@ public class ConsultationService {
     public List<Consultation> selectByPatientId(Integer patientId) {
         return consultationMapper.selectByPatientId(patientId);
     }
-
-
 
     public List<Consultation> selectByPatientName(String patientName) {
         return consultationMapper.selectByPatientName(patientName);

@@ -16,7 +16,7 @@ public interface ConsultationMapper {
 
     int insertSelective(@RequestBody Consultation record);
 
-    Consultation selectByPrimaryKey(Integer consultationId);
+    List<Consultation>  selectByPrimaryKey(Integer consultationId);
 
     int updateByPrimaryKeySelective(Consultation record);
 

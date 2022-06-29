@@ -181,7 +181,7 @@
     set is_deleted=1
     where consultation_id = #{consultationId,jdbcType=INTEGER}
   </update>
-  <select id="selectByTimeDepartmentId" resultMap="BaseResultMap">
+  <select id="selectByTimeDepartmentId" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"></include>
     from consultation

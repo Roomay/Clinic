@@ -342,6 +342,7 @@
 					success: function(msg){
 						if(msg['msg']=="ok"){
 							Toast.fire({
+								icon: 'success',
 								title: 'Sign in successfully'
 							});
 							console.log(msg['userId']);
@@ -349,10 +350,10 @@
 								var url = "case_list.html";
 								window.sessionStorage.setItem("username",login_username);
 								console.log(window.sessionStorage.getItem("username"));
-								Toast.fire({
-									icon: 'success',
-									title: 'Sign in successfully'
-								})
+								// Toast.fire({
+								// 	icon: 'success',
+								// 	title: 'Sign in successfully'
+								// })
 								window.location.href=url+"?username="+login_username;},1000);
 						}
 						else{

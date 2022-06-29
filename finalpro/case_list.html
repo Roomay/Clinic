@@ -166,9 +166,9 @@
                             </div>
                             <div class="news-body">
                                 <div class="news-content">
-                                    <div class="date">22 Aug, 2020</div>
-                                    <h2><a href="blog-single-sidebar.html" v-text="item.departmentName">We have annnocuced our new product.</a></h2>
-                                    <p class="text">Lorem ipsum dolor a sit ameti, consectetur adipisicing elit, sed do eiusmod tempor incididunt sed do incididunt sed.</p>
+                                    <div class="date" v-text="item.daySlot" href="Appointment_details.html">22 Aug, 2020</div>
+                                    <h2><a :href="'Appointment_details.html?cid='+item.consultationId" v-text="item.timeSlot">We have annnocuced our new product.</a></h2>
+                                    <p class="text" v-text="item.timeSlot" >You "{{item.timeSlot}}+{{item.doctorName}}" </p>
                                 </div>
                             </div>
                         </div>
@@ -373,6 +373,10 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
+    consultationdetailes= function(cid){
+        var url = "Appointment_details.html?h="+cid;
+        window.location.href = url;
+    }
     var app=new Vue({
         el:"#appointment_id",
         data:{
@@ -381,19 +385,23 @@
 
         mounted :function(){this.getappointment();},
         methods:{
+
             getappointment: function (){
                 var that=this;
                 var username=window.sessionStorage.getItem("username")
                 console.log(window.sessionStorage.getItem("username"));
-                axios.post("http://localhost:8080/consultation/selectByPatientId?patientId="+username).then(
+                axios.post("http://localhost:8080/consultation/selectByPatientName?patientName="+username).then(
                     function (response) {
-                        that.arr=response.data.result
+                        that.arr=response.data.result;
                         console.log(response.data.result)
                     },function (error) {
                         console.log(error)
                     }
                 )
-            }
+            },
+
+
+
         }
 
     })
