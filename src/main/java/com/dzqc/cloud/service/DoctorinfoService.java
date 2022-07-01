@@ -16,4 +16,20 @@ public class DoctorinfoService {
     public List<DoctorInfo> selectByDepartmentId(Integer departmentId) {
         return doctorInfoMapper.selectByDepartmentId(departmentId);
     }
+
+    public List<DoctorInfo> selectByDepartmentName(String departmentName) {
+        return doctorInfoMapper.selectByDepartmentName(departmentName);
+    }
+
+    public int insertADoctor(DoctorInfo doctorInfo) {
+        return doctorInfoMapper.insert(doctorInfo);
+    }
+
+    public int batchDelete(Integer[] ids) {
+        int count = 0;
+        for (Integer id : ids) {
+            count += doctorInfoMapper.softDeleteByPrimaryKey(id);
+        }
+        return count;
+    }
 }

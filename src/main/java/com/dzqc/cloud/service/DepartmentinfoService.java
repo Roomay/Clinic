@@ -1,7 +1,6 @@
 package com.dzqc.cloud.service;
 
 import com.dzqc.cloud.dao.DepartmentInfoMapper;
-import com.dzqc.cloud.entity.Consultation;
 import com.dzqc.cloud.entity.DepartmentInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

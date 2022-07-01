@@ -2,6 +2,7 @@ package com.dzqc.cloud.entity;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 public class Consultation implements Serializable {
     private Integer consultationId;
@@ -12,7 +13,7 @@ public class Consultation implements Serializable {
 
     private Integer departmentId;
 
-    private Integer daySlot;
+    private Date dates;
 
     private Integer timeSlot;
 
@@ -30,12 +31,12 @@ public class Consultation implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    public Consultation(Integer consultationId, Integer doctorId, String doctorName, Integer departmentId, Integer daySlot, Integer timeSlot, Integer patientId, String patientName, Integer availStatus, String comment, BigDecimal charge, Integer isDeleted) {
+    public Consultation(Integer consultationId, Integer doctorId, String doctorName, Integer departmentId, Date dates, Integer timeSlot, Integer patientId, String patientName, Integer availStatus, String comment, BigDecimal charge, Integer isDeleted) {
         this.consultationId = consultationId;
         this.doctorId = doctorId;
         this.doctorName = doctorName;
         this.departmentId = departmentId;
-        this.daySlot = daySlot;
+        this.dates = dates;
         this.timeSlot = timeSlot;
         this.patientId = patientId;
         this.patientName = patientName;
@@ -74,19 +75,19 @@ public class Consultation implements Serializable {
     }
 
     public Integer getDepartmentId() {
-        return doctorId;
+        return departmentId;
     }
 
     public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
     }
 
-    public Integer getDaySlot() {
-        return daySlot;
+    public Date getDates() {
+        return dates;
     }
 
-    public void setDaySlot(Integer daySlot) {
-        this.daySlot = daySlot;
+    public void setDates(Date dates) {
+        this.dates = dates;
     }
 
     public Integer getTimeSlot() {

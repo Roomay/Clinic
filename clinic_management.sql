@@ -70,8 +70,7 @@ CREATE TABLE `consultation`  (
   `doctor_id` int NOT NULL COMMENT '医生ID',
   `doctor_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '医生姓名',
   `department_id` int NOT NULL COMMENT '科室ID',
-  `day_slot` int NULL DEFAULT NULL COMMENT '星期几/该成日期吧 方便检索',
-  `dates` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '日期方便检索',
+  `dates` date NOT NULL DEFAULT '1970-01-01' COMMENT '日期',
   `time_slot` int NULL DEFAULT NULL COMMENT '时间段',
   `patient_id` int NULL DEFAULT NULL COMMENT '病人ID',
   `patient_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '病人姓名',
@@ -81,15 +80,15 @@ CREATE TABLE `consultation`  (
   `is_deleted` int NOT NULL DEFAULT 0 COMMENT '删除标记 0.正常 1.删除',
   PRIMARY KEY (`consultation_id`) USING BTREE,
   INDEX `department_id`(`department_id`) USING BTREE,
-  INDEX `day_slot`(`day_slot`) USING BTREE
+  INDEX `dates`(`dates`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '坐诊表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of consultation
 -- ----------------------------
-INSERT INTO `consultation` VALUES (1, 1, 'Alex', 1, NULL, '2022-6-30', 0, 1, 'fred', 0, NULL, 111.0, 1);
-INSERT INTO `consultation` VALUES (2, 1, 'Alex', 1, NULL, '2022-6-30', 1, 1, 'fred', 0, NULL, 2.0, 1);
-INSERT INTO `consultation` VALUES (3, 1, 'Alex', 1, NULL, '2022-6-30', 2, 1, 'fred', 0, NULL, 3333.0, 1);
+INSERT INTO `consultation` VALUES (1, 1, 'Alex', 1, '2022-06-30', 0, 1, 'fred', 0, NULL, 111.0, 1);
+INSERT INTO `consultation` VALUES (2, 1, 'Alex', 1, '2022-06-30', 1, 1, 'fred', 0, NULL, 2.0, 1);
+INSERT INTO `consultation` VALUES (3, 1, 'Alex', 1, '2022-06-30', 2, 1, 'fred', 0, NULL, 3333.0, 1);
 
 -- ----------------------------
 -- Table structure for department_info

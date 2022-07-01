@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -24,13 +25,6 @@ public class ConsultationController {
     private static final int NOT_DELETED = 0;
     private static final int DELETED = 1;
 
-    private static final int SUNDAY = 0;
-    private static final int MONDAY = 1;
-    private static final int TUESDAY = 2;
-    private static final int WENDESDAY = 3;
-    private static final int THURSDAY = 4;
-    private static final int FRIDAY = 5;
-    private static final int SATURDAY = 6;
 
     private static final int TIMESLOT_BEGIN = 0;
     private static final int TIMESLOT_END = 20;
@@ -47,9 +41,6 @@ public class ConsultationController {
     public ResultObject insertAConsultation(Consultation record) {
         if (record == null || record.getDoctorId() == null || record.getDoctorName() == null) {
             return ResultObject.error("添加坐诊信息失败，医生信息不能为空");
-        }
-        if (record.getDaySlot() < SUNDAY || record.getDaySlot() > SATURDAY) {
-            return ResultObject.error("添加坐诊信息失败，日期信息越界");
         }
         if (record.getTimeSlot() < TIMESLOT_BEGIN || record.getTimeSlot() > TIMESLOT_END) {
             return ResultObject.error("添加坐诊信息失败，时间信息越界");
@@ -219,12 +210,12 @@ public class ConsultationController {
      */
     @CrossOrigin
     @GetMapping("/consultation/selectByDate")
-    public ResultObject selectByDateDepartment(Integer daySlot, DepartmentInfo departmentInfo) {
+    public ResultObject selectByDateDepartment(Date dates, DepartmentInfo departmentInfo) {
         try {
             List<List<Consultation>> list = new ArrayList<>();
             int departmentId = departmentInfo.getDepartmentId();
             for (int i = TIMESLOT_BEGIN; i <= TIMESLOT_END; i++) {
-                list.add(consultationService.selectByTimeDepartment(daySlot, i, departmentId));
+                list.add(consultationService.selectByTimeDepartment(dates, i, departmentId));
             }
             return ResultObject.success(list);
         } catch (Exception e) {

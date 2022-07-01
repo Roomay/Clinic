@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -42,8 +43,8 @@ public class ConsultationService {
         return count;
     }
 
-    public List<Consultation> selectByTimeDepartment(Integer daySlot , Integer timeSlot, Integer departmentId) {
-        return consultationMapper.selectByTimeDepartmentId(daySlot, timeSlot, departmentId);
+    public List<Consultation> selectByTimeDepartment(Date dates , Integer timeSlot, Integer departmentId) {
+        return consultationMapper.selectByTimeDepartmentId(dates, timeSlot, departmentId);
     }
 
     public int updateByPrimaryKeySelective(Consultation record) {

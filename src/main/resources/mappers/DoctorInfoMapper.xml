@@ -204,4 +204,15 @@
     from doctor_info
     where department_id = #{departmentId,jdbcType=INTEGER}
   </select>
+  <select id="selectByDepartmentName" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from doctor_info
+    where department_name = #{departmentName,jdbcType=VARCHAR}
+  </select>
+  <update id="softDeleteByPrimaryKey" parameterType="java.lang.Integer" >
+    update doctor_id
+    set is_deleted=1
+    where doctor_id = #{doctorId,jdbcType=INTEGER}
+  </update>
 </mapper>

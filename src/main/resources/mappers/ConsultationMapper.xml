@@ -7,7 +7,7 @@
       <arg column="doctor_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="doctor_name" jdbcType="VARCHAR" javaType="java.lang.String" />
       <arg column="department_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
-      <arg column="day_slot" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="dates" jdbcType="DATE" javaType="java.util.Date" />
       <arg column="time_slot" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="patient_id" jdbcType="INTEGER" javaType="java.lang.Integer" />
       <arg column="patient_name" jdbcType="VARCHAR" javaType="java.lang.String" />
@@ -18,7 +18,7 @@
     </constructor>
   </resultMap>
   <sql id="Base_Column_List" >
-    consultation_id, doctor_id, doctor_name, department_id, day_slot, time_slot, patient_id, patient_name, avail_status, comment,
+    consultation_id, doctor_id, doctor_name, department_id, dates, time_slot, patient_id, patient_name, avail_status, comment,
     charge, is_deleted
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -37,10 +37,10 @@
 <!--      SELECT LAST_INSERT_ID()-->
 <!--    </selectKey>-->
     insert into consultation (consultation_id, doctor_id, doctor_name, department_id,
-      day_slot, time_slot, avail_status, 
+      dates, time_slot, avail_status,
       comment, charge, is_deleted)
     values (#{consultationId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, #{doctorName,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER},
-      #{daySlot,jdbcType=INTEGER}, #{timeSlot,jdbcType=INTEGER}, #{availStatus,jdbcType=INTEGER}, 
+      #{dates,jdbcType=DATE}, #{timeSlot,jdbcType=INTEGER}, #{availStatus,jdbcType=INTEGER},
       #{comment,jdbcType=VARCHAR}, #{charge,jdbcType=DECIMAL}, #{isDeleted,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.dzqc.cloud.entity.Consultation" >
@@ -58,8 +58,8 @@
       <if test="departmentId != null" >
         department_id,
       </if>
-      <if test="daySlot != null" >
-        day_slot,
+      <if test="dates != null" >
+        dates,
       </if>
       <if test="timeSlot != null" >
         time_slot,
@@ -90,8 +90,8 @@
       <if test="departmentId != null" >
         #{departmentId,jdbcType=INTEGER},
       </if>
-      <if test="daySlot != null" >
-        #{daySlot,jdbcType=INTEGER},
+      <if test="dates != null" >
+        #{dates,jdbcType=DATE},
       </if>
       <if test="timeSlot != null" >
         #{timeSlot,jdbcType=INTEGER},
@@ -119,7 +119,7 @@
       <if test="doctorName != null" >
         doctor_name = #{doctorName,jdbcType=VARCHAR},
       </if>
-      <if test="daySlot != null" >
+      <if test="dates != null" >
         day_slot = #{daySlot,jdbcType=INTEGER},
       </if>
       <if test="departmentId != null" >
@@ -148,7 +148,7 @@
     set doctor_id = #{doctorId,jdbcType=INTEGER},
       doctor_name = #{doctorName,jdbcType=VARCHAR},
       department_id = #{departmentId,jdbcType=INTEGER},
-      day_slot = #{daySlot,jdbcType=INTEGER},
+      dates = #{dates,jdbcType=DATE},
       time_slot = #{timeSlot,jdbcType=INTEGER},
       avail_status = #{availStatus,jdbcType=INTEGER},
       comment = #{comment,jdbcType=VARCHAR},
@@ -185,6 +185,6 @@
     select
     <include refid="Base_Column_List"></include>
     from consultation
-    where department_id = #{departmentId,jdbcType=INTEGER} and day_slot = #{daySlot,jdbcType=INTEGER} and time_slot = #{timeSlot,jdbcType=INTEGER}
+    where department_id = #{departmentId,jdbcType=INTEGER} and dates = #{dates,jdbcType=DATE} and time_slot = #{timeSlot,jdbcType=INTEGER}
   </select>
 </mapper>

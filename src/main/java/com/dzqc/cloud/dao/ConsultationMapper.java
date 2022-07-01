@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -30,5 +31,5 @@ public interface ConsultationMapper {
 
     int softDeleteByPrimaryKey(Integer consultationId);
 
-    List<Consultation> selectByTimeDepartmentId(@Param("daySlot") Integer daySlot, @Param("timeSlot") Integer timeSlot, @Param("departmentId") Integer departmentId);
+    List<Consultation> selectByTimeDepartmentId(@Param("dates") Date dates, @Param("timeSlot") Integer timeSlot, @Param("departmentId") Integer departmentId);
 }

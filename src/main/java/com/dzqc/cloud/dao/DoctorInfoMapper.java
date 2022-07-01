@@ -20,4 +20,7 @@ public interface DoctorInfoMapper {
 
     List<DoctorInfo> selectByDepartmentId(Integer departmentId);
 
+    List<DoctorInfo> selectByDepartmentName(String departmentName);
+
+    int softDeleteByPrimaryKey(Integer doctorId);
 }
