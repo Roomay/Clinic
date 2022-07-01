@@ -11,7 +11,7 @@
  Target Server Version : 80023
  File Encoding         : 65001
 
- Date: 01/07/2022 15:54:56
+ Date: 01/07/2022 15:58:42
 */
 
 SET NAMES utf8mb4;
@@ -71,7 +71,7 @@ CREATE TABLE `consultation`  (
   `doctor_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '医生姓名',
   `department_id` int NOT NULL COMMENT '科室ID',
   `day_slot` int NULL DEFAULT NULL COMMENT '星期几/该成日期吧 方便检索',
-  `date` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '日期方便检索',
+  `dates` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '日期方便检索',
   `time_slot` int NULL DEFAULT NULL COMMENT '时间段',
   `patient_id` int NULL DEFAULT NULL COMMENT '病人ID',
   `patient_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '病人姓名',
