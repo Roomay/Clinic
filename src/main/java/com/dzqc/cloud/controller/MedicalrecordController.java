@@ -4,7 +4,9 @@ import com.dzqc.cloud.common.Message;
 import com.dzqc.cloud.common.ResultObject;
 import com.dzqc.cloud.entity.MedicalRecord;
 import com.dzqc.cloud.entity.PatientInfo;
+import com.dzqc.cloud.service.ClientService;
 import com.dzqc.cloud.service.MedicalrecordService;
+import com.dzqc.cloud.service.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,12 @@ public class MedicalrecordController {
     @Autowired
     private MedicalrecordService medicalrecordService;
 
+    @Autowired
+    private ClientService clientService;
+
+    @Autowired
+    private PatientService patientService;
+
     @RequestMapping( value="/medicalrecord/insert",method = RequestMethod.POST)
     public ResultObject insertrecord(@RequestBody MedicalRecord medicalRecord) {
         try {
@@ -25,6 +33,64 @@ public class MedicalrecordController {
             }
             else {
                 return ResultObject.success(x);
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
+    /**
+     * 根据姓名 + 年龄 + 症状表述
+     * return 预测症状的可能的解决办法
+     */
+    @CrossOrigin
+    @PostMapping("/medicalrecord/predictionCase")
+    public ResultObject predictCase(MedicalRecord medicalRecord) {
+        try{
+            String patientName = medicalRecord.getPatientName();
+            PatientInfo patient = patientService.selectByusername(patientName);
+            String age = "";
+            String symptom = medicalRecord.getSymptom();
+            if(patient.getGender().equals("1")) {
+                age = "男";
+            } else {
+                age = "女";
+            }
+            String request = patientName + "，" + age + "，" + symptom;
+            String predictResult = clientService.sendMessageAndGetResultOfCasePrediction(request);
+            if(predictResult.equals("")) {
+                return ResultObject.error("症状结果预测失败");
+            } else {
+                return ResultObject.success(predictResult);
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
+    /**
+     * 根据姓名 + 年龄 + 症状表述
+     * return 3个预测的科室
+     */
+    @CrossOrigin
+    @PostMapping("/medicalrecord/predictDepartment")
+    public ResultObject predictDepartment(MedicalRecord medicalRecord) {
+        try{
+            String patientName = medicalRecord.getPatientName();
+            PatientInfo patient = patientService.selectByusername(patientName);
+            String age = "";
+            String symptom = medicalRecord.getSymptom();
+            if(patient.getGender().equals("1")) {
+                age = "男";
+            } else {
+                age = "女";
+            }
+            String request = patientName + "，" + age + "，" + symptom;
+            String predictResult = clientService.sendMessageAndGetResultOfClassification(request);
+            if(predictResult.equals("")) {
+                return ResultObject.error("预测科室失败");
+            } else {
+                return ResultObject.success(predictResult);
             }
         } catch (Exception e) {
             return ResultObject.error(Message.SERVER_ERROR);

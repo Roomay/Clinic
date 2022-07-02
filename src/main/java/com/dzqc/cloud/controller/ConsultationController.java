@@ -58,8 +58,7 @@ public class ConsultationController {
             return ResultObject.error(Message.SERVER_ERROR);
         }
     }
-
-
+    
     /**
      * 获取医生名下的所有就诊预约
      * @return 该医生名下的所有就诊预约
