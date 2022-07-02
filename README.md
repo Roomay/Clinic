@@ -20,3 +20,5 @@ $ docker run --name clinic -e MYSQL_ROOT_PASSWORD=123456 -p 3383:3306 -d mysql:8
   * 进行预约
 * Departmentinfo
 * Doctorinfo
+* MedicalRecord
+  * 返回一组数据(性别、年龄、症状)

@@ -104,4 +104,44 @@ public class DoctorController {
         }
     }
 
+    /**
+     * 完全替换一条医生信息(根据doctorId定位)
+     * @param record
+     * @return 反馈信息
+     */
+    @CrossOrigin
+    @PostMapping("/doctor/updateByPrimaryKey")
+    public ResultObject updateByPrimaryKey(DoctorInfo record) {
+        try {
+            int u = doctorinfoService.updateByPrimaryKey(record);
+            if (u == 0) {
+                return ResultObject.error("替换失败");
+            } else {
+                return ResultObject.success("替换成功");
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
+    /**
+     * 部分修改一条医生信息(根据doctorId定位)
+     * @param doctorInfo
+     * @return 反馈信息
+     */
+    @CrossOrigin
+    @PostMapping("/doctor/updateByPrimaryKeySelective")
+    public ResultObject updateByPrimaryKeySelective(DoctorInfo doctorInfo) {
+        try {
+            int u = doctorinfoService.updateByPrimaryKeySelective(doctorInfo);
+            if (u == 0) {
+                return ResultObject.error("部分更新失败");
+            } else {
+                return ResultObject.success("部分更新成功");
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
 }

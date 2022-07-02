@@ -32,4 +32,12 @@ public class DoctorinfoService {
         }
         return count;
     }
+
+    public int updateByPrimaryKey(DoctorInfo doctorInfo) {
+        return doctorInfoMapper.updateByPrimaryKey(doctorInfo);
+    }
+
+    public int updateByPrimaryKeySelective(DoctorInfo doctorInfo) {
+        return doctorInfoMapper.updateByPrimaryKeySelective(doctorInfo);
+    }
 }

@@ -123,7 +123,7 @@ public class DepartmentinfoController {
     /**
      * 完全替换一条坐诊信息(根据departmentId定位)
      * @param departmentInfo
-     * @return
+     * @return 反馈信息
      */
     @CrossOrigin
     @PostMapping("/departmentinfo/updateByPrimaryKey")
