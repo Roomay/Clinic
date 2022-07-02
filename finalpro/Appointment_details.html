@@ -227,7 +227,9 @@
                             <th>Status</th>
                             <th>Charge</th>
                             <th>Department</th>
-                            <th>Cancel</th>
+                            <th v-if="type==0">Cancel</th>
+                            <th v-if="type==1">Approve</th>
+                            <th v-if="type==1">Reject</th>
                         </tr>
                         </thead>
 
@@ -251,9 +253,19 @@
                             <td>
                                 <h3 v-text="item.departmentId">Dr. Foley</h3>
                             </td>
-                            <td onclick="alert()">
+
+                            <td v-if="type==0" onclick="alert()">
                                 <h3>Dr. Palmer</h3>
                             </td>
+
+                            <td v-if="type==1" onclick="alert()">
+                                <h3>A</h3>
+                            </td>
+
+                            <td v-if="type==1" onclick="alert()">
+                                <h3>R</h3>
+                            </td>
+
                         </tr>
 
                         </tbody>
@@ -388,11 +400,14 @@
     var app=new Vue({
         el:"#tablebar",
         data:{
-            arr:[]
+            arr:[],
+            type:3,
         },
-
         mounted :function(){
+            var that=this;
             var x =this.getParams("cid");
+            var dd =this.getParams("qid");
+            that.type=this.getParams("qid");
             this.getappointment(x);
 
             },
