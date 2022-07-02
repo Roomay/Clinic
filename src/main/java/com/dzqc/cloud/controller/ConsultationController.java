@@ -221,7 +221,43 @@ public class ConsultationController {
             return ResultObject.error("查询当天坐诊失败");
         }
     }
-
+    /**
+     * 获取医生名下的所有就诊预约
+     * @return 该医生名下的所有就诊预约
+     */
+    @CrossOrigin
+    @PostMapping("/consultation/selectByDoctorName")
+    public ResultObject selectByDoctorId(String doctorname) {
+        try {
+            List<Consultation> consultationsFound = consultationService.selectByDoctorName(doctorname);
+            if (consultationsFound.isEmpty()) {
+                return ResultObject.error("没有坐诊记录");
+            } else {
+                return ResultObject.success(consultationsFound);
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+    /**Chongyue
+     * 根据日期返回当日空余的TimeSlot
+     * @return 根据TimeSlot分类的坐诊信息列表
+     */
+    @PostMapping("/consultation/selectByTimeDoctor")
+    public ResultObject selectByTimeDoctor(String dates, String doctorName) {
+        try {
+            List<Consultation> list = consultationService.selectByTimeDoctor(dates,doctorName);
+            if(list.size()==4){
+                return ResultObject.success("full");
+            }
+            else{
+                return ResultObject.success(list);
+            }
+        }
+        catch (Exception e) {
+            return ResultObject.error("查询当天坐诊失败");
+        }
+    }
     /**
      * 部分修改一条坐诊信息(根据consultationId定位)
      * @return 反馈信息

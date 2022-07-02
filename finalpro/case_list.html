@@ -167,7 +167,7 @@
                             <div class="news-body">
                                 <div class="news-content">
                                     <div class="date" v-text="item.daySlot" href="Appointment_details.html">22 Aug, 2020</div>
-                                    <h2><a :href="'Appointment_details.html?cid='+item.consultationId'&qid=0'" v-text="item.timeSlot">We have annnocuced our new product.</a></h2>
+                                    <h2><a :href="'Appointment_details.html?cid='+item.consultationId+'&qid=0'" v-text="item.timeSlot">We have annnocuced our new product.</a></h2>
                                     <p class="text" v-text="item.timeSlot" >You "{{item.timeSlot}}+{{item.doctorName}}" </p>
                                 </div>
                             </div>
@@ -304,7 +304,7 @@
 
             getappointment: function (){
                 var that=this;
-                var username=window.sessionStorage.getItem("username")
+                var username=window.sessionStorage.getItem("username");
                 console.log(window.sessionStorage.getItem("username"));
                 axios.post("http://localhost:8080/consultation/selectByPatientName?patientName="+username).then(
                     function (response) {

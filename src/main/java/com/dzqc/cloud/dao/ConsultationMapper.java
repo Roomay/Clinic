@@ -31,5 +31,9 @@ public interface ConsultationMapper {
 
     int softDeleteByPrimaryKey(Integer consultationId);
 
+    List<Consultation> selectByDoctorName(String doctorName);
+
+    List<Consultation> selectByTimeDoctor(@Param("dates") String dates, @Param("doctorName") String doctorName);
+
     List<Consultation> selectByTimeDepartmentId(@Param("dates") Date dates, @Param("timeSlot") Integer timeSlot, @Param("departmentId") Integer departmentId);
 }

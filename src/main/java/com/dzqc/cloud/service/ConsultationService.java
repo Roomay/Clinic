@@ -46,7 +46,12 @@ public class ConsultationService {
     public List<Consultation> selectByTimeDepartment(Date dates , Integer timeSlot, Integer departmentId) {
         return consultationMapper.selectByTimeDepartmentId(dates, timeSlot, departmentId);
     }
-
+    public List<Consultation> selectByDoctorName(String doctorName) {
+        return consultationMapper.selectByDoctorName(doctorName);
+    }
+    public List<Consultation> selectByTimeDoctor(String dates , String doctorName) {
+        return consultationMapper.selectByTimeDoctor(dates, doctorName);
+    }
     public int updateByPrimaryKeySelective(Consultation record) {
         return consultationMapper.updateByPrimaryKeySelective(record);
     }

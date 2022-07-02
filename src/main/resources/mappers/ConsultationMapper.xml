@@ -162,7 +162,12 @@
     from consultation
     where doctor_id = #{doctorId,jdbcType=INTEGER}
   </select>
-
+  <select id="selectByDoctorName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from consultation
+    where doctor_name = #{doctorName,jdbcType=VARCHAR}
+  </select>
   <select id="selectByPatientName" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"></include>
@@ -186,5 +191,12 @@
     <include refid="Base_Column_List"></include>
     from consultation
     where department_id = #{departmentId,jdbcType=INTEGER} and dates = #{dates,jdbcType=DATE} and time_slot = #{timeSlot,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByTimeDoctor" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from consultation
+    where DATEDIFF(dates,#{dates,jdbcType=VARCHAR})=0 and doctor_name = #{doctorName,jdbcType=VARCHAR}
   </select>
 </mapper>
