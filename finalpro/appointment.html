@@ -154,22 +154,22 @@
 		<!-- End Header Area -->
 		
 		<!-- Breadcrumbs -->
-		<div class="breadcrumbs overlay">
-			<div class="container">
-				<div class="bread-inner">
-					<div class="row">
-						<div class="col-12">
-							<h2>Get Your Appointment</h2>
-							<ul class="bread-list">
-								<li><a href="index.html">Home</a></li>
-								<li><i class="icofont-simple-right"></i></li>
-								<li class="active">Appointment</li>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+<!--		<div class="breadcrumbs overlay">-->
+<!--			<div class="container">-->
+<!--				<div class="bread-inner">-->
+<!--					<div class="row">-->
+<!--						<div class="col-12">-->
+<!--							<h2>Get Your Appointment</h2>-->
+<!--							<ul class="bread-list">-->
+<!--								<li><a href="index.html">Home</a></li>-->
+<!--								<li><i class="icofont-simple-right"></i></li>-->
+<!--								<li class="active">Appointment</li>-->
+<!--							</ul>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
 		<!-- End Breadcrumbs -->
 		
 		<!-- Start Appointment -->
@@ -182,8 +182,8 @@
 								<h3>Book your appointment</h3>
 								<p>We will confirm your appointment within 2 hours</p>
 							</div>
-							<form class="form" action="#">
-								<div class="row" id="department_select" >
+							<div class="form"  id="department_select">
+								<div class="row" >
 <!--									<div class="col-lg-6 col-md-6 col-12">-->
 <!--										<div class="form-group">-->
 <!--											<input name="name" type="text" placeholder="Name">-->
@@ -215,22 +215,23 @@
 											<div class="nice-select form-control wide" tabindex="0"><span class="current">Doctor</span>
 												<ul class="list" id="doctor_select" >
 <!--													<li data-value="0" class="option selected ">Doctor</li>-->
-													<li  data-value="items.doctorName" class="option"  v-on:click="gettime(items.doctorName)" v-for="items in arr2">{{items.doctorName}}</li>
+													<li  data-value="items.doctorName" class="option"  v-on:click="gettime(items.doctorName,items.doctorId)" v-for="items in arr2">{{items.doctorName}}</li>
 												</ul>
 											</div>
 										</div>
 									</div>
 									<div class="col-lg-6 col-md-6 col-12">
 										<div class="form-group">
-											<input type="text" placeholder="Date"  id="datepicker"  >
+											<input  type="text" placeholder="Date"  id="datepicker"  >
 										</div>
 
 									</div>
 									<div class="col-lg-6 col-md-6 col-12">
 										<div class="form-group">
 											<div class="nice-select form-control wide" tabindex="0"><span class="current">Time</span>
-												<ul class="list" >
-													<li value="its.timeSlot" class="option"  v-for="its in arr3">{{its.timeSlot}}</li>
+												<ul class="list" id="time_select" >
+<!--													<li value="its.timeSlot" class="option"  v-for="its in arr3">{{its.timeSlot}}</li>-->
+													<li value="its" class="option" v-on:click="savetime(its)" v-for="its in occupytime" >{{its}}</li>
 												</ul>
 											</div>
 										</div>
@@ -243,14 +244,15 @@
 								</div>
 								<div class="row">
 									<div class="col-12">
-										<div class="form-group">
-											<div class="button">
-												<button type="submit" class="btn">Book An Appointment</button>
+										<div class="form-group" >
+											<div class="button" >
+												<button type="submit" class="btn" v-on:click="submitapp()" >Book An Appointment</button>
 											</div>
 										</div>
 									</div>
+
 								</div>
-							</form>
+							</div>
 						</div>
 					</div>
 					<div class="col-lg-5 col-md-12 ">
@@ -359,7 +361,7 @@
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-12">
 							<div class="copyright-content">
-								<p>Copyright &copy; 2020.Company name All rights reserved.</p>
+								<p hidden="hidden">Copyright &copy; 2020.Company name All rights reserved.</p>
 							</div>
 						</div>
 					</div>
@@ -384,7 +386,13 @@
 					arr:[],
 					arr2:[],
 					arr3:[],
-					docName:"N"
+					times:new Set([0,1,2,3]),
+					occupytime:[],
+					did:null,
+					docName:"N",
+					docId:null,
+					dates:null,
+					timeslot:null,
 				},
 				mounted :function(){
 					// var x =this.getParams("cid");
@@ -398,13 +406,26 @@
 						var dates=this.value;
 						var docname=app.docName;
 						console.log(dates);
+						app.dates=dates;
 						console.log(docname);
+						app.times=new Set([0,1,2,3]);
+						app.occupytime=[];
 						var that=this;
 						axios.post("http://localhost:8080/consultation/selectByTimeDoctor?dates="+dates+"&doctorName="+docname).then(
 								function (response) {
 									app.arr3=response.data.result;
-									console.log("response.data.result arr3")
-									console.log(response.data.result)
+									// console.log(response.data.result.length);
+									for (var i=0 ;i<response.data.result.length;i++)
+									{
+										// app.occupytime.add(response.data.result[i]["timeSlot"]);
+										// console.log(response.data.result[i]["timeSlot"])
+										app.times.delete(response.data.result[i]["timeSlot"]);
+
+									}
+									console.log(app.times)
+									app.occupytime = [...app.times];
+									// console.log("response.data.result arr3")
+									// console.log(response.data.result)
 								},
 								function (error) {
 									console.log(error)
@@ -414,6 +435,41 @@
 
 				},
 				methods:{
+					submitapp: function (){
+						console.log(app.docId);
+						console.log(app.did);
+
+						axios.post("http://localhost:8080/consulation/insertappointment",    {
+									"doctorId": app.docId,
+									"doctorName":app.docName,
+									"departmentId":app.did,
+									"dates":app.dates,
+									"timeSlot":app.timeslot,
+									"patientName":"ss",
+									"comment":"null",
+									"charge":1.0,
+									"isDeleted":0
+								},
+								{
+									headers: {
+										'content-type': 'application/json'
+									}
+								}
+						).then(
+								function (response) {
+
+									console.log("success")
+
+									var url = "case_list.html";
+									window.location.href=url+"?username="+window.sessionStorage.getItem("username")
+								},
+								function (error) {
+									console.log(error)
+								}
+						);
+
+
+					},
 					getdepartment: function (){
 						var that=this;
 						axios.get("http://localhost:8080/departmentinfo/list").then(
@@ -428,6 +484,7 @@
 					},
 					getdoc: function (did){
 						var thats=this;
+						app.did=did;
 						axios.get("http://localhost:8080/doctor/selectByDepartmentId?departmentId="+did).then(
 								function (response) {
 									thats.arr2=response.data.result;
@@ -440,10 +497,15 @@
 						)
 					},
 
-					gettime: function (name){
+					gettime: function (name,id){
 						var thats=this;
 						app.docName=name;
+						app.docId=id;
 					},
+					savetime: function (time){
+						app.timeslot=time;
+						console.log(time)
+					}
 
 
 				}

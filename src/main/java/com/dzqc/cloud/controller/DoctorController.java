@@ -144,4 +144,30 @@ public class DoctorController {
         }
     }
 
+
+    /**
+     * login
+     * @return
+     */
+    @CrossOrigin
+    @RequestMapping( "/doctor/selectBydoctorname")
+    public ResultObject selectBydoctorname(String username,String password) {
+        try {
+            DoctorInfo patientInfo = this.doctorinfoService.selectBydoctorname(username);
+            //
+            if (patientInfo==null) {
+                return ResultObject.error("未注册");
+            }
+            else if (patientInfo.getPassword().equals(password)) {
+                return ResultObject.success(patientInfo);
+            }
+            else if (!patientInfo.getPassword().equals(password)){
+                return ResultObject.error("密码错"+patientInfo.getPassword());
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+        return null;
+    }
+
 }

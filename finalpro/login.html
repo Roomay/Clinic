@@ -206,11 +206,12 @@
 												<a class="btn"  href="javascript:void(0);"  onclick="login()">Login</a>
 											</div>
 											<div class="checkbox">
-												<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">Remember me</label>
+<!--												<label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">Remember me</label>-->
+<!--												<label class="checkbox-inline" ><input  id="Customer" value="0" type="checkbox" checked="checked">Customer</label>-->
 												<br>
-												<label class="checkbox-inline" for="2"><input name="news" id="3" type="checkbox">Employee</label>
+												<label class="checkbox-inline" ><input  id="Employee" value="1" type="checkbox">Employee</label>
 											</div>
-											<a href="#" class="lost-pass">Lost your password ?</a>
+<!--											<a href="#" class="lost-pass">Lost your password ?</a>-->
 										</div>
 									</div>
 								</form>
@@ -312,6 +313,7 @@
 		</footer>
 		<!--/ End Footer Area -->
 		<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+		<script src="js/jquery-1.12.4.min.js"></script>
 		<script>
 			const Toast = Swal.mixin({
 				toast: true,
@@ -327,47 +329,94 @@
 			function login() {
 				var login_username = document.getElementById("login_user").value;
 				var login_password = document.getElementById("login_pas").value;
-				// var base = new Base64();
+				var base = 0;
 				// login_password = base.encode(login_password);
-				console.log(login_username+login_password);
-				$.ajax({
 
-					type: "POST",
+				if($('#Employee').prop("checked")){
+					base=1;
+					console.log(base);
+					$.ajax({
 
-					url: "http://localhost:8080/patient/selectByusername",
+						type: "POST",
 
-					data: "username=" + login_username +"&password=" + login_password,
+						url: "http://localhost:8080/doctor/selectBydoctorname",
 
-					success: function(msg){
-						if(msg['msg']=="ok"){
-							Toast.fire({
-								icon: 'success',
-								title: 'Sign in successfully'
-							});
-							console.log(msg['userId']);
-							setTimeout(function(){
-								var url = "case_list.html";
-								window.sessionStorage.setItem("username",login_username);
-								console.log(window.sessionStorage.getItem("username"));
-								// Toast.fire({
-								// 	icon: 'success',
-								// 	title: 'Sign in successfully'
-								// })
-								window.location.href=url+"?username="+login_username;},1000);
+						data: "username=" + login_username +"&password=" + login_password,
+
+						success: function(msg){
+							if(msg['msg']=="ok"){
+								Toast.fire({
+									icon: 'success',
+									title: 'Sign in successfully'
+								});
+								console.log(msg['userId']);
+								setTimeout(function(){
+									var url = "doctor_appointment.html";
+									window.sessionStorage.setItem("username",login_username);
+									console.log(window.sessionStorage.getItem("username"));
+									// Toast.fire({
+									// 	icon: 'success',
+									// 	title: 'Sign in successfully'
+									// })
+									window.location.href=url+"?username="+login_username;},1000);
+							}
+							else{
+								Toast.fire({
+									icon: 'error',
+									title: 'Sign in unsuccessfully'
+								})
+							}
+
+						},
+						error: function (msg) {
+							console.log("Data not Saved: " + msg);
 						}
-						else{
-							Toast.fire({
-								icon: 'error',
-								title: 'Sign in unsuccessfully'
-							})
+
+					});
+				}
+				else{
+					console.log(base);
+					$.ajax({
+
+						type: "POST",
+
+						url: "http://localhost:8080/patient/selectByusername",
+
+						data: "username=" + login_username +"&password=" + login_password,
+
+						success: function(msg){
+							if(msg['msg']=="ok"){
+								Toast.fire({
+									icon: 'success',
+									title: 'Sign in successfully'
+								});
+								console.log(msg['userId']);
+								setTimeout(function(){
+									var url = "case_list.html";
+									window.sessionStorage.setItem("username",login_username);
+									console.log(window.sessionStorage.getItem("username"));
+									// Toast.fire({
+									// 	icon: 'success',
+									// 	title: 'Sign in successfully'
+									// })
+									window.location.href=url+"?username="+login_username;},1000);
+							}
+							else{
+								Toast.fire({
+									icon: 'error',
+									title: 'Sign in unsuccessfully'
+								})
+							}
+
+						},
+						error: function (msg) {
+							console.log("Data not Saved: " + msg);
 						}
 
-					},
-					error: function (msg) {
-						console.log("Data not Saved: " + msg);
-					}
+					});
+				}
 
-				});
+
 			}
 		</script>
 		<!-- jquery Min JS -->

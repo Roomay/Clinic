@@ -1,5 +1,7 @@
 package com.dzqc.cloud.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,6 +15,7 @@ public class Consultation implements Serializable {
 
     private Integer departmentId;
 
+    @JsonFormat(locale="zh", pattern="yyyy/MM/dd")
     private Date dates;
 
     private Integer timeSlot;
