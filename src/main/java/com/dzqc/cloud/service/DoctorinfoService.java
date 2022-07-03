@@ -40,4 +40,8 @@ public class DoctorinfoService {
     public int updateByPrimaryKeySelective(DoctorInfo doctorInfo) {
         return doctorInfoMapper.updateByPrimaryKeySelective(doctorInfo);
     }
+    public DoctorInfo selectBydoctorname(String username) {
+        return doctorInfoMapper.selectBydoctorname(username);
+    }
+
 }

@@ -29,6 +29,14 @@
     from doctor_info
     where doctor_id = #{doctorId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectBydoctorname" resultType="com.dzqc.cloud.entity.DoctorInfo">
+    select
+    <include refid="Base_Column_List" />
+    from doctor_info
+    where doctor_name = #{doctorName,jdbcType=VARCHAR}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from doctor_info
     where doctor_id = #{doctorId,jdbcType=INTEGER}
