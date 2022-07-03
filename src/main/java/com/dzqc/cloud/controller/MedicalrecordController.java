@@ -11,6 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
+
 
 @RestController
 public class MedicalrecordController {
@@ -49,14 +52,17 @@ public class MedicalrecordController {
         try{
             String patientName = medicalRecord.getPatientName();
             PatientInfo patient = patientService.selectByusername(patientName);
-            String age = "";
+            String gender = "";
+            Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String birthday = formatter.format(patient.getBirthday()).split("-")[0];
+            String age = 2022 - Integer.parseInt(birthday) + "";
             String symptom = medicalRecord.getSymptom();
-            if(patient.getGender().equals("1")) {
-                age = "男";
+            if(medicalRecord.getGender().equals("0")) {
+                gender = "男";
             } else {
-                age = "女";
+                gender = "女";
             }
-            String request = patientName + "，" + age + "，" + symptom;
+            String request = gender + "，" + age + "，" + symptom;
             String predictResult = clientService.sendMessageAndGetResultOfCasePrediction(request);
             if(predictResult.equals("")) {
                 return ResultObject.error("症状结果预测失败");
@@ -78,12 +84,15 @@ public class MedicalrecordController {
         try{
             String patientName = medicalRecord.getPatientName();
             PatientInfo patient = patientService.selectByusername(patientName);
-            String age = "";
+            String gender = "";
+            Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            String birthday = formatter.format(patient.getBirthday()).split("-")[0];
+            String age = 2022 - Integer.parseInt(birthday) + "";
             String symptom = medicalRecord.getSymptom();
-            if(patient.getGender().equals("1")) {
-                age = "男";
+            if(medicalRecord.getGender().equals("0")) {
+                gender = "男";
             } else {
-                age = "女";
+                gender = "女";
             }
             String request = patientName + "，" + age + "，" + symptom;
             String predictResult = clientService.sendMessageAndGetResultOfClassification(request);
