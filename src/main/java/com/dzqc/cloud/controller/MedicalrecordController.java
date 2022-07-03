@@ -58,9 +58,9 @@ public class MedicalrecordController {
             String age = 2022 - Integer.parseInt(birthday) + "";
             String symptom = medicalRecord.getSymptom();
             if(medicalRecord.getGender().equals("0")) {
-                gender = "男";
-            } else {
                 gender = "女";
+            } else {
+                gender = "男";
             }
             String request = gender + "，" + age + "，" + symptom;
             String predictResult = clientService.sendMessageAndGetResultOfCasePrediction(request);
@@ -90,9 +90,9 @@ public class MedicalrecordController {
             String age = 2022 - Integer.parseInt(birthday) + "";
             String symptom = medicalRecord.getSymptom();
             if(medicalRecord.getGender().equals("0")) {
-                gender = "男";
-            } else {
                 gender = "女";
+            } else {
+                gender = "男";
             }
             String request = patientName + "，" + age + "，" + symptom;
             String predictResult = clientService.sendMessageAndGetResultOfClassification(request);
