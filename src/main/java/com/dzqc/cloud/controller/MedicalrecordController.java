@@ -50,8 +50,8 @@ public class MedicalrecordController {
     @PostMapping("/medicalrecord/predictionCase")
     public ResultObject predictCase(MedicalRecord medicalRecord) {
         try{
-            String patientName = medicalRecord.getPatientName();
-            PatientInfo patient = patientService.selectByusername(patientName);
+            int patientId = medicalRecord.getPatientId();
+            PatientInfo patient = patientService.findPatientById(patientId);
             String gender = "";
             Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String birthday = formatter.format(patient.getBirthday()).split("-")[0];
@@ -82,8 +82,8 @@ public class MedicalrecordController {
     @PostMapping("/medicalrecord/predictDepartment")
     public ResultObject predictDepartment(MedicalRecord medicalRecord) {
         try{
-            String patientName = medicalRecord.getPatientName();
-            PatientInfo patient = patientService.selectByusername(patientName);
+            int patientId = medicalRecord.getPatientId();
+            PatientInfo patient = patientService.findPatientById(patientId);
             String gender = "";
             Format formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String birthday = formatter.format(patient.getBirthday()).split("-")[0];
@@ -94,7 +94,7 @@ public class MedicalrecordController {
             } else {
                 gender = "男";
             }
-            String request = patientName + "，" + age + "，" + symptom;
+            String request = gender + "，" + age + "，" + symptom;
             String predictResult = clientService.sendMessageAndGetResultOfClassification(request);
             if(predictResult.equals("")) {
                 return ResultObject.error("预测科室失败");
