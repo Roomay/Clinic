@@ -94,7 +94,7 @@ public class MedicalrecordController {
             } else {
                 gender = "男";
             }
-            String request = gender + "，" + age + "，" + symptom;
+            String request = patientId + ";" + gender + "，" + age + "。" + symptom;
             String predictResult = clientService.sendMessageAndGetResultOfClassification(request);
             if(predictResult.equals("")) {
                 return ResultObject.error("预测科室失败");
