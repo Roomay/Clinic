@@ -31,6 +31,7 @@ public class ClientService {
             outputStream.write(s.getBytes());
             int len = inputStream.read(bytes);
             String result = new String(bytes,0,len);
+            socket.close();
             //System.out.println(result);
             return result;
         } catch (IOException e) {
@@ -53,6 +54,8 @@ public class ClientService {
             outputStream.write(s.getBytes());
             int len = inputStream.read(bytes);
             String result = new String(bytes,0,len);
+
+            socket.close();
             //System.out.println(result);
             return result;
         } catch (IOException e) {
