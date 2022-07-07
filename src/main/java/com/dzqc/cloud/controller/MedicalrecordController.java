@@ -31,8 +31,8 @@ public class MedicalrecordController {
     public ResultObject insertrecord(@RequestBody MedicalRecord medicalRecord) {
         try {
             int x = medicalrecordService.insertmedical(medicalRecord);
-            if (x==0) {
-                return ResultObject.error("未注册");
+            if (x== 0) {
+                return ResultObject.error("插入失败");
             }
             else {
                 return ResultObject.success(x);

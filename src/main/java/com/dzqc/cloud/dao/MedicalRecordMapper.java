@@ -1,7 +1,9 @@
 package com.dzqc.cloud.dao;
 
 import com.dzqc.cloud.entity.MedicalRecord;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface MedicalRecordMapper {
     int deleteByPrimaryKey(Integer recordId);
 
