@@ -393,6 +393,7 @@
 					docId:null,
 					dates:null,
 					timeslot:null,
+					username:window.sessionStorage.getItem("username"),
 				},
 				mounted :function(){
 					// var x =this.getParams("cid");
@@ -417,10 +418,7 @@
 									// console.log(response.data.result.length);
 									for (var i=0 ;i<response.data.result.length;i++)
 									{
-										// app.occupytime.add(response.data.result[i]["timeSlot"]);
-										// console.log(response.data.result[i]["timeSlot"])
 										app.times.delete(response.data.result[i]["timeSlot"]);
-
 									}
 									console.log(app.times)
 									app.occupytime = [...app.times];
@@ -437,7 +435,7 @@
 				methods:{
 					submitapp: function (){
 						console.log(app.docId);
-						console.log(app.did);
+						console.log(window.sessionStorage.getItem("username"));
 
 						axios.post("http://localhost:8080/consulation/insertappointment",    {
 									"doctorId": app.docId,
@@ -445,7 +443,7 @@
 									"departmentId":app.did,
 									"dates":app.dates,
 									"timeSlot":app.timeslot,
-									"patientName":"ss",
+									"patientname":app.username,
 									"comment":"null",
 									"charge":1.0,
 									"isDeleted":0

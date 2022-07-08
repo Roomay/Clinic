@@ -50,6 +50,9 @@
       #{reportId,jdbcType=INTEGER}, #{diagnosis,jdbcType=VARCHAR}, #{prescription,jdbcType=VARCHAR}, 
       #{departmentId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{status,jdbcType=INTEGER}, #{isDeleted,jdbcType=INTEGER})
+    <selectKey keyProperty="recordId" order="AFTER" resultType="int">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
   </insert>
   <insert id="insertSelective" parameterType="com.dzqc.cloud.entity.MedicalRecord" >
     insert into medicalrecord
@@ -234,4 +237,10 @@
       is_deleted = #{isDeleted,jdbcType=INTEGER}
     where record_id = #{recordId,jdbcType=INTEGER}
   </update>
+  <select id="selectByPatientName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from medicalrecord
+    where patient_name = #{patientName,jdbcType=VARCHAR}
+  </select>
 </mapper>

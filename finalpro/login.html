@@ -350,6 +350,7 @@
 									title: 'Sign in successfully'
 								});
 								console.log(msg['userId']);
+								window.sessionStorage.setItem("patientid",msg['result']['patientId']);
 								setTimeout(function(){
 									var url = "doctor_appointment.html";
 									window.sessionStorage.setItem("username",login_username);

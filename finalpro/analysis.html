@@ -117,7 +117,7 @@
 
                                             <li><a href="case_list.html">My Appointment</a></li>
                                             <li><a href="case.html">New Case analysis</a></li>
-                                            <li><a href="analysis.html">My Case analysis</a></li>
+                                            <li><a href="time-table.html">Time Table</a></li>
                                             <li><a href="testimonials.html">Testimonials</a></li>
                                             <li><a href="pricing.html">Our Pricing</a></li>
                                             <li><a href="faq.html">Faq</a></li>
@@ -167,18 +167,12 @@
                             <div class="news-body">
                                 <div class="news-content">
                                     <div class="date" v-text="item.dates" href="Appointment_details.html" data-bgcolor="green">22 Aug, 2020</div>
-                                    <div  v-if="item.availStatus==0" >Pending</div>
-                                    <div  v-if="item.availStatus==1" >Approved</div>
-                                    <div  v-if="item.availStatus==2">Rejected</div>
-<!--                                    <h2><a :href="'Appointment_details.html?cid='+item.consultationId+'&qid=0'" v-text="item.timeSlot" >16:00-17:00</a></h2>-->
-                                    <h2><a :href="'Appointment_details.html?cid='+item.consultationId+'&qid=0'"  v-if="item.timeSlot==0">9:00-10:00</a></h2>
-                                    <h2><a :href="'Appointment_details.html?cid='+item.consultationId+'&qid=0'"  v-if="item.timeSlot==1">11:00-12:00</a></h2>
-                                    <h2><a :href="'Appointment_details.html?cid='+item.consultationId+'&qid=0'"  v-if="item.timeSlot==2">14:00-15:00</a></h2>
-                                    <h2><a :href="'Appointment_details.html?cid='+item.consultationId+'&qid=0'" v-if="item.timeSlot==3">16:00-17:00</a></h2>
-                                    <p class="text" v-if="item.timeSlot==0">You had an appointment at "9:00-10:00" with {{item.doctorName}} </p>
-                                    <p class="text" v-if="item.timeSlot==1">You had an appointment at "11:00-12:00" with {{item.doctorName}} </p>
-                                    <p class="text" v-if="item.timeSlot==2">You had an appointment at "14:00-15:00" with {{item.doctorName}} </p>
-                                    <p class="text" v-if="item.timeSlot==3">You had an appointment at "16:00-17:00" with {{item.doctorName}} </p>
+                                    <div  v-if="item.status==0" >自行预约</div>
+                                    <div  v-if="item.status==1" >导诊中</div>
+                                    <div  v-if="item.status==2">诊断完成</div>
+                                    <!--                                    <h2><a :href="'Appointment_details.html?cid='+item.consultationId+'&qid=0'" v-text="item.timeSlot" >16:00-17:00</a></h2>-->
+                                    <h2><a :href="'case_details.html?rid='+item.recordId"  >{{item.patientName}}</a></h2>
+                                    <p class="text" >You had an appointment at  with {{item.symptom}} </p>
                                 </div>
                             </div>
                         </div>
@@ -299,10 +293,6 @@
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    consultationdetailes= function(cid){
-        var url = "Appointment_details.html?h="+cid;
-        window.location.href = url;
-    }
     var app=new Vue({
         el:"#appointment_id",
         data:{
@@ -316,7 +306,7 @@
                 var that=this;
                 var username=window.sessionStorage.getItem("username");
                 console.log(window.sessionStorage.getItem("username"));
-                axios.post("http://localhost:8080/consultation/selectByPatientName?patientName="+username).then(
+                axios.post("http://localhost:8080/medicalrecord/selectByPatientName?patientName="+username).then(
                     function (response) {
                         that.arr=response.data.result;
                         console.log(response.data.result)

@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="zxx" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Meta Tags -->
     <meta charset="utf-8">
@@ -56,7 +56,6 @@
     <!--<link rel="stylesheet" href="css/color/color11.css">-->
     <!--<link rel="stylesheet" href="css/color/color12.css">-->
 
-    <link rel="stylesheet" href="#" id="colors">
 
 </head>
 <body>
@@ -155,31 +154,32 @@
 <!-- Start Contact Us -->
 <section class="contact-us section">
     <div class="container">
-        <div class="inner">
+        <div class="inner" id="allform">
             <div class="row">
-                <div class="col-lg-12">
-                    <div class="contact-us-form">
-                        <form class="form" method="post" action="">
+                <div class="col-lg-12" >
+                    <div class="contact-us-form" >
+                        <form class="form" >
                             <div class="row">
                                 <div class="appointment-inner">
                                     <div class="title">
                                         <h3>Enter your  discomfort</h3>
                                         <p>We will confirm your appointment within 10 mins(AI mode)</p>
                                     </div>
-                                    <form class="form" action="#">
+
+
+                                    <form class="form"  >
                                         <div class="row">
                                             <div class="col-lg-6 col-md-6 col-12">
                                                 <div class="form-group">
-                                                    <input name="name" type="text" placeholder="Name">
+                                                    <input name="name" type="text" placeholder="Name" >
                                                 </div>
                                             </div>
                                             <div class="col-lg-6 col-md-6 col-12">
                                                 <div class="form-group">
                                                     <div class="nice-select form-control wide" tabindex="0"><span class="current">Gender</span>
-                                                        <ul class="list">
-                                                            <li data-value="1" class="option selected ">Gender</li>
-                                                            <li data-value="2" class="option">Male</li>
-                                                            <li data-value="3" class="option">Female</li>
+                                                        <ul class="list" >
+                                                            <li class="option"  v-on:click="savegender(1)">Male</li>
+                                                            <li class="option"  v-on:click="savegender(0)">Female</li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -189,15 +189,11 @@
                                                     <input name="age" type="number" placeholder="Age">
                                                 </div>
                                             </div>
-                                            <div class="col-lg-6 col-md-6 col-12">
+                                            <div class="col-lg-6 col-md-6 col-12" v-show="showAI" >
                                                 <div class="form-group">
                                                     <div class="nice-select form-control wide" tabindex="0"><span class="current">Department</span>
                                                         <ul class="list">
-                                                            <li data-value="1" class="option selected ">Department</li>
-                                                            <li data-value="2" class="option">Cardiac Clinic</li>
-                                                            <li data-value="3" class="option">Neurology</li>
-                                                            <li data-value="4" class="option">Dentistry</li>
-                                                            <li data-value="5" class="option">Gastroenterology</li>
+                                                            <li value="item.departmentId" class="option" v-for="item in departarr" v-on:click="savedepart(item.departmentId)">{{item.departmentName}}</li>
                                                         </ul>
                                                     </div>
                                                 </div>
@@ -230,23 +226,23 @@
 
                                             <div class="col-lg-6 col-md-6 col-12">
                                                 <div class="form-group">
-                                                    <input name="temperature" type="tel" placeholder="temperature">
+                                                    <input name="temperature" type="tel" placeholder="temperature"  id="temperature">
                                                 </div>
                                             </div>
                                             <div class="col-lg-12 col-md-12 col-12">
                                                 <div class="form-group">
-                                                    <textarea name="message" placeholder="Write Your Discomfort Here....."></textarea>
+                                                    <textarea name="message" placeholder="Write Your Discomfort Here....." id="comment"></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
-                                                    <div class="button">
-                                                        <button type="submit" class="btn">Submit</button>
+                                                    <div >
+                                                        <button type="submit" class="btn" v-on:click="submitcase()">Submit</button>
                                                     </div>
                                                     <div class="checkbox">
-                                                        <label class="checkbox-inline" for="2"><input name="news" id="2" type="checkbox">Do you want AI guidance ?</label>
+                                                        <label class="checkbox-inline" ><input name="news" id="AI" type="checkbox" v-on:click="onClickHander()">Do you want AI guidance ?</label>
                                                     </div>
                                                 </div>
                                             </div>
@@ -261,43 +257,6 @@
                 </div>
             </div>
         </div>
-<!--        <div class="contact-info">-->
-<!--            <div class="row">-->
-<!--                &lt;!&ndash; single-info &ndash;&gt;-->
-<!--                <div class="col-lg-4 col-12 ">-->
-<!--                    <div class="single-info">-->
-<!--                        <i class="icofont icofont-ui-call"></i>-->
-<!--                        <div class="content">-->
-<!--                            <h3>XXX</h3>-->
-<!--                            <p>XXX</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                &lt;!&ndash;/End single-info &ndash;&gt;-->
-<!--                &lt;!&ndash; single-info &ndash;&gt;-->
-<!--                <div class="col-lg-4 col-12 ">-->
-<!--                    <div class="single-info">-->
-<!--                        <i class="icofont-google-map"></i>-->
-<!--                        <div class="content">-->
-<!--                            <h3>XXX</h3>-->
-<!--                            <p>XXX</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                &lt;!&ndash;/End single-info &ndash;&gt;-->
-<!--                &lt;!&ndash; single-info &ndash;&gt;-->
-<!--                <div class="col-lg-4 col-12 ">-->
-<!--                    <div class="single-info">-->
-<!--                        <i class="icofont icofont-wall-clock"></i>-->
-<!--                        <div class="content">-->
-<!--                            <h3>Mon - Sat: 8am - 5pm</h3>-->
-<!--                            <p>Sunday Closed</p>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                &lt;!&ndash;/End single-info &ndash;&gt;-->
-<!--            </div>-->
-<!--        </div>-->
     </div>
 </section>
 <!--/ End Contact Us -->
@@ -389,7 +348,110 @@
     <!--/ End Copyright -->
 </footer>
 <!--/ End Footer Area -->
+<script src="js/jquery-1.12.4.min.js"></script>
+<script src="js/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    var app=new Vue({
+        el:"#allform",
+        data:{
+            arr:[],
+            departarr:[],
+            showAI:true,
+            age:0,
+            temp:0,
+            gender:null,
+            comment:"",
+            username:"al",
+            departmentId:null,
+        },
+        mounted :function(){
+            this.getdepartment();
 
+        },
+        updated:function(){
+
+            // $('#AI').change(function() {
+            //     if(this.prop('checked')){
+            //         console.log("selected");
+            //     }else{
+            //         console.log("unselected");
+            //     }
+            // })
+
+        },
+        methods:{
+            onClickHander:function (){
+                if(event.target.checked){
+                    app.showAI=false;
+                    console.log("selected");
+                }
+                else{
+                    app.showAI=true;
+                    console.log("unselected");
+                }
+
+            },
+            submitcase: function (){
+                var comment = $('#comment').val();
+                console.log(comment);
+                console.log(app.gender);
+                console.log(app.departmentId);
+                console.log(app.username);
+                axios.post("/medicalrecord/insert",    {
+                        "patientId": window.sessionStorage.getItem("patientid"),
+                        "doctorName":app.docName,
+                        "departmentId":app.did,
+                        "dates":app.dates,
+                        "timeSlot":app.timeslot,
+                        "patientname":app.username,
+                        "comment":"null",
+                        "charge":1.0,
+                        "isDeleted":0
+                    },
+                    {
+                        headers: {
+                            'content-type': 'application/json'
+                        }
+                    }).then(
+                    function (response) {
+                        that.departarr=response.data.result;
+                        // console.log(response.data.result)
+                    },
+                    function (error) {
+                        console.log(error)
+                    }
+                )
+            },
+            },
+            getdepartment: function (){
+                var that=this;
+                axios.get("http://localhost:8080/departmentinfo/list").then(
+                    function (response) {
+                        that.departarr=response.data.result;
+                        // console.log(response.data.result)
+                    },
+                    function (error) {
+                        console.log(error)
+                    }
+                )
+            },
+            savedepart: function (id) {
+                app.departmentId=id;
+                console.log("id"+id)
+            },
+            savegender: function (gender) {
+                app.gender=gender;
+                console.log("gender"+gender)
+            }
+
+
+
+        }
+    })
+
+
+</script>
 <!-- jquery Min JS -->
 <script src="js/jquery.min.js"></script>
 <!-- jquery Migrate JS -->
@@ -427,11 +489,8 @@
 <!-- Counter Up CDN JS -->
 <script src="js/waypoints.min.js"></script>
 <!-- Google Map API Key JS -->
-<script src="https://ditu.google.cn/maps/api/js?key=AIzaSyDGqTyqoPIvYxhn_Sa7ZrK5bENUWhpCo0w"></script>
 <!-- Gmaps JS -->
-<script src="js/gmaps.min.js"></script>
 <!-- Map Active JS -->
-<script src="js/map-active.js"></script>
 <!-- Bootstrap JS -->
 <script src="js/bootstrap.min.js"></script>
 <!-- Main JS -->

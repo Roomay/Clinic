@@ -36,7 +36,7 @@ public class PatientController{
     @RequestMapping( "/patient/selectByusername")
     public ResultObject selectByusername(String username,String password) {
         try {
-            PatientInfo patientInfo = this.patientService.selectByusername(username);
+            PatientInfo patientInfo = this.patientService.selectByUsername(username);
             //
             if (patientInfo==null) {
                 return ResultObject.error("未注册");

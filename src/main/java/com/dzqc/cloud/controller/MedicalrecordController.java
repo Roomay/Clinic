@@ -2,6 +2,7 @@ package com.dzqc.cloud.controller;
 
 import com.dzqc.cloud.common.Message;
 import com.dzqc.cloud.common.ResultObject;
+import com.dzqc.cloud.entity.Consultation;
 import com.dzqc.cloud.entity.MedicalRecord;
 import com.dzqc.cloud.entity.PatientInfo;
 import com.dzqc.cloud.service.ClientService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.text.Format;
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 
 @RestController
@@ -31,8 +33,8 @@ public class MedicalrecordController {
     public ResultObject insertrecord(@RequestBody MedicalRecord medicalRecord) {
         try {
             int x = medicalrecordService.insertmedical(medicalRecord);
-            if (x==0) {
-                return ResultObject.error("未注册");
+            if (x== 0) {
+                return ResultObject.error("插入失败");
             }
             else {
                 return ResultObject.success(x);
@@ -48,8 +50,9 @@ public class MedicalrecordController {
      */
     @CrossOrigin
     @PostMapping("/medicalrecord/predictionCase")
-    public ResultObject predictCase(MedicalRecord medicalRecord) {
+    public ResultObject predictCase(int recordId) {
         try{
+            MedicalRecord medicalRecord=medicalrecordService.selectByPrimaryKey(recordId);
             int patientId = medicalRecord.getPatientId();
             PatientInfo patient = patientService.findPatientById(patientId);
             String gender = "";
@@ -100,6 +103,35 @@ public class MedicalrecordController {
                 return ResultObject.error("预测科室失败");
             } else {
                 return ResultObject.success(predictResult);
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/medicalrecord/selectByRecordId")
+    public ResultObject selectByConsultationId(Integer recordId) {
+        try {
+            MedicalRecord medicalRecord = medicalrecordService.selectByPrimaryKey(recordId);
+            if (medicalRecord==null) {
+                return ResultObject.error("没有就诊记录");
+            } else {
+                return ResultObject.success(medicalRecord);
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
+    @CrossOrigin
+    @PostMapping("/medicalrecord/selectByPatientName")
+    public ResultObject selectByPatientName(String patientName) {
+        try {
+            List<MedicalRecord> consultationsFound = medicalrecordService.selectByPatientName(patientName);
+            if (consultationsFound.isEmpty()) {
+                return ResultObject.error("没有导诊记录");
+            } else {
+                return ResultObject.success(consultationsFound);
             }
         } catch (Exception e) {
             return ResultObject.error(Message.SERVER_ERROR);

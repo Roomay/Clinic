@@ -135,7 +135,7 @@ public class PatientService  {
         return;
     }
 
-    public PatientInfo selectByusername(String username) {
+    public PatientInfo selectByUsername(String username) {
         return patientInfoMapper.selectByUsername(username);
     }
 }

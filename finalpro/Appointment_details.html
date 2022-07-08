@@ -234,12 +234,15 @@
 
                         <tbody>
                         <tr>
-                            <td><span class="time" >9.00</span></td>
+                            <td v-if="item.timeSlot==0"><span class="time" >9.00</span></td>
+                            <td v-if="item.timeSlot==1"><span class="time" >11.00</span></td>
+                            <td v-if="item.timeSlot==2"><span class="time" >14.00</span></td>
+                            <td v-if="item.timeSlot==3"><span class="time" >16.00</span></td>
                             <td>
-                                <h3 v-text="item.doctorName">Dr. Tanner</h3>
+                                <h3 v-text="item.dates">Dr. Tanner</h3>
                             </td>
                             <td>
-                                <h3 v-text="item.daySlot">Dr. Kwak</h3>
+                                <h3 v-text="item.doctorName">Dr. Kwak</h3>
                             </td>
 
 
@@ -253,15 +256,15 @@
                                 <h3 v-text="item.departmentId">Dr. Foley</h3>
                             </td>
 
-                            <td v-if="type==0" onclick="alert()">
+                            <td v-if="type==0" onclick="alert('Canceled')">
                                 <h3>Dr. Palmer</h3>
                             </td>
 
-                            <td v-if="type==1" onclick="alert()">
+                            <td v-if="type==1" onclick="alert('Approved')">
                                 <h3>A</h3>
                             </td>
 
-                            <td v-if="type==1" onclick="alert()">
+                            <td v-if="type==1" onclick="alert('Rejected')">
                                 <h3>R</h3>
                             </td>
 
@@ -407,6 +410,7 @@
             var x =this.getParams("cid");
             var dd =this.getParams("qid");
             that.type=this.getParams("qid");
+            console.log(dd)
             this.getappointment(x);
 
             },
