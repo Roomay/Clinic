@@ -1,7 +1,9 @@
 package com.dzqc.cloud.dao;
 
 import com.dzqc.cloud.entity.AdminInfo;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface AdminInfoMapper {
     int deleteByPrimaryKey(Integer adminId);
 

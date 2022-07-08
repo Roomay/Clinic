@@ -8,6 +8,41 @@ spring:
       driver-class-name: com.mysql.cj.jdbc.Driver
       url: jdbc:mysql://localhost:3306/clinic_management?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true
 
+  ## kafka 连接地址
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      retries: 0  # 发生错误后消息重发次数
+      batch-size: 16384 # 同一分区单个批处理允许使用内存大小
+      buffer-memory: 33554432 # 生产者内存缓冲区大小
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer  # 键的序列化方式
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer  # 值的序列化方式
+      acks: 1 # acknowledge, 0 表示生产者在成功写入消息前不等待来自服务器的成功响应；1表示当集群的首领节点收到消息，生产者就会收到服务器成功响应；all表示所有节点收到消息，才会发送成功响应
+      properties:
+        linger.ms: 1
+    consumer:
+      auto-commit-interval: 1S  # 自动提交的时间间隔
+      auto-offset-reset: earliest # 消费者读取一个没有offset或者offset无效的分区时，该如何处理，latest 表示从最近记录开始；earliest 表示从起始位置开始。
+      enable-auto-commit: false # 是否自动提交offset，设置为 false 是为了避免出现重复数据和数据丢失
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer  # 键的反序列化方式
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer  # 值的反序列化方式
+      properties:
+        session.timeout.ms: 15000
+    listener:
+      concurrency: 5  # 在侦听器容器中运行的线程数
+      ack-mode: manual_immediate  # listener 负责 ack，immediate 表示每调用一次就立即 commit
+      missing-topics-fatal: false #
+
+## kafka 配置 topic 和 consumer group
+kafka:
+  topic:
+    group-id: BERTEngine
+    topic-name:
+      - recordTopic1
+      - recordTopic2
+      - recordTopic3
+
+
 ## springboot 和 mybatis整合的配置
 mybatis:
   type-aliases-package: com.dzqc.cloud.entity
