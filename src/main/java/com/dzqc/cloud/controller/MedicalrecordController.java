@@ -69,7 +69,10 @@ public class MedicalrecordController {
             String predictResult = clientService.sendMessageAndGetResultOfCasePrediction(request);
             if(predictResult.equals("")) {
                 return ResultObject.error("症状结果预测失败");
-            } else {
+            }
+            else {
+                medicalRecord.setDiagnosis(predictResult);
+                medicalrecordService.updateByPrimaryKeySelective(medicalRecord);
                 return ResultObject.success(predictResult);
             }
         } catch (Exception e) {
@@ -83,8 +86,9 @@ public class MedicalrecordController {
      */
     @CrossOrigin
     @PostMapping("/medicalrecord/predictDepartment")
-    public ResultObject predictDepartment(MedicalRecord medicalRecord) {
+    public ResultObject predictDepartment(int recordId) {
         try{
+            MedicalRecord medicalRecord=medicalrecordService.selectByPrimaryKey(recordId);
             int patientId = medicalRecord.getPatientId();
             PatientInfo patient = patientService.findPatientById(patientId);
             String gender = "";
@@ -102,6 +106,9 @@ public class MedicalrecordController {
             if(predictResult.equals("")) {
                 return ResultObject.error("预测科室失败");
             } else {
+                String s1[] =predictResult.trim().split(" ");
+                medicalRecord.setDepartmentId(Integer.parseInt(s1[0]));
+                medicalrecordService.updateByPrimaryKeySelective(medicalRecord);
                 return ResultObject.success(predictResult);
             }
         } catch (Exception e) {

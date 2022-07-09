@@ -28,7 +28,7 @@
     update_time, status, is_deleted
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from medicalrecord
     where record_id = #{recordId,jdbcType=INTEGER}
@@ -38,18 +38,18 @@
     where record_id = #{recordId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.dzqc.cloud.entity.MedicalRecord" >
-    insert into medicalrecord (record_id, patient_id, patient_name, 
-      gender, symptom, drugsused, 
-      doctor_id, doctor_name, preconsultation, 
-      report_id, diagnosis, prescription, 
-      department_id, create_time, update_time, 
-      status, is_deleted)
-    values (#{recordId,jdbcType=INTEGER}, #{patientId,jdbcType=INTEGER}, #{patientName,jdbcType=VARCHAR}, 
-      #{gender,jdbcType=VARCHAR}, #{symptom,jdbcType=VARCHAR}, #{drugsused,jdbcType=VARCHAR}, 
-      #{doctorId,jdbcType=INTEGER}, #{doctorName,jdbcType=VARCHAR}, #{preconsultation,jdbcType=VARCHAR}, 
-      #{reportId,jdbcType=INTEGER}, #{diagnosis,jdbcType=VARCHAR}, #{prescription,jdbcType=VARCHAR}, 
-      #{departmentId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
-      #{status,jdbcType=INTEGER}, #{isDeleted,jdbcType=INTEGER})
+    insert into medicalrecord (record_id, patient_id, patient_name,
+    gender, symptom, drugsused,
+    doctor_id, doctor_name, preconsultation,
+    report_id, diagnosis, prescription,
+    department_id, create_time, update_time,
+    status, is_deleted)
+    values (#{recordId,jdbcType=INTEGER}, #{patientId,jdbcType=INTEGER}, #{patientName,jdbcType=VARCHAR},
+    #{gender,jdbcType=VARCHAR}, #{symptom,jdbcType=VARCHAR}, #{drugsused,jdbcType=VARCHAR},
+    #{doctorId,jdbcType=INTEGER}, #{doctorName,jdbcType=VARCHAR}, #{preconsultation,jdbcType=VARCHAR},
+    #{reportId,jdbcType=INTEGER}, #{diagnosis,jdbcType=VARCHAR}, #{prescription,jdbcType=VARCHAR},
+    #{departmentId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+    #{status,jdbcType=INTEGER}, #{isDeleted,jdbcType=INTEGER})
     <selectKey keyProperty="recordId" order="AFTER" resultType="int">
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -220,20 +220,20 @@
   <update id="updateByPrimaryKey" parameterType="com.dzqc.cloud.entity.MedicalRecord" >
     update medicalrecord
     set patient_id = #{patientId,jdbcType=INTEGER},
-      patient_name = #{patientName,jdbcType=VARCHAR},
-      gender = #{gender,jdbcType=VARCHAR},
-      symptom = #{symptom,jdbcType=VARCHAR},
-      drugsused = #{drugsused,jdbcType=VARCHAR},
-      doctor_id = #{doctorId,jdbcType=INTEGER},
-      doctor_name = #{doctorName,jdbcType=VARCHAR},
-      preconsultation = #{preconsultation,jdbcType=VARCHAR},
-      report_id = #{reportId,jdbcType=INTEGER},
-      diagnosis = #{diagnosis,jdbcType=VARCHAR},
-      prescription = #{prescription,jdbcType=VARCHAR},
-      department_id = #{departmentId,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      status = #{status,jdbcType=INTEGER}
+        patient_name = #{patientName,jdbcType=VARCHAR},
+        gender = #{gender,jdbcType=VARCHAR},
+        symptom = #{symptom,jdbcType=VARCHAR},
+        drugsused = #{drugsused,jdbcType=VARCHAR},
+        doctor_id = #{doctorId,jdbcType=INTEGER},
+        doctor_name = #{doctorName,jdbcType=VARCHAR},
+        preconsultation = #{preconsultation,jdbcType=VARCHAR},
+        report_id = #{reportId,jdbcType=INTEGER},
+        diagnosis = #{diagnosis,jdbcType=VARCHAR},
+        prescription = #{prescription,jdbcType=VARCHAR},
+        department_id = #{departmentId,jdbcType=INTEGER},
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+        status = #{status,jdbcType=INTEGER}
       is_deleted = #{isDeleted,jdbcType=INTEGER}
     where record_id = #{recordId,jdbcType=INTEGER}
   </update>
