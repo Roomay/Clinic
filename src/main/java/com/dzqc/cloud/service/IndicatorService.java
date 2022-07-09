@@ -18,14 +18,14 @@ public class IndicatorService {
     private final KafkaTemplate<Integer, String> kafkaTemplate;
 
     @Autowired
-    public IndicatorService(KafkaTemplate kafkaTemplate) {
+    public IndicatorService(KafkaTemplate<Integer, String> kafkaTemplate) {
         this.kafkaTemplate = kafkaTemplate;
     }
 
-    @KafkaListener(topics = "#{kafkaTopicName}", groupId = "#{topicGroudId}")
+    @KafkaListener(topics = "#{kafkaTopicName}", groupId = "#{topicGroupId}")
     public void processMessage(ConsumerRecord<Integer, String> record) {
         LOG.info("kafka processMessage start");
-        LOG.info("processMessage, topic = {}, msg = {}, record.topic(), record.value()");
+        LOG.info("processMessage, topic = {}, msg = {}", record.topic(), record.value());
 
         // 消息处理（如发送给Engine等）
 
