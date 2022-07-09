@@ -101,19 +101,110 @@ INSERT INTO `consultation` VALUES (25, 1, 'Alex', 1, '2022-07-05', 2, NULL, NULL
 DROP TABLE IF EXISTS `department_info`;
 CREATE TABLE `department_info`  (
   `department_id` int NOT NULL AUTO_INCREMENT,
-  `department_name` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '科室名称',
+  `department_name` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '科室名称',
   `affliation_id` int NULL DEFAULT NULL COMMENT '隶属id',
   `introduction` varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '科室简介',
   `is_deleted` int NOT NULL DEFAULT 0 COMMENT '删除标记 0.正常 1.删除',
   PRIMARY KEY (`department_id`) USING BTREE,
   UNIQUE INDEX `department_name`(`department_name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 39 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '科室信息表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 0 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '科室信息表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of department_info
 -- ----------------------------
-INSERT INTO `department_info` VALUES (1, '牙科', NULL, NULL, 0);
-INSERT INTO `department_info` VALUES (2, '脑科', NULL, NULL, 0);
+DELETE FROM `department_info`;
+INSERT INTO `department_info` VALUES (1,'cataract',NULL,'白内障',0);
+INSERT INTO `department_info` VALUES (2,'obstetrics',NULL,'产科',0);
+INSERT INTO `department_info` VALUES (3,'prenatal examination department',NULL,'产前检查科',0);
+INSERT INTO `department_info` VALUES (4,'otorhinolaryngology',NULL,'耳鼻喉科',0);
+INSERT INTO `department_info` VALUES (5,'Pediatrics',NULL,'儿科',0);
+INSERT INTO `department_info` VALUES (6,'pediatric dentistry',NULL,'儿童口腔科',0);
+INSERT INTO `department_info` VALUES (7,'child intensive care unit',NULL,'儿童重症监护科',0);
+INSERT INTO `department_info` VALUES (8,'obstetrics and Gynecology',NULL,'妇产科',0);
+INSERT INTO `department_info` VALUES (9,'gynecology',NULL,'妇科',0);
+INSERT INTO `department_info` VALUES (10,'gynecological endocrinology',NULL,'妇科内分泌',0);
+INSERT INTO `department_info` VALUES (11,'gynecology and urology',NULL,'妇泌尿科',0);
+INSERT INTO `department_info` VALUES (12,'hepatobiliary surgery',NULL,'肝胆外科',0);
+INSERT INTO `department_info` VALUES (13,'anorectal surgery',NULL,'肛肠外科',0);
+INSERT INTO `department_info` VALUES (14,'internal medicine of infection',NULL,'感染内科',0);
+INSERT INTO `department_info` VALUES (15,'hyperbaric oxygen department',NULL,'高压氧科',0);
+INSERT INTO `department_info` VALUES (16,'functional neurosurgery',NULL,'功能神经外科',0);
+INSERT INTO `department_info` VALUES (17,'bone surgery',NULL,'骨外科',0);
+INSERT INTO `department_info` VALUES (18,'osteoporosis department',NULL,'骨质疏松科',0);
+INSERT INTO `department_info` VALUES (19,'bone oncology',NULL,'骨肿瘤科',0);
+INSERT INTO `department_info` VALUES (20,'respiratory medicine',NULL,'呼吸内科',0);
+INSERT INTO `department_info` VALUES (21,'department of cornea',NULL,'角膜科',0);
+INSERT INTO `department_info` VALUES (22,'orthopaedics',NULL,'矫形骨科',0);
+INSERT INTO `department_info` VALUES (23,'spine surgery',NULL,'脊柱外科',0);
+INSERT INTO `department_info` VALUES (24,'oral emergency department',NULL,'口腔急诊科',0);
+INSERT INTO `department_info` VALUES (25,'geriatric medicine',NULL,'老年病内科',0);
+INSERT INTO `department_info` VALUES (26,'department of immunology',NULL,'免疫内科',0);
+INSERT INTO `department_info` VALUES (27,'urology',NULL,'泌尿外科',0);
+INSERT INTO `department_info` VALUES (28,'endocrinology department',NULL,'内分泌科',0);
+INSERT INTO `department_info` VALUES (29,'dermatology',NULL,'皮肤科',0);
+INSERT INTO `department_info` VALUES (30,'general internal medicine',NULL,'普通内科',0);
+INSERT INTO `department_info` VALUES (31,'general surgery',NULL,'普通外科',0);
+INSERT INTO `department_info` VALUES (32,'organ transplantation department',NULL,'器官移植科',0);
+INSERT INTO `department_info` VALUES (33,'glaucoma',NULL,'青光眼',0);
+INSERT INTO `department_info` VALUES (34,'refraction',NULL,'屈光',0);
+INSERT INTO `department_info` VALUES (35,'breast surgery',NULL,'乳腺外科',0);
+INSERT INTO `department_info` VALUES (36,'nephrology department',NULL,'肾病内科',0);
+INSERT INTO `department_info` VALUES (37,'department of Neurology',NULL,'神经内科',0);
+INSERT INTO `department_info` VALUES (38,'neurosurgery',NULL,'神经外科',0);
+INSERT INTO `department_info` VALUES (39,'optometry',NULL,'视光科',0);
+INSERT INTO `department_info` VALUES (40,'hand surgery',NULL,'手外科',0);
+INSERT INTO `department_info` VALUES (41,'head and neck surgery',NULL,'头颈外科',0);
+INSERT INTO `department_info` VALUES (42,'gastrointestinal surgery',NULL,'胃肠外科',0);
+INSERT INTO `department_info` VALUES (43,'minimally invasive surgery',NULL,'微创外科',0);
+INSERT INTO `department_info` VALUES (44,'pediatric otorhinolaryngology',NULL,'小儿耳鼻喉科',0);
+INSERT INTO `department_info` VALUES (45,'pediatric gynecology',NULL,'小儿妇科',0);
+INSERT INTO `department_info` VALUES (46,'pediatric infection department',NULL,'小儿感染科',0);
+INSERT INTO `department_info` VALUES (47,'pediatric orthopaedics',NULL,'小儿骨科',0);
+INSERT INTO `department_info` VALUES (48,'pediatric respiratory department',NULL,'小儿呼吸科',0);
+INSERT INTO `department_info` VALUES (49,'pediatric psychiatry',NULL,'小儿精神科',0);
+INSERT INTO `department_info` VALUES (50,'pediatric emergency department',NULL,'小儿急诊科',0);
+INSERT INTO `department_info` VALUES (51,'pediatric rehabilitation department',NULL,'小儿康复科',0);
+INSERT INTO `department_info` VALUES (52,'pediatric Immunology Department',NULL,'小儿免疫科',0);
+INSERT INTO `department_info` VALUES (53,'pediatric urology',NULL,'小儿泌尿外科',0);
+INSERT INTO `department_info` VALUES (54,'pediatric endocrinology department',NULL,'小儿内分泌科',0);
+INSERT INTO `department_info` VALUES (55,'pediatric dermatology',NULL,'小儿皮肤科',0);
+INSERT INTO `department_info` VALUES (56,'pediatric neurology',NULL,'小儿神经内科',0);
+INSERT INTO `department_info` VALUES (57,'pediatric neurosurgery',NULL,'小儿神经外科',0);
+INSERT INTO `department_info` VALUES (58,'pediatric nephrology',NULL,'小儿肾内科',0);
+INSERT INTO `department_info` VALUES (59,'pediatric surgery',NULL,'小儿外科',0);
+INSERT INTO `department_info` VALUES (60,'pediatric digestive department',NULL,'小儿消化科',0);
+INSERT INTO `department_info` VALUES (61,'pediatric cardiology',NULL,'小儿心内科',0);
+INSERT INTO `department_info` VALUES (62,'pediatric cardiac surgery',NULL,'小儿心外科',0);
+INSERT INTO `department_info` VALUES (63,'pediatric thoracic surgery',NULL,'小儿胸外科',0);
+INSERT INTO `department_info` VALUES (64,'pediatric hematology department',NULL,'小儿血液科',0);
+INSERT INTO `department_info` VALUES (65,'pediatric ophthalmology',NULL,'小儿眼科',0);
+INSERT INTO `department_info` VALUES (66,'pediatric nutrition and health care department',NULL,'小儿营养保健科',0);
+INSERT INTO `department_info` VALUES (67,'pediatric plastic surgery',NULL,'小儿整形科',0);
+INSERT INTO `department_info` VALUES (68,'gastroenterology',NULL,'消化内科',0);
+INSERT INTO `department_info` VALUES (69,'std department',NULL,'性病科',0);
+INSERT INTO `department_info` VALUES (70,'neonatology',NULL,'新生儿科',0);
+INSERT INTO `department_info` VALUES (71,'neonatal surgery',NULL,'新生儿外科',0);
+INSERT INTO `department_info` VALUES (72,'cardiovascular medicine',NULL,'心血管内科',0);
+INSERT INTO `department_info` VALUES (73,'cardiovascular surgery',NULL,'心血管外科',0);
+INSERT INTO `department_info` VALUES (74,'thoracic surgery',NULL,'胸外科',0);
+INSERT INTO `department_info` VALUES (75,'vascular surgery',NULL,'血管外科',0);
+INSERT INTO `department_info` VALUES (76,'hematology department',NULL,'血液内科',0);
+INSERT INTO `department_info` VALUES (77,'fundus department',NULL,'眼底科',0);
+INSERT INTO `department_info` VALUES (78,'ophthalmology',NULL,'眼科',0);
+INSERT INTO `department_info` VALUES (79,'orbit and tumor',NULL,'眼眶及肿瘤',0);
+INSERT INTO `department_info` VALUES (80,'department of ocular trauma',NULL,'眼外伤科',0);
+INSERT INTO `department_info` VALUES (81,'inflammatory',NULL,'炎症性',0);
+INSERT INTO `department_info` VALUES (82,'genetic counseling section',NULL,'遗传咨询科',0);
+INSERT INTO `department_info` VALUES (83,'plastic surgery',NULL,'整形外科',0);
+INSERT INTO `department_info` VALUES (84,'gynecological oncology',NULL,'肿瘤妇科',0);
+INSERT INTO `department_info` VALUES (85,'oncology rehabilitation department',NULL,'肿瘤康复科',0);
+INSERT INTO `department_info` VALUES (86,'medicine-oncology',NULL,'肿瘤内科',0);
+INSERT INTO `department_info` VALUES (87,'tumor surgery',NULL,'肿瘤外科',0);
+INSERT INTO `department_info` VALUES (88,'oncology department',NULL,'肿瘤科',0);
+INSERT INTO `department_info` VALUES (89,'foot and ankle surgery',NULL,'足踝外科',0);
+
+
+
 
 -- ----------------------------
 -- Table structure for doctor_info
