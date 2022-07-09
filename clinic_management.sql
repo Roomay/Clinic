@@ -11,7 +11,7 @@
  Target Server Version : 80023
  File Encoding         : 65001
 
- Date: 01/07/2022 15:58:42
+ Date: 09/07/2022 17:46:33
 */
 
 SET NAMES utf8mb4;
@@ -81,14 +81,19 @@ CREATE TABLE `consultation`  (
   PRIMARY KEY (`consultation_id`) USING BTREE,
   INDEX `department_id`(`department_id`) USING BTREE,
   INDEX `dates`(`dates`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '坐诊表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 26 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '坐诊表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of consultation
 -- ----------------------------
-INSERT INTO `consultation` VALUES (1, 1, 'Alex', 1, '2022-06-30', 0, 1, 'fred', 0, NULL, 111.0, 1);
-INSERT INTO `consultation` VALUES (2, 1, 'Alex', 1, '2022-06-30', 1, 1, 'fred', 0, NULL, 2.0, 1);
-INSERT INTO `consultation` VALUES (3, 1, 'Alex', 1, '2022-06-30', 2, 1, 'fred', 0, NULL, 3333.0, 1);
+INSERT INTO `consultation` VALUES (1, 1, 'Alex', 1, '2022-07-01', 0, 1, 'fred', 0, NULL, 111.0, 1);
+INSERT INTO `consultation` VALUES (2, 1, 'Alex', 1, '2022-07-02', 1, 1, 'fred', 1, NULL, 2.0, 1);
+INSERT INTO `consultation` VALUES (3, 1, 'Alex', 1, '2022-07-02', 2, 1, 'fred', 2, NULL, 3333.0, 1);
+INSERT INTO `consultation` VALUES (4, 1, 'Alex', 1, '2022-07-05', 1, NULL, 'fred', 1, NULL, 0.0, 0);
+INSERT INTO `consultation` VALUES (9, 1, 'Alex', 1, '2022-07-02', 3, NULL, 'fred', 0, NULL, 0.0, 0);
+INSERT INTO `consultation` VALUES (10, 1, 'Alex', 1, '2022-07-03', 0, NULL, 'fred', 0, NULL, 0.0, 0);
+INSERT INTO `consultation` VALUES (24, 1, 'Alex', 1, '2022-07-05', 3, NULL, 'fred', NULL, NULL, 2.0, 1);
+INSERT INTO `consultation` VALUES (25, 1, 'Alex', 1, '2022-07-05', 2, NULL, NULL, 1, 'null', 1.0, 0);
 
 -- ----------------------------
 -- Table structure for department_info
@@ -185,11 +190,14 @@ CREATE TABLE `medicalrecord`  (
   PRIMARY KEY (`record_id`) USING BTREE,
   INDEX `patient_id`(`patient_id`) USING BTREE,
   INDEX `doctor_id`(`doctor_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '病历表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '病历表' ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of medicalrecord
 -- ----------------------------
+INSERT INTO `medicalrecord` VALUES (17, 2, 'Alan', '0', '高烧不退，还有经常性的咳嗽', NULL, NULL, NULL, NULL, NULL, '如果确诊是感冒咳嗽，需要吃中药，配合西药治疗效果不错。', NULL, 13, NULL, NULL, 2, 0);
+INSERT INTO `medicalrecord` VALUES (23, 1, 'fred', '1', '高烧不退，还有经常性的咳嗽', NULL, NULL, NULL, NULL, NULL, '你好，考虑感冒症状。服用清热解毒之类中成药。', NULL, 13, NULL, NULL, 2, 0);
+INSERT INTO `medicalrecord` VALUES (24, 1, 'fred', '1', '高烧不退，还有经常性的咳嗽', NULL, NULL, NULL, NULL, NULL, '你好，考虑感冒症状。服用清热解毒之类中成药。', NULL, 13, NULL, NULL, 2, 0);
 
 -- ----------------------------
 -- Table structure for patient_info
@@ -216,6 +224,7 @@ CREATE TABLE `patient_info`  (
 -- ----------------------------
 -- Records of patient_info
 -- ----------------------------
-INSERT INTO `patient_info` VALUES (1, 'fred', '123', NULL, '123', NULL, '2022-07-13 15:52:23', '0', NULL, NULL, 0);
+INSERT INTO `patient_info` VALUES (1, 'fred', '123', '1', '123', NULL, '2000-07-07 16:23:33', '0', NULL, NULL, 0);
+INSERT INTO `patient_info` VALUES (2, 'Alan', '123', '2', '1', NULL, '1999-07-07 17:23:40', '0', NULL, NULL, 0);
 
 SET FOREIGN_KEY_CHECKS = 1;
