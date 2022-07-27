@@ -1,24 +1,19 @@
 ## The directory is for the back-end build .
 
-## The front-end is developed with Vue and wrapped in the directory "frontend".
-
-### Docker 配置
-docker 指定映射端口为3383(避免3306与其他docker实例混淆)
+### Docker Config
+docker port mapped to 3383 (avoid to be confused with other Docker instance )
 ```
 $ docker run --name clinic -e MYSQL_ROOT_PASSWORD=123456 -p 3383:3306 -d mysql:8.0 
 ```
 
-### Interfaces to be done
-* 注册登录
-* 所有doc
-* 根据depar选
-* 用户名 appoint （1，2）
-* Consultation
-  * 显示医生的可预约时间
-    * 以列表形式返回当天LIST<TIME_SLOT>
-  * 显示病人的预约记录
-  * 进行预约
-* Departmentinfo
-* Doctorinfo
-* MedicalRecord
-  * 返回一组数据(性别、年龄、症状)
+
+
+### Originality and Reference Declaration
+
+* Our AI engine is based on an open-source BERT model, so the framework of the AI engine refers to ...
+* Our frontend design is based on 
+* Our backend design is based on an open-source framework Spring Boot. 
+  * The skeleton of dependency library configuration defined in the file "pom.xml" was referred to [maven.apache.org](https://maven.apache.org/guides/introduction/introduction-to-the-pom.html#:~:text=Available%20Variables-,What%20is%20a%20POM%3F,default%20values%20for%20most%20projects.). 
+  * The skeleton of the Java Web framework was referred to [Spring Boot](https://spring.io/guides/gs/spring-boot/).
+* We hereby declare that except the parts mentioned above, all other parts of source code are done by us.
+
