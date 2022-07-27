@@ -6,7 +6,7 @@ docker port mapped to 3383 (avoid to be confused with other Docker instance )
 $ docker run --name clinic -e MYSQL_ROOT_PASSWORD=123456 -p 3383:3306 -d mysql:8.0 
 ```
 
-##AI
+## AI
 
 ### python environment
 We have two python environment py36tf110 and pytorch140.
@@ -36,7 +36,7 @@ In the server, run /nlp_model/hku_proj/imit_bert_2/server_one.py and /nlp_model/
 
 ### Originality and Reference Declaration
 
-* Our AI engine is based on an open-source BERT model, so the framework of the AI engine refers to [BERT: Pre-training of deep bidirectional transformers for language understanding](https://github.com/google-research/bert) and [MedDialog: Large-scale Medical Dialogue Dataset](https://github.com/UCSD-AI4H/Medical-Dialogue-System/tree/master/bertGPT)
+* Our AI engine is based on an open-source BERT model, so the framework of the AI engine refers to [BERT: Pre-training of deep bidirectional transformers for language understanding](https://github.com/google-research/bert) and [MedDialog: Large-scale Medical Dialogue Dataset](https://github.com/UCSD-AI4H/Medical-Dialogue-System)
 * Our frontend design is based on 
 * Our backend design is based on an open-source framework Spring Boot. 
   * The skeleton of dependency library configuration defined in the file "pom.xml" was referred to [maven.apache.org](https://maven.apache.org/guides/introduction/introduction-to-the-pom.html#:~:text=Available%20Variables-,What%20is%20a%20POM%3F,default%20values%20for%20most%20projects.). 
