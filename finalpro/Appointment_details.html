@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html class="no-js" lang="zxx" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <!-- Meta Tags -->
     <meta charset="utf-8">
@@ -98,31 +98,6 @@
 
 <!-- Header Area -->
 <header class="header" >
-    <!-- Topbar -->
-    <div class="topbar">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-5 col-12">
-                    <!-- Contact -->
-                    <ul class="top-link">
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Doctors</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                    <!-- End Contact -->
-                </div>
-                <div class="col-lg-6 col-md-7 col-12">
-                    <!-- Top Contact -->
-                    <ul class="top-contact">
-                        <li><i class="fa fa-phone"></i>XXX</li>
-                        <li><i class="fa fa-envelope"></i><a href="mailto:XXX">XXX</a></li>
-                    </ul>
-                    <!-- End Top Contact -->
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- End Topbar -->
     <!-- Header Inner -->
     <div class="header-inner">
@@ -144,42 +119,25 @@
                         <div class="main-menu">
                             <nav class="navigation">
                                 <ul class="nav menu">
-                                    <li class="active"><a href="#">Home <i class="icofont-rounded-down"></i></a>
-                                        <ul class="dropdown">
-                                            <li><a href="index.html">Home Page 1</a></li>
-                                            <li><a href="index2.html">Home Page 2</a></li>
-                                        </ul>
+                                    <li class="active"><a href="index.html">Home </a>
                                     </li>
-                                    <li><a href="#">Doctos <i class="icofont-rounded-down"></i></a>
+
+                                    <li><a href="#">Departments <i class="icofont-rounded-down"></i></a>
                                         <ul class="dropdown">
+                                            <li><a href="service.html">Department</a></li>
                                             <li><a href="doctors.html">Doctor</a></li>
-                                            <li><a href="doctor-details.html">Doctor Details</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Services <i class="icofont-rounded-down"></i></a>
+
+
+
+                                    <li><a href="#">Appointment <i class="icofont-rounded-down"></i></a>
                                         <ul class="dropdown">
-                                            <li><a href="service.html">Service</a></li>
-                                            <li><a href="service-details.html">Service Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Pages <i class="icofont-rounded-down"></i></a>
-                                        <ul class="dropdown">
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="appointment.html">Appointment</a></li>
-                                            <li><a href="time-table.html">Time Table</a></li>
-                                            <li><a href="testimonials.html">Testimonials</a></li>
-                                            <li><a href="pricing.html">Our Pricing</a></li>
-                                            <li><a href="register.html">Sign Up</a></li>
-                                            <li><a href="login.html">Login</a></li>
-                                            <li><a href="faq.html">Faq</a></li>
-                                            <li><a href="mail-success.html">Mail Success</a></li>
-                                            <li><a href="404.html">404 Error</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Blogs <i class="icofont-rounded-down"></i></a>
-                                        <ul class="dropdown">
-                                            <li><a href="blog-grid.html">Blog Grid</a></li>
-                                            <li><a href="blog-single.html">Blog Details</a></li>
+
+                                            <li><a href="case_list.html">My Appointment</a></li>
+                                            <li><a href="case.html">New Case analysis</a></li>
+                                            <li><a href="analysis.html">My Case analysis</a></li>
+                                            <li><a href="appointment.html">Book Appointment</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="contact.html">Contact Us</a></li>
@@ -215,7 +173,7 @@
             </div>
         </div>
         <div class="row" id="tablebar">
-            <div class="col-12" v-for="item in arr">
+            <div class="col-12" >
                 <div class="doctor-calendar-table table-responsive">
                     <table class="table">
                         <thead>
@@ -226,46 +184,54 @@
                             <th>Status</th>
                             <th>Charge</th>
                             <th>Department</th>
-                            <th v-if="type==0">Cancel</th>
-                            <th v-if="type==1">Approve</th>
-                            <th v-if="type==1">Reject</th>
+                            <th v-if="type==0&arr.availStatus==0">Cancel</th>
+                            <th v-if="type==1&arr.availStatus==0">Approve</th>
+                            <th v-if="type==1&arr.availStatus==0">Reject</th>
                         </tr>
                         </thead>
 
                         <tbody>
                         <tr>
-                            <td v-if="item.timeSlot==0"><span class="time" >9.00</span></td>
-                            <td v-if="item.timeSlot==1"><span class="time" >11.00</span></td>
-                            <td v-if="item.timeSlot==2"><span class="time" >14.00</span></td>
-                            <td v-if="item.timeSlot==3"><span class="time" >16.00</span></td>
+                            <td v-if="arr.timeSlot==0"><span class="time" >9.00</span></td>
+                            <td v-if="arr.timeSlot==1"><span class="time" >11.00</span></td>
+                            <td v-if="arr.timeSlot==2"><span class="time" >14.00</span></td>
+                            <td v-if="arr.timeSlot==3"><span class="time" >16.00</span></td>
                             <td>
-                                <h3 v-text="item.dates">Dr. Tanner</h3>
+                                <h3 v-text="arr.dates">Dr. Tanner</h3>
                             </td>
                             <td>
-                                <h3 v-text="item.doctorName">Dr. Kwak</h3>
+                                <h3 v-text="arr.doctorName">Dr. Kwak</h3>
                             </td>
 
 
                             <td>
-                                <h3 v-text="item.availStatus">Dr. Slaughter</h3>
+                                <h3 v-if="type==0&arr.availStatus==0">Pending</h3>
+                                <h3 v-if="type==0&arr.availStatus==1">Approved</h3>
+                                <h3 v-if="type==0&arr.availStatus==2">Rejected</h3>
+                                <h3 v-if="type==0&arr.availStatus==3">Canceled</h3>
+                                <h3 v-if="type==1&arr.availStatus==0">Pending</h3>
+                                <h3 v-if="type==1&arr.availStatus==1">You have approved</h3>
+                                <h3 v-if="type==1&arr.availStatus==2">You have rejected</h3>
+                                <h3 v-if="type==1&arr.availStatus==3">Patient had Canceled</h3>
+
                             </td>
                             <td>
-                                <h3 v-text="item.charge">Dr. Slaughter</h3>
+                                <h3 v-text="arr.charge">Dr. Slaughter</h3>
                             </td>
                             <td>
-                                <h3 v-text="item.departmentId">Dr. Foley</h3>
+                                <h3 v-text="departmentName">Dr. Foley</h3>
                             </td>
 
-                            <td v-if="type==0" onclick="alert('Canceled')">
-                                <h3>Dr. Palmer</h3>
+                            <td v-if="type==0&arr.availStatus==0" v-on:click="dealappoint(3)">
+                                <h3>Click</h3>
                             </td>
 
-                            <td v-if="type==1" onclick="alert('Approved')">
-                                <h3>A</h3>
+                            <td v-if="type==1&arr.availStatus==0" v-on:click="dealappoint(1)">
+                                <h3>Click</h3>
                             </td>
 
-                            <td v-if="type==1" onclick="alert('Rejected')">
-                                <h3>R</h3>
+                            <td v-if="type==1&arr.availStatus==0" v-on:click="dealappoint(2)">
+                                <h3>Click</h3>
                             </td>
 
                         </tr>
@@ -395,7 +361,7 @@
 </footer>
 <!--/ End Footer Area -->
 
-<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="js/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
 
@@ -404,6 +370,7 @@
         data:{
             arr:[],
             type:3,
+            departmentName:'',
         },
         mounted :function(){
             var that=this;
@@ -430,11 +397,36 @@
                     function (response) {
                         that.arr=response.data.result;
                         console.log(response.data.result)
+                        axios.post("http://localhost:8080/departmentinfo/selectByDepartmentId?departmentId="+that.arr.departmentId).then(
+                            function (response) {
+                                that.departmentName=response.data.result.departmentName;
+                                that.departmentId=response.data.result.departmentId;
+                                console.log(response.data.result)
+                            },function (error) {
+                                console.log(error)
+                            }
+                        )
                     },function (error) {
                         console.log(error)
                     }
                 )
             },
+            dealappoint:function (type) {
+                var that=this;
+                var x =this.getParams("cid");
+                console.log("http://localhost:8080/consultation/dealconsultation?consultationId="+ x+"&deal="+type);
+
+                axios.post("http://localhost:8080/consultation/dealconsultation?consultationId="+ x+"&deal="+type).then(
+                    function (response) {
+                        location.reload();
+                    },function (error) {
+                        console.log(error)
+                    }
+                )
+
+
+
+            }
 
 
         }

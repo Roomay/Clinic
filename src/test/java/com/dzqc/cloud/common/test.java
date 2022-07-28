@@ -24,19 +24,20 @@ public class test  {
 
     @Test
     public void test(){
-        Consultation consultation=new Consultation();
-        consultation.setDoctorId(1);
-        consultation.setDoctorName("1");
-        consultation.setPatientName("1");
-        consultation.setCharge(BigDecimal.valueOf(1.0));
-        String s = "fred";
-//        System.out.println(consultation);
-        List<Consultation> ss=consultationService.selectByPatientName(s);
-        System.out.println(ss);
+//        Consultation consultation=new Consultation();
+//        consultation.setDoctorId(1);
+//        consultation.setDoctorName("1");
+//        consultation.setPatientName("1");
+//        consultation.setCharge(BigDecimal.valueOf(1.0));
+//        String s = "fred";
+////        System.out.println(consultation);
+//        List<Consultation> ss=consultationService.selectByPatientName(s);
+//        System.out.println(ss);
 
-//        System.out.println(consultation);
-//        s =consultationService.insertConsultation(consultation);
-//        System.out.println(s);
+        Consultation consultation=consultationService.selectByConsultationId(1);
+        consultation.setIsDeleted(1);
+        consultation.setAvailStatus(3);
+        consultationService.updateByPrimaryKeySelective(consultation);
 
     }
 

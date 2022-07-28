@@ -36,10 +36,10 @@
 <!--    <selectKey keyProperty="consultation_id" order="AFTER" resultType="int">-->
 <!--      SELECT LAST_INSERT_ID()-->
 <!--    </selectKey>-->
-    insert into consultation (consultation_id, doctor_id, doctor_name, department_id,
+    insert into consultation (consultation_id,patient_id,patient_name, doctor_id, doctor_name, department_id,
       dates, time_slot, avail_status,
       comment, charge, is_deleted)
-    values (#{consultationId,jdbcType=INTEGER}, #{doctorId,jdbcType=INTEGER}, #{doctorName,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER},
+    values (#{consultationId,jdbcType=INTEGER}, #{patientId,jdbcType=INTEGER}, #{patientName,jdbcType=VARCHAR},#{doctorId,jdbcType=INTEGER}, #{doctorName,jdbcType=VARCHAR}, #{departmentId,jdbcType=INTEGER},
       #{dates,jdbcType=DATE}, #{timeSlot,jdbcType=INTEGER}, #{availStatus,jdbcType=INTEGER},
       #{comment,jdbcType=VARCHAR}, #{charge,jdbcType=DECIMAL}, #{isDeleted,jdbcType=INTEGER})
   </insert>
@@ -120,7 +120,7 @@
         doctor_name = #{doctorName,jdbcType=VARCHAR},
       </if>
       <if test="dates != null" >
-        day_slot = #{daySlot,jdbcType=INTEGER},
+        dates = #{dates,jdbcType=DATE},
       </if>
       <if test="departmentId != null" >
         doctor_id = #{departmentId,jdbcType=INTEGER},

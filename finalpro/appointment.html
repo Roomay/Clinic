@@ -77,6 +77,7 @@
             </div>
         </div>
         <!-- End Preloader -->
+
 		<!-- Header Area -->
 		<header class="header" >
 			<!-- End Topbar -->
@@ -106,9 +107,7 @@
 											<li><a href="#">Departments <i class="icofont-rounded-down"></i></a>
 												<ul class="dropdown">
 													<li><a href="service.html">Department</a></li>
-													<li><a href="service-details.html">Department Details</a></li>
 													<li><a href="doctors.html">Doctor</a></li>
-													<li><a href="doctor-details.html">Doctor Details</a></li>
 												</ul>
 											</li>
 
@@ -119,19 +118,8 @@
 
 													<li><a href="case_list.html">My Appointment</a></li>
 													<li><a href="case.html">New Case analysis</a></li>
-													<li><a href="time-table.html">Time Table</a></li>
-													<li><a href="testimonials.html">Testimonials</a></li>
-													<li><a href="pricing.html">Our Pricing</a></li>
-													<li><a href="faq.html">Faq</a></li>
-													<li><a href="mail-success.html">Mail Success</a></li>
-													<li><a href="404.html">404 Error</a></li>
-													<li><a href="about.html">About Us</a></li>
-												</ul>
-											</li>
-											<li><a href="#">Blogs <i class="icofont-rounded-down"></i></a>
-												<ul class="dropdown">
-													<li><a href="blog-grid.html">Blog Grid</a></li>
-													<li><a href="blog-single.html">Blog Details</a></li>
+													<li><a href="analysis.html">My Case analysis</a></li>
+													<li><a href="appointment.html">Book Appointment</a></li>
 												</ul>
 											</li>
 											<li><a href="contact.html">Contact Us</a></li>
@@ -151,6 +139,7 @@
 			</div>
 			<!--/ End Header Inner -->
 		</header>
+		<!-- End Header Area -->
 		<!-- End Header Area -->
 		
 		<!-- Breadcrumbs -->
@@ -376,7 +365,7 @@
 		<!--/ End Footer Area -->
 
 		<script src="js/jquery-1.12.4.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+		<script src="js/vue.js"></script>
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 		<script>
 
@@ -393,7 +382,8 @@
 					docId:null,
 					dates:null,
 					timeslot:null,
-					username:window.sessionStorage.getItem("username"),
+					username:null,
+					userid:window.sessionStorage.getItem("patientid"),
 				},
 				mounted :function(){
 					// var x =this.getParams("cid");
@@ -434,16 +424,19 @@
 				},
 				methods:{
 					submitapp: function (){
+						var that=this;
 						console.log(app.docId);
 						console.log(window.sessionStorage.getItem("username"));
-
+						that.username=window.sessionStorage.getItem("username");
 						axios.post("http://localhost:8080/consulation/insertappointment",    {
 									"doctorId": app.docId,
 									"doctorName":app.docName,
 									"departmentId":app.did,
 									"dates":app.dates,
 									"timeSlot":app.timeslot,
-									"patientname":app.username,
+									"patientName":app.username,
+									"patientId":parseInt(app.userid),
+									"availStatus":0,
 									"comment":"null",
 									"charge":1.0,
 									"isDeleted":0
@@ -455,9 +448,7 @@
 								}
 						).then(
 								function (response) {
-
 									console.log("success")
-
 									var url = "case_list.html";
 									window.location.href=url+"?username="+window.sessionStorage.getItem("username")
 								},

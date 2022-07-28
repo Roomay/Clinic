@@ -15,9 +15,11 @@ public class ConsultationService {
     @Autowired
     private ConsultationMapper consultationMapper;
 
-    public  List<Consultation>  selectByConsultationId(Integer consultationId) {
+    public  Consultation  selectByConsultationId(Integer consultationId) {
         return consultationMapper.selectByPrimaryKey(consultationId);
     }
+
+
 
     public List<Consultation> selectByDoctorId(Integer doctorId) {
         return consultationMapper.selectByDoctorId(doctorId);

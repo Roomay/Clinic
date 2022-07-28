@@ -140,4 +140,22 @@ public class DepartmentinfoController {
         }
     }
 
+
+    @CrossOrigin
+    @PostMapping("/departmentinfo/selectByDepartmentId")
+    public ResultObject selectByConsultationId(Integer departmentId) {
+        try {
+            DepartmentInfo departmentInfo = departmentinfoService.selectByPrimaryKey(departmentId);
+            if (departmentInfo==null) {
+                return ResultObject.error("没有就诊记录");
+            } else {
+                return ResultObject.success(departmentInfo);
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
+
+
 }

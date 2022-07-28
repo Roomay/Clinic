@@ -124,8 +124,8 @@ public class ConsultationController {
     @PostMapping("/consultation/selectByConsultationId")
     public ResultObject selectByConsultationId(Integer consultationId) {
         try {
-            List<Consultation> consultationsFound = consultationService.selectByConsultationId(consultationId);
-            if (consultationsFound.isEmpty()) {
+            Consultation consultationsFound = consultationService.selectByConsultationId(consultationId);
+            if (consultationsFound==null) {
                 return ResultObject.error("没有就诊记录");
             } else {
                 return ResultObject.success(consultationsFound);
@@ -295,5 +295,35 @@ public class ConsultationController {
             return ResultObject.error(Message.SERVER_ERROR);
         }
     }
+
+
+    /**
+     * 操作consultation(根据consultationId定位)
+     * @return 反馈信息
+     */
+    @CrossOrigin
+    @PostMapping("/consultation/dealconsultation")
+    public ResultObject DealConsultation(int consultationId,int deal) {
+        try {
+            Consultation consultation=consultationService.selectByConsultationId(consultationId);
+            switch (deal) {
+                case 1:
+                    consultation.setAvailStatus(1);
+                    break;
+                case 2:
+                    consultation.setAvailStatus(2);
+                    break;
+                case 3:
+                    consultation.setIsDeleted(1);
+                    consultation.setAvailStatus(3);
+                    break;
+            }
+            consultationService.updateByPrimaryKeySelective(consultation);
+            return ResultObject.success("部分更新成功");
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
 
 }

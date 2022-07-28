@@ -72,7 +72,9 @@ public class MedicalrecordController {
             }
             else {
                 medicalRecord.setDiagnosis(predictResult);
+                medicalRecord.setStatus(2);
                 medicalrecordService.updateByPrimaryKeySelective(medicalRecord);
+
                 return ResultObject.success(predictResult);
             }
         } catch (Exception e) {
@@ -108,6 +110,7 @@ public class MedicalrecordController {
             } else {
                 String s1[] =predictResult.trim().split(" ");
                 medicalRecord.setDepartmentId(Integer.parseInt(s1[0]));
+                medicalRecord.setStatus(2);
                 medicalrecordService.updateByPrimaryKeySelective(medicalRecord);
                 return ResultObject.success(predictResult);
             }

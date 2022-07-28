@@ -36,7 +36,9 @@ public class DepartmentinfoService {
     public int updateByPrimaryKeySelective(DepartmentInfo departmentInfo) {
         return departmentinfoMapper.updateByPrimaryKeySelective(departmentInfo);
     }
-
+    public DepartmentInfo selectByPrimaryKey(int did){
+        return departmentinfoMapper.selectByPrimaryKey(did);
+    }
     public int updateByPrimaryKey(DepartmentInfo departmentInfo) {
         return departmentinfoMapper.updateByPrimaryKey(departmentInfo);
     }
