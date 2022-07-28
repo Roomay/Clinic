@@ -9,6 +9,7 @@
 
 ## Frontend
 
+Our project's front end is based on a templete from [http://www.jqueryfuns.com/] which is a material website. You can access [http://www.jqueryfuns.com/resource/4341], and download it. We also use a useful plug-in component sweetalert2[https://sweetalert2.github.io/]. The main body of our project applies this template, which is based on bootstrap, but almost all the pages of our project are designed and implemented by ourselves, and all js code are wrote by ourselves.
 
 
 ## Backend
