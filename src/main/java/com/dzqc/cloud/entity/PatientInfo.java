@@ -1,5 +1,7 @@
 package com.dzqc.cloud.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,6 +18,7 @@ public class PatientInfo implements Serializable {
 
     private String validatecode;
 
+    @JsonFormat(locale="zh", pattern="yyyy/MM/dd")
     private Date birthday;
 
     private String gender;

@@ -173,10 +173,13 @@
                                                 </div>
                                             </div>
 
+
+
                                             <div class="col-lg-6 col-md-6 col-12" v-show="showAI" >
                                                 <div class="form-group">
-                                                    <div class="nice-select form-control wide" tabindex="0"><span class="current">Department</span>
-                                                        <ul class="list" size="4">
+                                                    <div class="nice-select form-control wide" tabindex="0">
+                                                        <span class="current">Department</span>
+                                                        <ul class="list" >
                                                             <li value="item.departmentId" class="option" v-for="item in departarr" v-on:click="savedepart(item.departmentId)">{{item.departmentName}}</li>
                                                         </ul>
 
@@ -186,18 +189,6 @@
 
 
 
-
-
-
-
-
-<!--                                            <div class="col-lg-6 col-md-6 col-12" v-show="showAI" >-->
-<!--                                                <div class="form-group">-->
-<!--                                                        <select >-->
-<!--                                                            <option  v-for="item in departarr" v-on:click="savedepart(item.departmentId)">{{item.departmentName}}</option>-->
-<!--                                                        </select>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
 
 
 
