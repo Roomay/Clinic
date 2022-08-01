@@ -1,5 +1,6 @@
 package com.dzqc.cloud.dao;
 
+import com.dzqc.cloud.entity.DepartmentInfo;
 import com.dzqc.cloud.entity.DoctorInfo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -24,4 +25,5 @@ public interface DoctorInfoMapper {
 
     int softDeleteByPrimaryKey(Integer doctorId);
     DoctorInfo selectBydoctorname(String doctorName);
+    List<DoctorInfo> selectAll();
 }

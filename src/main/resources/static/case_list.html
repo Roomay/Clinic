@@ -105,7 +105,6 @@
                                     <li><a href="#">Departments <i class="icofont-rounded-down"></i></a>
                                         <ul class="dropdown">
                                             <li><a href="service.html">Department</a></li>
-                                            <li><a href="doctors.html">Doctor</a></li>
                                         </ul>
                                     </li>
 
@@ -117,18 +116,7 @@
                                             <li><a href="case_list.html">My Appointment</a></li>
                                             <li><a href="case.html">New Case analysis</a></li>
                                             <li><a href="analysis.html">My Case analysis</a></li>
-                                            <li><a href="testimonials.html">Testimonials</a></li>
-                                            <li><a href="pricing.html">Our Pricing</a></li>
-                                            <li><a href="faq.html">Faq</a></li>
-                                            <li><a href="mail-success.html">Mail Success</a></li>
-                                            <li><a href="404.html">404 Error</a></li>
-                                            <li><a href="about.html">About Us</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Blogs <i class="icofont-rounded-down"></i></a>
-                                        <ul class="dropdown">
-                                            <li><a href="blog-grid.html">Blog Grid</a></li>
-                                            <li><a href="blog-single.html">Blog Details</a></li>
+                                            <li><a href="appointment.html">Book Appointment</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="contact.html">Contact Us</a></li>
@@ -161,7 +149,10 @@
                         <!-- Single Blog -->
                         <div class="single-news">
                             <div class="news-head">
-                                <img src="img/blog1.jpg" alt="#">
+                                <img src="img/blog2pending.jpg" v-if="item.availStatus==0" >
+                                <img src="img/blog2tick.jpg" v-if="item.availStatus==1" >
+                                <img src="img/blog2cross.jpg" v-if="item.availStatus==2">
+                                <img src="img/blog2cross.jpg" v-if="item.availStatus==3">
 
                             </div>
                             <div class="news-body">
@@ -189,15 +180,6 @@
 
                     <div class="col-12">
                         <!-- Pagination -->
-                        <div class="pagination">
-                            <ul class="pagination-list">
-                                <li><a href="#"><i class="icofont-rounded-left"></i></a></li>
-                                <li class="active"><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#"><i class="icofont-rounded-right"></i></a></li>
-                            </ul>
-                        </div>
                         <!--/ End Pagination -->
                     </div>
                 </div>
@@ -317,7 +299,7 @@
                 var that=this;
                 var username=window.sessionStorage.getItem("username");
                 console.log(window.sessionStorage.getItem("username"));
-                axios.post("http://localhost:8080/consultation/selectByPatientName?patientName="+username).then(
+                axios.post("http://124.222.24.171:8080/consultation/selectByPatientName?patientName="+username).then(
                     function (response) {
                         that.arr=response.data.result;
                         console.log(response.data.result)

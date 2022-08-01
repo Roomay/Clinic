@@ -76,81 +76,67 @@
 </div>
 <!-- End Preloader -->
 
-<!-- Mediplus Color Plate -->
-    <!-- Header Area -->
-    <header class="header" >
-        <!-- End Topbar -->
-        <!-- Header Inner -->
-        <div class="header-inner">
-            <div class="container">
-                <div class="inner">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-3 col-12">
-                            <!-- Start Logo -->
-                            <div class="logo">
-                                <a href="index.html"><img src="img/logo.png" alt="#"></a>
-                            </div>
-                            <!-- End Logo -->
-                            <!-- Mobile Nav -->
-                            <div class="mobile-nav"></div>
-                            <!-- End Mobile Nav -->
+<!-- Header Area -->
+<header class="header" >
+    <!-- End Topbar -->
+    <!-- Header Inner -->
+    <div class="header-inner">
+        <div class="container">
+            <div class="inner">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-12">
+                        <!-- Start Logo -->
+                        <div class="logo">
+                            <a href="index.html"><img src="img/logo.png" alt="#"></a>
                         </div>
-                        <div class="col-lg-7 col-md-9 col-12">
-                            <!-- Main Menu -->
-                            <div class="main-menu">
-                                <nav class="navigation">
-                                    <ul class="nav menu">
-                                        <li class="active"><a href="index.html">Home </a>
-                                        </li>
+                        <!-- End Logo -->
+                        <!-- Mobile Nav -->
+                        <div class="mobile-nav"></div>
+                        <!-- End Mobile Nav -->
+                    </div>
+                    <div class="col-lg-7 col-md-9 col-12">
+                        <!-- Main Menu -->
+                        <div class="main-menu">
+                            <nav class="navigation">
+                                <ul class="nav menu">
+                                    <li class="active"><a href="index.html">Home </a>
+                                    </li>
 
-                                        <li><a href="#">Departments <i class="icofont-rounded-down"></i></a>
-                                            <ul class="dropdown">
-                                                <li><a href="service.html">Department</a></li>
-                                                <li><a href="doctors.html">Doctor</a></li>
-                                            </ul>
-                                        </li>
+                                    <li><a href="#">Departments <i class="icofont-rounded-down"></i></a>
+                                        <ul class="dropdown">
+                                            <li><a href="service.html">Department</a></li>
+                                        </ul>
+                                    </li>
 
 
 
-                                        <li><a href="#">Appointment <i class="icofont-rounded-down"></i></a>
-                                            <ul class="dropdown">
+                                    <li><a href="#">Appointment <i class="icofont-rounded-down"></i></a>
+                                        <ul class="dropdown">
 
-                                                <li><a href="case_list.html">My Appointment</a></li>
-                                                <li><a href="case.html">New Case analysis</a></li>
-                                                <li><a href="time-table.html">Time Table</a></li>
-                                                <li><a href="testimonials.html">Testimonials</a></li>
-                                                <li><a href="pricing.html">Our Pricing</a></li>
-                                                <li><a href="faq.html">Faq</a></li>
-                                                <li><a href="mail-success.html">Mail Success</a></li>
-                                                <li><a href="404.html">404 Error</a></li>
-                                                <li><a href="about.html">About Us</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Blogs <i class="icofont-rounded-down"></i></a>
-                                            <ul class="dropdown">
-                                                <li><a href="blog-grid.html">Blog Grid</a></li>
-                                                <li><a href="blog-single.html">Blog Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact Us</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                            <!--/ End Main Menu -->
+                                            <li><a href="case_list.html">My Appointment</a></li>
+                                            <li><a href="case.html">New Case analysis</a></li>
+                                            <li><a href="analysis.html">My Case analysis</a></li>
+                                            <li><a href="appointment.html">Book Appointment</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="contact.html">Contact Us</a></li>
+                                </ul>
+                            </nav>
                         </div>
-                        <div class="col-lg-2 col-12">
-                            <div class="get-quote">
-                                <a href="appointment.html" class="btn">Book Appointment</a>
-                            </div>
+                        <!--/ End Main Menu -->
+                    </div>
+                    <div class="col-lg-2 col-12">
+                        <div class="get-quote">
+                            <a href="appointment.html" class="btn">Book Appointment</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!--/ End Header Inner -->
-    </header>
-    <!-- End Header Area -->
-
+    </div>
+    <!--/ End Header Inner -->
+</header>
+<!-- End Header Area -->
 <!-- Start Contact Us -->
 <section class="contact-us section">
     <div class="container">
@@ -163,7 +149,7 @@
                                 <div class="appointment-inner">
                                     <div class="title">
                                         <h3>Enter your  discomfort</h3>
-                                        <p>We will confirm your appointment within 10 mins(AI mode)</p>
+                                        <p>We will confirm your appointment within 1 mins(AI mode)</p>
                                     </div>
 
 
@@ -186,10 +172,13 @@
                                                 </div>
                                             </div>
 
+
+
                                             <div class="col-lg-6 col-md-6 col-12" v-show="showAI" >
                                                 <div class="form-group">
-                                                    <div class="nice-select form-control wide" tabindex="0"><span class="current">Department</span>
-                                                        <ul class="list" size="4">
+                                                    <div class="nice-select form-control wide" tabindex="0">
+                                                        <span class="current">Department</span>
+                                                        <ul class="list" >
                                                             <li value="item.departmentId" class="option" v-for="item in departarr" v-on:click="savedepart(item.departmentId)">{{item.departmentName}}</li>
                                                         </ul>
 
@@ -199,18 +188,6 @@
 
 
 
-
-
-
-
-
-<!--                                            <div class="col-lg-6 col-md-6 col-12" v-show="showAI" >-->
-<!--                                                <div class="form-group">-->
-<!--                                                        <select >-->
-<!--                                                            <option  v-for="item in departarr" v-on:click="savedepart(item.departmentId)">{{item.departmentName}}</option>-->
-<!--                                                        </select>-->
-<!--                                                </div>-->
-<!--                                            </div>-->
 
 
 
@@ -420,7 +397,7 @@
                         ai=0;
                     }
 
-                    axios.post("http://localhost:8080/medicalrecord/insert",
+                    axios.post("http://124.222.24.171:8080/medicalrecord/insert",
                         {
                             "patientId": window.sessionStorage.getItem("patientid"),
                             "patientName":window.sessionStorage.getItem("username"),
@@ -437,21 +414,24 @@
                             }
                         }).then(
                         function (response) {
-                            console.log(response.data.result);
-
                             var url = "analysis.html";
                             window.location.href=url;
-                            if(app.showAI){
-                                axios.post("http://localhost:8080/medicalrecord/predictDepartment?recordId="+response.data.result).then(
+                            console.log(response.data.result);
+                            var temp=null;
+                            temp=response.data.result;
+                            if(!app.showAI){
+                                axios.post("http://124.222.24.171:8080/medicalrecord/predictDepartment?recordId="+temp).then(
                                     function (response) {
+
                                     },
                                     function (error) {
                                         console.log(error)
                                     }
                                 )
                             }
-                            axios.post("http://localhost:8080/medicalrecord/predictionCase?recordId="+response.data.result).then(
+                            axios.post("http://124.222.24.171:8080/medicalrecord/predictionCase?recordId="+temp).then(
                                 function (response) {
+
                                 },
                                 function (error) {
                                     console.log(error)
@@ -474,7 +454,7 @@
 
             getdepartment: function (){
                 var that=this;
-                axios.get("http://localhost:8080/departmentinfo/list").then(
+                axios.get("http://124.222.24.171:8080/departmentinfo/list").then(
                     function (response) {
                         that.departarr=response.data.result;
                         // console.log(response.data.result)

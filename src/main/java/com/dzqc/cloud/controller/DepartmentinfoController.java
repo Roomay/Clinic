@@ -4,6 +4,7 @@ import com.dzqc.cloud.common.Message;
 import com.dzqc.cloud.common.ResultObject;
 import com.dzqc.cloud.entity.Consultation;
 import com.dzqc.cloud.entity.DepartmentInfo;
+import com.dzqc.cloud.entity.PatientInfo;
 import com.dzqc.cloud.service.DepartmentinfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -151,6 +152,24 @@ public class DepartmentinfoController {
             } else {
                 return ResultObject.success(departmentInfo);
             }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
+    @CrossOrigin
+    @RequestMapping( "/departmentinfo/selectById")
+    public ResultObject selectByDepartmentId(int departmentId) {
+        try {
+            DepartmentInfo departmentInfo = this.departmentinfoService.selectByPrimaryKey(departmentId);
+            //
+            if (departmentInfo==null) {
+                return ResultObject.error("未注册");
+            }
+            else {
+                return ResultObject.success(departmentInfo);
+            }
+
         } catch (Exception e) {
             return ResultObject.error(Message.SERVER_ERROR);
         }

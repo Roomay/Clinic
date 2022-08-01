@@ -141,6 +141,7 @@
 	</dependencies>
 
 	<build>
+
 		<resources>
 			<resource>
 				<directory>${basedir}/src/main/resources</directory>
@@ -178,6 +179,27 @@
 					</configurationFile>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<fork>true</fork>
+					<mainClass>com.dzqc.cloud.CloudApplication</mainClass>
+					<includeSystemScope>true</includeSystemScope>
+				</configuration>
+			</plugin>
+			<plugin>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-maven-plugin</artifactId>
+			<executions>
+				<execution>
+					<goals>
+						<goal>repackage</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>
+
 
 		</plugins>
 	</build>

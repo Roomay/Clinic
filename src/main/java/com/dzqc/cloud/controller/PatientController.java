@@ -52,32 +52,21 @@ public class PatientController{
         }
         return null;
     }
-//    @Value("${server.servlet.context-path}")
-//    private String contextPath;
-//
 
-//    @RequestMapping(path = "/register", method = RequestMethod.GET)
-//    public String getRegisterPage() {
-//        return "/finalpro/register";
-//    }
-//
-//    @RequestMapping(path = "/login", method = RequestMethod.GET)
-//    public String getLoginPage() {
-//        return "/finalpro/login";
-//    }
 
     /**
      * register
      *
     */
 
-    @RequestMapping(path = "/register", method = RequestMethod.POST)
-    public ResultObject register(PatientInfo patient) throws IllegalAccessException {
+    @RequestMapping(path = "/patient/register", method = RequestMethod.POST)
+    public ResultObject register(@RequestBody PatientInfo patient) throws IllegalAccessException {
         try {
             Map<String, Object> map = patientService.register(patient);
             if (map == null || map.isEmpty()) {
                 return ResultObject.success("注册成功");
-            } else {
+            }
+            else {
                 if(map.containsKey("usernameMsg")) {
                     return ResultObject.error((String) map.get("usernameMsg"));
                 } else if(map.containsKey("passwordMsg")) {
@@ -117,30 +106,7 @@ public class PatientController{
     }
 
 
-    /**
-     * login
-     * @return
-     */
-//    @RequestMapping( "/user/selectByUsernme")
-//    public ResultObject selectByUsername(String username,String password) {
-//        try {
-//            PatientInfo patientInfo = this.patientService.login(username);
-//            //
-//            if (patientInfo==null) {
-//                return ResultObject.error("未注册");
-//            }
-//            else if (patientInfo.getPassword().equals(password)) {
-//                return ResultObject.success(patientInfo);
-//            }
-//            else if (!patientInfo.getPassword().equals(password)){
-//                return ResultObject.error("密码错"+patientInfo.getPassword());
-//            }
-//        } catch (Exception e) {
-//            return ResultObject.error(Message.SERVER_ERROR);
-//        }
-//        return null;
-//    }
-//
+
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public ResultObject login(String username, String password, String code, boolean rememberMe,
                               HttpSession session, HttpServletResponse response) {
@@ -178,12 +144,6 @@ public class PatientController{
      * @param
      * @returnd
      */
-//    @RequestMapping("/shiro/logout")
-//    public ResultObject logout(HttpServletRequest request){
-//        HttpSession session = request.getSession();
-//        session.removeAttribute("userinfo");
-//        return ResultObject.success("成功注销");
-//    }
     @RequestMapping(path = "/logout", method = RequestMethod.GET)
     public ResultObject logout(@CookieValue("ticket") String ticket) {
         try {

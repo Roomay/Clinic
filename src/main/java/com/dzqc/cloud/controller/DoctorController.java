@@ -39,6 +39,25 @@ public class DoctorController {
         }
     }
 
+
+    /**
+     * 获取所有的科室
+     * @return 所有的科室信息
+     */
+    @GetMapping("/doctor/list")
+    public ResultObject list(){
+        try {
+            List<DoctorInfo> doctorInfos = doctorinfoService.selectAll();
+            if (doctorInfos == null) {
+                return ResultObject.error("获取医生信息失败");
+            } else {
+                return ResultObject.success(doctorInfos);
+            }
+        } catch (Exception e) {
+            return ResultObject.error(Message.SERVER_ERROR);
+        }
+    }
+
     /**
      * 按科室名字查找医生
      * @param departmentName

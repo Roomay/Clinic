@@ -77,6 +77,7 @@
             </div>
         </div>
         <!-- End Preloader -->
+
 		<!-- Header Area -->
 		<header class="header" >
 			<!-- End Topbar -->
@@ -106,9 +107,6 @@
 											<li><a href="#">Departments <i class="icofont-rounded-down"></i></a>
 												<ul class="dropdown">
 													<li><a href="service.html">Department</a></li>
-													<li><a href="service-details.html">Department Details</a></li>
-													<li><a href="doctors.html">Doctor</a></li>
-													<li><a href="doctor-details.html">Doctor Details</a></li>
 												</ul>
 											</li>
 
@@ -119,19 +117,8 @@
 
 													<li><a href="case_list.html">My Appointment</a></li>
 													<li><a href="case.html">New Case analysis</a></li>
-													<li><a href="time-table.html">Time Table</a></li>
-													<li><a href="testimonials.html">Testimonials</a></li>
-													<li><a href="pricing.html">Our Pricing</a></li>
-													<li><a href="faq.html">Faq</a></li>
-													<li><a href="mail-success.html">Mail Success</a></li>
-													<li><a href="404.html">404 Error</a></li>
-													<li><a href="about.html">About Us</a></li>
-												</ul>
-											</li>
-											<li><a href="#">Blogs <i class="icofont-rounded-down"></i></a>
-												<ul class="dropdown">
-													<li><a href="blog-grid.html">Blog Grid</a></li>
-													<li><a href="blog-single.html">Blog Details</a></li>
+													<li><a href="analysis.html">My Case analysis</a></li>
+													<li><a href="appointment.html">Book Appointment</a></li>
 												</ul>
 											</li>
 											<li><a href="contact.html">Contact Us</a></li>
@@ -151,28 +138,7 @@
 			</div>
 			<!--/ End Header Inner -->
 		</header>
-		<!-- End Header Area -->
-		
-		<!-- Breadcrumbs -->
-<!--		<div class="breadcrumbs overlay">-->
-<!--			<div class="container">-->
-<!--				<div class="bread-inner">-->
-<!--					<div class="row">-->
-<!--						<div class="col-12">-->
-<!--							<h2>Get Your Appointment</h2>-->
-<!--							<ul class="bread-list">-->
-<!--								<li><a href="index.html">Home</a></li>-->
-<!--								<li><i class="icofont-simple-right"></i></li>-->
-<!--								<li class="active">Appointment</li>-->
-<!--							</ul>-->
-<!--						</div>-->
-<!--					</div>-->
-<!--				</div>-->
-<!--			</div>-->
-<!--		</div>-->
-		<!-- End Breadcrumbs -->
-		
-		<!-- Start Appointment -->
+
 		<section class="appointment single-page">
 			<div class="container">
 				<div class="row">
@@ -184,27 +150,11 @@
 							</div>
 							<div class="form"  id="department_select">
 								<div class="row" >
-<!--									<div class="col-lg-6 col-md-6 col-12">-->
-<!--										<div class="form-group">-->
-<!--											<input name="name" type="text" placeholder="Name">-->
-<!--										</div>-->
-<!--									</div>-->
-<!--									<div class="col-lg-6 col-md-6 col-12">-->
-<!--										<div class="form-group">-->
-<!--											<input name="email" type="email" placeholder="Email">-->
-<!--										</div>-->
-<!--									</div>-->
-<!--									<div class="col-lg-6 col-md-6 col-12">-->
-<!--										<div class="form-group">-->
-<!--											<input name="phone" type="text" placeholder="Phone">-->
-<!--										</div>-->
-<!--									</div>-->
 									<div class="col-lg-6 col-md-6 col-12" >
 										<div class="form-group">
 											<div class="nice-select form-control wide" tabindex="0">
 												<span class="current">Department</span>
 												<ul class="list" id="dep_select">
-<!--													<li data-value="0" class="option" >Department</li>-->
 													<li data-value="item.doctorId" class="option" v-for="item in arr" v-on:click="getdoc(item.departmentId)">{{item.departmentName}}</li>
 												</ul>
 											</div>
@@ -220,22 +170,23 @@
 											</div>
 										</div>
 									</div>
+
 									<div class="col-lg-6 col-md-6 col-12">
 										<div class="form-group">
 											<input  type="text" placeholder="Date"  id="datepicker"  >
 										</div>
-
 									</div>
+
 									<div class="col-lg-6 col-md-6 col-12">
 										<div class="form-group">
 											<div class="nice-select form-control wide" tabindex="0"><span class="current">Time</span>
 												<ul class="list" id="time_select" >
-<!--													<li value="its.timeSlot" class="option"  v-for="its in arr3">{{its.timeSlot}}</li>-->
-													<li value="its" class="option" v-on:click="savetime(its)" v-for="its in occupytime" >{{its}}</li>
+													<li value="its" class="option" v-on:click="savetime(its)" v-for="its in occupytime" >{{its+9}}:00-{{its+10}}:00</li>
 												</ul>
 											</div>
 										</div>
 									</div>
+
 									<div class="col-lg-12 col-md-12 col-12">
 										<div class="form-group">
 											<textarea name="message" placeholder="Write Your Message Here....."></textarea>
@@ -413,7 +364,7 @@
 						app.times=new Set([0,1,2,3]);
 						app.occupytime=[];
 						var that=this;
-						axios.post("http://localhost:8080/consultation/selectByTimeDoctor?dates="+dates+"&doctorName="+docname).then(
+						axios.post("http://124.222.24.171:8080/consultation/selectByTimeDoctor?dates="+dates+"&doctorName="+docname).then(
 								function (response) {
 									app.arr3=response.data.result;
 									// console.log(response.data.result.length);
@@ -439,7 +390,7 @@
 						console.log(app.docId);
 						console.log(window.sessionStorage.getItem("username"));
 						that.username=window.sessionStorage.getItem("username");
-						axios.post("http://localhost:8080/consulation/insertappointment",    {
+						axios.post("http://124.222.24.171:8080/consulation/insertappointment",    {
 									"doctorId": app.docId,
 									"doctorName":app.docName,
 									"departmentId":app.did,
@@ -472,7 +423,7 @@
 					},
 					getdepartment: function (){
 						var that=this;
-						axios.get("http://localhost:8080/departmentinfo/list").then(
+						axios.get("http://124.222.24.171:8080/departmentinfo/list").then(
 								function (response) {
 									that.arr=response.data.result;
 									// console.log(response.data.result)
@@ -485,7 +436,7 @@
 					getdoc: function (did){
 						var thats=this;
 						app.did=did;
-						axios.get("http://localhost:8080/doctor/selectByDepartmentId?departmentId="+did).then(
+						axios.get("http://124.222.24.171:8080/doctor/selectByDepartmentId?departmentId="+did).then(
 								function (response) {
 									thats.arr2=response.data.result;
 									// console.log(".arr2"+thats.arr2)

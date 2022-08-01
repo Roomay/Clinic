@@ -46,7 +46,8 @@ public class PatientService  {
         }
 
         if (StringUtils.isBlank(patient.getPatientName())) {
-            map.put("usernameMsg", "账号不能为空");
+            map.put("usernameMsg", patient.getPatientName());
+
             return map;
         }
 
@@ -55,10 +56,6 @@ public class PatientService  {
             return map;
         }
 
-        if (StringUtils.isBlank(patient.getCid())) {
-            map.put("cidMsg", "身份证不能为空");
-            return map;
-        }
 
 
         if (StringUtils.isBlank(patient.getPhone())) {
@@ -77,14 +74,10 @@ public class PatientService  {
         //注册
         patient.setPatientName(patient.getPatientName());
         patient.setPassword(patient.getPassword());
-        patient.setCid(patient.getCid());
         patient.setPhone(patient.getPhone());
-        patient.setValidatecode(EncodeMD5.generateUUID());
         patient.setBirthday(patient.getBirthday());
         patient.setGender(patient.getGender());
-        patient.setCreateTime(new Date());
-        patient.setUpdateTime(new Date());
-
+        patient.setIsDeleted(0);
         patientInfoMapper.insert(patient);
 
         return map;

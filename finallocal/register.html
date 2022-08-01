@@ -1,0 +1,351 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+	<!-- Meta Tags -->
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="keywords" content="Site keywords here">
+	<meta name="description" content="">
+	<meta name='copyright' content=''>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+	<title></title>
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- Nice Select CSS -->
+	<link rel="stylesheet" href="css/nice-select.css">
+	<!-- Font Awesome CSS -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<!-- icofont CSS -->
+	<link rel="stylesheet" href="css/icofont.css">
+	<!-- Slicknav -->
+	<link rel="stylesheet" href="css/slicknav.min.css">
+	<!-- Owl Carousel CSS -->
+	<link rel="stylesheet" href="css/owl-carousel.css">
+	<!-- Datepicker CSS -->
+	<link rel="stylesheet" href="css/datepicker.css">
+	<!-- Animate CSS -->
+	<link rel="stylesheet" href="css/animate.min.css">
+	<!-- Magnific Popup CSS -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<!-- Medipro CSS -->
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="css/responsive.css">
+	<link rel="stylesheet" href="css/color/color1.css">
+
+
+</head>
+
+    <body>
+        <div class="preloader">
+            <div class="loader">
+                <div class="loader-outter"></div>
+                <div class="loader-inner"></div>
+
+                <div class="indicator"> 
+                    <svg width="16px" height="12px">
+                        <polyline id="back" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                        <polyline id="front" points="1 6 4 6 6 11 10 1 12 6 15 6"></polyline>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+		<!-- Header Area -->
+		<header class="header" >
+			<!-- End Topbar -->
+			<!-- Header Inner -->
+			<div class="header-inner">
+				<div class="container">
+					<div class="inner">
+						<div class="row">
+							<div class="col-lg-3 col-md-3 col-12">
+								<!-- Start Logo -->
+								<div class="logo">
+									<a href="index.html"><img src="img/logo.png" alt="#"></a>
+								</div>
+								<!-- End Logo -->
+								<!-- Mobile Nav -->
+								<div class="mobile-nav"></div>
+								<!-- End Mobile Nav -->
+							</div>
+							<div class="col-lg-7 col-md-9 col-12">
+								<!-- Main Menu -->
+								<div class="main-menu">
+									<nav class="navigation">
+										<ul class="nav menu">
+											<li class="active"><a href="index.html">Home </a>
+											</li>
+
+											<li><a href="#">Departments <i class="icofont-rounded-down"></i></a>
+												<ul class="dropdown">
+													<li><a href="service.html">Department</a></li>
+												</ul>
+											</li>
+
+											<li><a href="contact.html">Contact Us</a></li>
+										</ul>
+									</nav>
+								</div>
+								<!--/ End Main Menu -->
+							</div>
+							<div class="col-lg-2 col-12">
+								<div class="get-quote">
+									<a href="login.html" class="btn">Book Appointment</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--/ End Header Inner -->
+		</header>
+		<!-- End Header Area -->
+
+		<section class="register section" >
+			<div class="container">
+				<div class="inner">
+					<div class="row"> 
+						<div class="col-lg-6">
+							<div class="register-left">
+							
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="register-form">
+								<h2>Register Here</h2>
+								<p>Already have an account ? <a href="login.html">Login Here</a></p>
+								<div class="form" >
+									<div class="row" id="allform" >
+										                            <div class="col-lg-6" style="display: none">
+										                                <div class="form-group">
+										                                    <div class="nice-select form-control wide" tabindex="0">
+										                                        <span class="current">Department</span>
+										                                        <ul class="list" id="dep_select">
+										                                            <!--													<li data-value="0" class="option" >Department</li>-->
+										                                            <li class="option" v-for="item in arr" v-on:click="getdoc(item.departmentId)">{{item.departmentName}}</li>
+										                                        </ul>
+										                                    </div>
+										                                </div>
+										                            </div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<input type="text" name="name" placeholder="Name" required="" id="username">
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<div class="nice-select form-control wide" tabindex="0"><span class="current">Gender</span>
+													<ul class="list">
+														<li data-value="1" class="option " v-on:click="savegender(1)">Male</li>
+														<li data-value="0" class="option" v-on:click="savegender(0)">Female</li>
+													</ul>
+												</div>
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<input type="phone" name="phone" placeholder="Phone" required="" id="phone">
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<input type="password" name="password" placeholder="Password" required="" id="password">
+											</div>
+										</div>
+										<div class="col-lg-6">
+											<div class="form-group">
+												<input  type="text" placeholder="Date"  id="datepicker">
+											</div>
+										</div>
+
+										<div class="col-12">
+											<div class="form-group login-btn">
+												<button class="btn" v-on:click="submitcase()">Register</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+			<div class="copyright">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-12">
+							<div class="copyright-content">
+								<p>Copyright &copy; 2020.Company name All rights reserved.</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<script src="js/jquery-1.12.4.min.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<!--/ End Footer Area -->
+		<script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+		<script>
+			const Toast = Swal.mixin({
+				toast: true,
+				position: 'top-end',
+				showConfirmButton: false,
+				timer: 3000,
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener('mouseenter', Swal.stopTimer)
+					toast.addEventListener('mouseleave', Swal.resumeTimer)
+				}
+			});
+			var app=new Vue({
+				el:"#allform",
+				data:{
+					arr:[],
+					password:null,
+					gender:null,
+					birthday:null,
+					username:null,
+					phone:null,
+				},
+				mounted :function(){
+					this.getdepartment();
+				},
+				updated:function(){
+					$('#datepicker').on('changeDate', function() {
+						var dates=this.value;
+						// console.log("this.value");
+						console.log(this.value);
+						app.birthday=dates;
+					})
+				},
+				methods:{
+
+					submitcase: function (){
+						var username = $('#username').val();
+						var phone = $('#phone').val();
+						var pass = $('#password').val();
+						// console.log(username);
+						// console.log(phone);
+						// console.log(pass);
+
+						if(app.gender==null||phone==null||pass==null){
+							Toast.fire({
+								icon: 'error',
+								title: 'Enter you information'
+							});
+						}
+						else{
+							axios.post("http://localhost:8080/patient/register",
+									{
+										"patientName":username,
+										"password":pass,
+										"phone":phone,
+										"birthday":app.birthday,
+										"isDeleted":0,
+									},
+									{
+										headers: {
+											'content-type': 'application/json'
+										}
+									}).then(
+									function (response) {
+										console.log(response.data["msg"]);
+										if(response.data["msg"]==="ok"){
+											Toast.fire({
+												icon: 'success',
+												title: 'Register successfully'
+											});
+											var url = "login.html";
+											window.location.href=url;
+										}
+										else{
+											Toast.fire({
+												icon: 'error',
+												title: 'change your name or phone'
+											});
+										}
+
+									},
+									function (error) {
+										console.log(error)
+									}
+							)
+						}
+
+					},
+
+					getdepartment: function (){
+						var that=this;
+						axios.get("http://localhost:8080/departmentinfo/list").then(
+								function (response) {
+									that.arr=response.data.result;
+								},
+								function (error) {
+									console.log(error)
+								}
+						)
+					},
+					savegender: function (gender) {
+						app.gender=gender;
+						console.log("gender"+gender)
+					}
+
+
+
+				}
+			})
+		</script>
+		
+		<!-- jquery Min JS -->
+        <script src="js/jquery.min.js"></script>
+		<!-- jquery Migrate JS -->
+		<script src="js/jquery-migrate-3.0.0.js"></script>
+		<!-- jquery Ui JS -->
+		<script src="js/jquery-ui.min.js"></script>
+		<!-- Easing JS -->
+        <script src="js/easing.js"></script>
+		<!-- Color JS -->
+		<script src="js/colors.js"></script>
+		<!-- Popper JS -->
+		<script src="js/popper.min.js"></script>
+		<!-- Bootstrap Datepicker JS -->
+		<script src="js/bootstrap-datepicker.js"></script>
+		<!-- Jquery Nav JS -->
+        <script src="js/jquery.nav.js"></script>
+		<!-- Slicknav JS -->
+		<script src="js/slicknav.min.js"></script>
+		<!-- ScrollUp JS -->
+        <script src="js/jquery.scrollUp.min.js"></script>
+		<!-- Niceselect JS -->
+		<script src="js/niceselect.js"></script>
+		<!-- Tilt Jquery JS -->
+		<script src="js/tilt.jquery.min.js"></script>
+		<!-- Owl Carousel JS -->
+        <script src="js/owl-carousel.js"></script>
+		<!-- counterup JS -->
+		<script src="js/jquery.counterup.min.js"></script>
+		<!-- Steller JS -->
+		<script src="js/steller.js"></script>
+		<!-- Wow JS -->
+		<script src="js/wow.min.js"></script>
+		<!-- Magnific Popup JS -->
+		<script src="js/jquery.magnific-popup.min.js"></script>
+		<!-- Counter Up CDN JS -->
+		<script src="js/waypoints.min.js"></script>
+		<!-- Bootstrap JS -->
+		<script src="js/bootstrap.min.js"></script>
+		<!-- Main JS -->
+		<script src="js/main.js"></script>
+
+    </body>
+</html>

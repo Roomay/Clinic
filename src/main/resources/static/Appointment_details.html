@@ -98,31 +98,6 @@
 
 <!-- Header Area -->
 <header class="header" >
-    <!-- Topbar -->
-    <div class="topbar">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 col-md-5 col-12">
-                    <!-- Contact -->
-                    <ul class="top-link">
-                        <li><a href="#">About</a></li>
-                        <li><a href="#">Doctors</a></li>
-                        <li><a href="#">Contact</a></li>
-                        <li><a href="#">FAQ</a></li>
-                    </ul>
-                    <!-- End Contact -->
-                </div>
-                <div class="col-lg-6 col-md-7 col-12">
-                    <!-- Top Contact -->
-                    <ul class="top-contact">
-                        <li><i class="fa fa-phone"></i>XXX</li>
-                        <li><i class="fa fa-envelope"></i><a href="mailto:XXX">XXX</a></li>
-                    </ul>
-                    <!-- End Top Contact -->
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- End Topbar -->
     <!-- Header Inner -->
     <div class="header-inner">
@@ -144,42 +119,24 @@
                         <div class="main-menu">
                             <nav class="navigation">
                                 <ul class="nav menu">
-                                    <li class="active"><a href="#">Home <i class="icofont-rounded-down"></i></a>
+                                    <li class="active"><a href="index.html">Home </a>
+                                    </li>
+
+                                    <li><a href="#">Departments <i class="icofont-rounded-down"></i></a>
                                         <ul class="dropdown">
-                                            <li><a href="index.html">Home Page 1</a></li>
-                                            <li><a href="index2.html">Home Page 2</a></li>
+                                            <li><a href="service.html">Department</a></li>
                                         </ul>
                                     </li>
-                                    <li><a href="#">Doctos <i class="icofont-rounded-down"></i></a>
+
+
+
+                                    <li><a href="#">Appointment <i class="icofont-rounded-down"></i></a>
                                         <ul class="dropdown">
-                                            <li><a href="doctors.html">Doctor</a></li>
-                                            <li><a href="doctor-details.html">Doctor Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Services <i class="icofont-rounded-down"></i></a>
-                                        <ul class="dropdown">
-                                            <li><a href="service.html">Service</a></li>
-                                            <li><a href="service-details.html">Service Details</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Pages <i class="icofont-rounded-down"></i></a>
-                                        <ul class="dropdown">
-                                            <li><a href="about.html">About Us</a></li>
-                                            <li><a href="appointment.html">Appointment</a></li>
-                                            <li><a href="time-table.html">Time Table</a></li>
-                                            <li><a href="testimonials.html">Testimonials</a></li>
-                                            <li><a href="pricing.html">Our Pricing</a></li>
-                                            <li><a href="register.html">Sign Up</a></li>
-                                            <li><a href="login.html">Login</a></li>
-                                            <li><a href="faq.html">Faq</a></li>
-                                            <li><a href="mail-success.html">Mail Success</a></li>
-                                            <li><a href="404.html">404 Error</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Blogs <i class="icofont-rounded-down"></i></a>
-                                        <ul class="dropdown">
-                                            <li><a href="blog-grid.html">Blog Grid</a></li>
-                                            <li><a href="blog-single.html">Blog Details</a></li>
+
+                                            <li><a href="case_list.html">My Appointment</a></li>
+                                            <li><a href="case.html">New Case analysis</a></li>
+                                            <li><a href="analysis.html">My Case analysis</a></li>
+                                            <li><a href="appointment.html">Book Appointment</a></li>
                                         </ul>
                                     </li>
                                     <li><a href="contact.html">Contact Us</a></li>
@@ -435,11 +392,11 @@
             getappointment: function (cid){
                 var that=this;
                 // var cid=getParams("cid");
-                axios.post("http://localhost:8080/consultation/selectByConsultationId?consultationId="+cid).then(
+                axios.post("http://124.222.24.171:8080/consultation/selectByConsultationId?consultationId="+cid).then(
                     function (response) {
                         that.arr=response.data.result;
                         console.log(response.data.result)
-                        axios.post("http://localhost:8080/departmentinfo/selectByDepartmentId?departmentId="+that.arr.departmentId).then(
+                        axios.post("http://124.222.24.171:8080/departmentinfo/selectByDepartmentId?departmentId="+that.arr.departmentId).then(
                             function (response) {
                                 that.departmentName=response.data.result.departmentName;
                                 that.departmentId=response.data.result.departmentId;
@@ -456,9 +413,9 @@
             dealappoint:function (type) {
                 var that=this;
                 var x =this.getParams("cid");
-                console.log("http://localhost:8080/consultation/dealconsultation?consultationId="+ x+"&deal="+type);
+                console.log("http://124.222.24.171:8080/consultation/dealconsultation?consultationId="+ x+"&deal="+type);
 
-                axios.post("http://localhost:8080/consultation/dealconsultation?consultationId="+ x+"&deal="+type).then(
+                axios.post("http://124.222.24.171:8080/consultation/dealconsultation?consultationId="+ x+"&deal="+type).then(
                     function (response) {
                         location.reload();
                     },function (error) {
